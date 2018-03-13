@@ -1,0 +1,43 @@
+<Model id="3000" package="com.test.enums" target="ENUM">
+
+	<Enum name="Lights">
+		<Extends type="INamed" />
+		<Constant name="RED" />
+		<Constant name="AMBER" />
+		<Constant name="GREEN" />
+	</Enum>
+
+	<Interface name="INamed">
+		<Method name="name" returnType="String" />
+	</Interface>
+
+	<Enum name="HttpMethod">
+		<Constant name="GET" />
+		<Constant name="POST" />
+		<Constant name="OPTIONS" />
+		<Constant name="HEAD" />
+		<Constant name="PUT" />
+		<Constant name="DELETE" />
+		<Constant name="TRACE" />
+		<Constant name="CONNECT" />
+		<Constant name="PATCH" />
+	</Enum>
+
+	<Enum name="HttpStatusCode">
+		<Extends type="IHttpStatusCode" />
+		<Constant name="OK">
+			<Field name="code" type="int" value="200" />
+		</Constant>
+		<Constant name="NOT_FOUND">
+			<Field name="code" type="int" value="404" />
+		</Constant>
+		<Constant name="INTERNAL_SERVER_ERROR">
+			<Field name="code" type="int" value="500" />
+		</Constant>
+	</Enum>
+
+	<Interface name="IHttpStatusCode">
+		<Method name="getCode" returnType="int" />
+	</Interface>
+
+</Model>

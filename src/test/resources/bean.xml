@@ -1,0 +1,99 @@
+<Model id="1000" package="com.test.bean" target="BEAN">
+
+	<Alias name="TimeUnit" type="java.util.concurrent.TimeUnit" />
+
+	<Bean name="MutableBean" returnType="List{Integer}">
+		<Extends type="IValueBean" />
+		<Constructor type="IImmutableBean" />
+		<Field name="valueChar" type="char" />
+		<Field name="valueBoolean" type="boolean" />
+		<Field name="valueByte" type="byte" />
+		<Field name="valueShort" type="short" />
+		<Field name="valueInt" type="int" />
+		<Field name="valueLong" type="long" />
+		<Field name="valueFloat" type="float" />
+		<Field name="valueDouble" type="double" />
+		<Field name="valueObjectCharacter" type="Character" />
+		<Field name="valueObjectBoolean" type="Boolean" />
+		<Field name="valueObjectByte" type="Byte" />
+		<Field name="valueObjectShort" type="Short" />
+		<Field name="valueObjectInteger" type="Integer" />
+		<Field name="valueObjectLong" type="Long" />
+		<Field name="valueObjectFloat" type="Float" />
+		<Field name="valueObjectDouble" type="double" />
+		<Field name="valueObjectString" type="String" />
+		<Field name="valueObjectBytes" type="byte[]" />
+		<Field name="valueObjectTimeUnit" type="TimeUnit" />
+		<Field name="valueObjectList" type="List{String}" />
+		<Field name="valueObjectSet" type="Set{Integer}" />
+		<Field name="valueObjectMap" type="Map{String, IMutableBean}" />
+		<Field name="set" type="boolean" />
+	</Bean>
+	<Bean name="ImmutableBean" immutable="true">
+		<Extends type="IValueBean" />
+		<Field name="valueChar" type="char" />
+		<Field name="valueBoolean" type="boolean" />
+		<Field name="valueByte" type="byte" />
+		<Field name="valueShort" type="short" />
+		<Field name="valueInt" type="int" />
+		<Field name="valueLong" type="long" />
+		<Field name="valueFloat" type="float" />
+		<Field name="valueDouble" type="double" />
+		<Field name="valueObjectCharacter" type="Character" />
+		<Field name="valueObjectBoolean" type="Boolean" />
+		<Field name="valueObjectByte" type="Byte" />
+		<Field name="valueObjectShort" type="Short" />
+		<Field name="valueObjectInteger" type="Integer" />
+		<Field name="valueObjectLong" type="Long" />
+		<Field name="valueObjectFloat" type="Float" />
+		<Field name="valueObjectDouble" type="double" />
+		<Field name="valueObjectString" type="String" />
+		<Field name="valueObjectBytes" type="byte[]" />
+		<Field name="valueObjectTimeUnit" type="TimeUnit" />
+		<Field name="valueObjectList" type="List{String}" />
+		<Field name="valueObjectSet" type="Set{Integer}" />
+		<Field name="valueObjectMap" type="Map{String, IMutableBean}" />
+		<Field name="set" type="boolean" />
+	</Bean>
+
+	<Adapter name="MutableBeanAdaptor" from="ImmutableBean" to="MutableBean">
+		<Field from="valueChar" />
+		<Field from="valueBoolean" />
+		<Field from="valueByte" />
+		<Field from="valueShort" />
+		<Field from="valueInt" />
+		<Field from="valueLong" />
+		<Field from="valueFloat" />
+		<Field from="valueDouble" />
+		<Field from="valueObjectCharacter" />
+		<Field from="valueObjectBoolean" />
+		<Field from="valueObjectByte" />
+		<Field from="valueObjectShort" />
+		<Field from="valueObjectInteger" />
+		<Field from="valueObjectLong" />
+		<Field from="valueObjectFloat" />
+		<Field from="valueObjectDouble" />
+		<Field from="valueObjectString" />
+		<Field from="valueObjectBytes" />
+		<Field from="valueObjectTimeUnit" />
+	</Adapter>
+
+	<Comparator name="MutableBeanComparator" type="MutableBean">
+		<Field name="valueInt" />
+	</Comparator>
+	<Comparator name="ImmutableBeanComparator" type="ImmutableBean">
+		<Field name="valueInt" />
+	</Comparator>
+
+	<Interface name="IValueBean">
+		<Method name="getValueInt" returnType="int" />
+		<Method name="getValueObjectString" returnType="String" />
+		<Method name="getValueObjectBytes" returnType="byte[]" />
+	</Interface>
+
+	<DataSerializer type="MutableBean" />
+	<XmlSerializer type="MutableBean" returnType="true"/>
+
+	<ObjectFactory name="XmlBeanObjectFactory" factory="XML_SERIALIZER" />
+
+</Model>

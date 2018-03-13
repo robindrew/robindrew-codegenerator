@@ -1,0 +1,11 @@
+<Targets>
+
+	<Source name="bean.xml" type="RESOURCE" />
+	<Source name="data.xml" type="RESOURCE" />
+	<Source name="enum.xml" type="RESOURCE" />
+
+	<Target name="ENUM" directory="src/generated/java/enums" />
+	<Target name="BEAN" directory="src/generated/java/beans" />
+	<Target name="DATA" directory="src/generated/java/data" />
+
+</Targets>

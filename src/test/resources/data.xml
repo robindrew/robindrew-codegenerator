@@ -1,0 +1,45 @@
+<Model id="2000" package="com.test.data" target="DATA">
+
+	<Validator name="id" type="int" min="1" />
+	<Validator name="name" type="String" min="6" max="200" />
+	<Validator name="data" type="byte[]" notNull="false" min="0" max="200" />
+
+	<Bean name="Row">
+		<Field name="id" type="id" identity="true" autoIncrement="true" />
+		<Field name="name" type="String" validator="name" unique="true" />
+		<Field name="data" type="byte[]" validator="data" />
+		<Field name="width" type="long" />
+		<Field name="height" type="long" />
+		<Field name="unit" type="TimeUnit" />
+	</Bean>
+	<Bean name="RowKey">
+		<Constructor type="IRow" />
+		<Field name="id" type="int" />
+	</Bean>
+	<Bean name="RowData">
+		<Constructor type="IRow" />
+		<Field name="data" type="byte[]" validator="data" />
+	</Bean>
+	<Bean name="RowDimensions">
+		<Constructor type="IRow" />
+		<Field name="id" type="int" validator="id" identity="true" />
+		<Field name="width" type="long" />
+		<Field name="height" type="long" />
+	</Bean>
+
+	<DataStore name="RowTable" element="IRow" key="IRowKey">
+		<Row type="RowData" />
+		<Row type="RowDimensions" />
+	</DataStore>
+
+	<ResultSetParser type="Row" />
+	<ResultSetParser type="RowData" />
+	<ResultSetParser type="RowDimensions" />
+
+	<DataSerializer type="Row" />
+	<DataSerializer type="RowData" />
+	<DataSerializer type="RowDimensions" />
+
+	<ServletRequestParser type="Row" />
+
+</Model>
