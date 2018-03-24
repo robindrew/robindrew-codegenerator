@@ -7,7 +7,7 @@ import java.util.List;
 import com.robindrew.codegenerator.lang.java.type.classtype.IClassType;
 
 /**
- * A type where you can specify a type and a list of its generics (e.g. Map<String, Integer>)
+ * A type where you can specify a type and a list of its generics (e.g. Map&lt;String, Integer&gt;)
  */
 public class JavaTypeWithGenerics extends AbstractJavaType {
 
