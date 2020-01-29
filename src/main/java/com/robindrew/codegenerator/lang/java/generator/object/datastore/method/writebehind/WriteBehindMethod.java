@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
-import com.google.common.base.Throwables;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
 import com.robindrew.codegenerator.lang.java.type.JavaTypeClass;
 import com.robindrew.codegenerator.lang.java.type.block.IJavaNamedType;
@@ -12,6 +11,7 @@ import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeLines
 import com.robindrew.codegenerator.lang.java.type.block.method.IJavaMethod;
 import com.robindrew.codegenerator.lang.java.type.block.method.delegate.DelegateMethod;
 import com.robindrew.codegenerator.lang.java.type.block.parameter.JavaNamedType;
+import com.robindrew.common.util.Java;
 
 public class WriteBehindMethod extends DelegateMethod {
 
@@ -26,7 +26,7 @@ public class WriteBehindMethod extends DelegateMethod {
 		if (!getReturnType().isVoid()) {
 			getReferences().add(Future.class);
 			getReferences().add(Callable.class);
-			getReferences().add(Throwables.class);
+			getReferences().add(Java.class);
 		}
 		this.forceSync = forceSync;
 		setDelegateContents();
