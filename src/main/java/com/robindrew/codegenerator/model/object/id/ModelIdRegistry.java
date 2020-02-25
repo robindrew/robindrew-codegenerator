@@ -1,7 +1,7 @@
 package com.robindrew.codegenerator.model.object.id;
 
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,13 +16,25 @@ public class ModelIdRegistry {
 
 	private static final Logger log = LoggerFactory.getLogger(ModelIdRegistry.class);
 
-	private final Map<Class<? extends IModelObject>, Set<Integer>> duplicateMap = new HashMap<Class<? extends IModelObject>, Set<Integer>>();
+	private final Map<Integer, IModel> idToModelMap = new LinkedHashMap<>();
+	private final Map<Class<? extends IModelObject>, Set<Integer>> duplicateMap = new LinkedHashMap<Class<? extends IModelObject>, Set<Integer>>();
 
 	public void setIds(IModel model) {
 		int baseId = model.getId();
 		if (baseId < 0) {
 			throw new IllegalStateException("negative id=" + baseId);
 		}
+
+		// Duplicate check
+		IModel existing = idToModelMap.get(baseId);
+		if (existing != null) {
+			if (existing.equals(model)) {
+				return;
+			}
+			throw new IllegalStateException("existing=" + existing.getPackage() + ", duplicate=" + model.getPackage());
+		}
+		idToModelMap.put(baseId, model);
+
 		setObjectIds(baseId, model.getBeanList());
 	}
 
