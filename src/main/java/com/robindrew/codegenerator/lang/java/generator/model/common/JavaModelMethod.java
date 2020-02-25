@@ -1,16 +1,16 @@
-package com.robindrew.codegenerator.lang.java.generator.model.bean;
+package com.robindrew.codegenerator.lang.java.generator.model.common;
 
 import java.util.List;
 
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModelTyped;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
-import com.robindrew.codegenerator.model.object.bean.ModelBeanMethod;
+import com.robindrew.codegenerator.model.object.common.ModelMethod;
 
-public class JavaModelBeanMethod extends JavaModelTyped<ModelBeanMethod> {
+public class JavaModelMethod extends JavaModelTyped<ModelMethod> {
 
-	private final List<JavaModelBeanParameter> parameterList;
+	private final List<JavaModelMethodParameter> parameterList;
 
-	public JavaModelBeanMethod(ModelBeanMethod method, List<JavaModelBeanParameter> parameterList) {
+	public JavaModelMethod(ModelMethod method, List<JavaModelMethodParameter> parameterList) {
 		super(method);
 		this.parameterList = parameterList;
 	}
@@ -23,7 +23,7 @@ public class JavaModelBeanMethod extends JavaModelTyped<ModelBeanMethod> {
 		return getType();
 	}
 
-	public List<JavaModelBeanParameter> getParameterList() {
+	public List<JavaModelMethodParameter> getParameterList() {
 		return parameterList;
 	}
 

@@ -9,9 +9,11 @@ import com.robindrew.codegenerator.api.datastore.IDataStore;
 import com.robindrew.codegenerator.api.datastore.IDataView;
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModel;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethod;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethodParameter;
 import com.robindrew.codegenerator.lang.java.generator.model.datastore.JavaModelDataStore;
 import com.robindrew.codegenerator.lang.java.generator.model.datastore.JavaModelDataStoreKey;
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.generator.object.JavaGeneratorSet;
 import com.robindrew.codegenerator.lang.java.generator.object.JavaObjectGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.context.IJavaContext;
@@ -28,14 +30,15 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.type.sql
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.type.sql.MysqlGenerator;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
 import com.robindrew.codegenerator.lang.java.type.JavaTypeWithGenerics;
+import com.robindrew.codegenerator.lang.java.type.block.codeblock.JavaCodeLines;
 import com.robindrew.codegenerator.lang.java.type.block.method.JavaMethod;
 import com.robindrew.codegenerator.lang.java.type.block.parameter.IJavaNamedTypeSet;
 import com.robindrew.codegenerator.lang.java.type.block.parameter.JavaNamedTypeSet;
 import com.robindrew.codegenerator.lang.java.type.object.JavaObject;
+import com.robindrew.codegenerator.model.object.common.ModelExtends;
 import com.robindrew.codegenerator.model.object.datastore.ModelDataStore;
 import com.robindrew.codegenerator.model.object.datastore.ModelDataStoreKey;
 import com.robindrew.codegenerator.model.object.datastore.ModelDataStoreRow;
-import com.robindrew.codegenerator.model.object.iinterface.ModelExtends;
 import com.robindrew.codegenerator.setup.ISetup;
 
 public class JavaDataStoreGenerator extends JavaObjectGenerator implements IJavaDataStoreGenerator {
@@ -116,6 +119,16 @@ public class JavaDataStoreGenerator extends JavaObjectGenerator implements IJava
 		dataStore.setBeans(elementBean, keyBean, rowBeans, keyBeans);
 		dataStore.setResolver(getContext().getResolver());
 
+		// Method
+		for (JavaModelMethod method : dataStore.getMethodList()) {
+			method.setType(resolve(method.get().getReturnType()));
+
+			// Parameters
+			for (JavaModelMethodParameter parameter : method.getParameterList()) {
+				parameter.setType(resolve(parameter.get().getType()));
+			}
+		}
+
 		// Children
 		generatorSet.registerSecondaryTypes();
 	}
@@ -141,6 +154,52 @@ public class JavaDataStoreGenerator extends JavaObjectGenerator implements IJava
 			list.add(bean);
 		}
 		return list;
+	}
+
+	public void addMethods(JavaObject object, boolean isInterface) {
+		for (JavaMethod method : getMethods(object, isInterface)) {
+			object.addBlock(method);
+		}
+	}
+
+	public List<JavaMethod> getMethods(JavaObject object, boolean isInterface) {
+		List<JavaMethod> list = new ArrayList<>();
+		for (JavaModelMethod method : dataStore.getMethodList()) {
+			list.add(getMethod(object, method, isInterface));
+		}
+		return list;
+	}
+
+	private JavaMethod getMethod(JavaObject object, JavaModelMethod method, boolean isInterface) {
+		JavaMethod value = new JavaMethod(method.getName(), method.getReturnType());
+		for (JavaModelMethodParameter parameter : method.getParameterList()) {
+			value.getParameters().add(parameter.toNamedType());
+		}
+		if (!isInterface) {
+			if (method.getReturnValue() != null) {
+				String returnValue = getMethodReturnValue(object, value.getReturnType(), method.getReturnValue());
+				value.setContents(new JavaCodeLines("return " + returnValue + ";"));
+			} else {
+				value.setUnsupportedOperationContents();
+			}
+		}
+		value.setInterface(isInterface);
+		return value;
+	}
+
+	private String getMethodReturnValue(JavaObject object, IJavaType returnType, String returnValue) {
+
+		// String return value
+		if (returnType.isType(String.class)) {
+			return "\"" + returnValue + "\"";
+		}
+
+		// Enum return value
+		if (returnType.isEnum()) {
+			return returnType.getSimpleName() + "." + returnValue;
+		}
+
+		return returnValue;
 	}
 
 	@Override
@@ -175,6 +234,11 @@ public class JavaDataStoreGenerator extends JavaObjectGenerator implements IJava
 		methods.addInterfaceMethods();
 		for (JavaMethod method : methods) {
 			object.addBlock(method.setInterface(true));
+		}
+
+		// Only add methods to the base interface
+		if (readOnly) {
+			addMethods(object, true);
 		}
 
 		// Done

@@ -3,7 +3,8 @@ package com.robindrew.codegenerator.lang.java.generator.model.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethod;
 import com.robindrew.codegenerator.lang.java.generator.model.serializer.JavaModelDataSerializer;
 import com.robindrew.codegenerator.lang.java.generator.model.serializer.JavaModelJsonSerializer;
 import com.robindrew.codegenerator.lang.java.generator.model.serializer.JavaModelXmlSerializer;
@@ -22,7 +23,7 @@ public class JavaModelBean {
 	private final List<JavaModelBeanField> fieldList;
 	private final List<JavaModelExtends> extendsList;
 	private final List<JavaModelBeanConstructor> constructorList;
-	private final List<JavaModelBeanMethod> methodList;
+	private final List<JavaModelMethod> methodList;
 	private final List<JavaModelBeanField> identityList = new ArrayList<JavaModelBeanField>();
 	private final List<JavaModelBeanField> uniqueFieldList = new ArrayList<JavaModelBeanField>();
 	private final JavaModelBeanField autoIncrementField;
@@ -37,7 +38,7 @@ public class JavaModelBean {
 	private volatile JavaModelResultSetParser resultSetParser;
 	private volatile JavaModelServletRequestParser servletRequestParser;
 
-	public JavaModelBean(ModelBean bean, List<JavaModelBeanField> fieldList, List<JavaModelExtends> extendsList, List<JavaModelBeanConstructor> constructorList, List<JavaModelBeanMethod> methodList) {
+	public JavaModelBean(ModelBean bean, List<JavaModelBeanField> fieldList, List<JavaModelExtends> extendsList, List<JavaModelBeanConstructor> constructorList, List<JavaModelMethod> methodList) {
 		if (bean == null) {
 			throw new NullPointerException("bean");
 		}
@@ -111,7 +112,7 @@ public class JavaModelBean {
 		return constructorList;
 	}
 
-	public List<JavaModelBeanMethod> getMethodList() {
+	public List<JavaModelMethod> getMethodList() {
 		return methodList;
 	}
 
@@ -239,6 +240,11 @@ public class JavaModelBean {
 
 	public boolean isExecutable() {
 		return returnType != null;
+	}
+
+	@Override
+	public String toString() {
+		return bean.getName() + " (" + getType().getSimpleName(false) + ")";
 	}
 
 }

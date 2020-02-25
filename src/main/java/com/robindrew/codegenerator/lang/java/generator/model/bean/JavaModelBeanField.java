@@ -72,4 +72,9 @@ public class JavaModelBeanField extends JavaModelTyped<ModelBeanField> {
 		return new JavaNamedType(getName(), getType());
 	}
 
+	@Override
+	public String toString() {
+		return getName() + " (" + getType().getSimpleName(false) + ")";
+	}
+
 }

@@ -55,6 +55,9 @@ public class ConcurrentGenerator extends TypeGenerator {
 			}
 		}
 
+		// Custom Methods
+		getGenerator().addMethods(object, false);
+
 		// Done
 		write(object);
 	}

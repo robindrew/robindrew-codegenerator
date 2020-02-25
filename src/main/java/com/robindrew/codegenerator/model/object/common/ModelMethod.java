@@ -1,4 +1,4 @@
-package com.robindrew.codegenerator.model.object.bean;
+package com.robindrew.codegenerator.model.object.common;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import org.simpleframework.xml.ElementList;
 
 import com.robindrew.codegenerator.model.object.SimpleModelElement;
 
-public class ModelBeanMethod extends SimpleModelElement {
+public class ModelMethod extends SimpleModelElement {
 
 	@Attribute
 	private String name;
@@ -17,7 +17,7 @@ public class ModelBeanMethod extends SimpleModelElement {
 	@Attribute(required = false)
 	private String returnValue = null;
 	@ElementList(entry = "Parameter", inline = true, required = false)
-	private List<ModelBeanParameter> parameterList = new ArrayList<ModelBeanParameter>();
+	private List<ModelMethodParameter> parameterList = new ArrayList<ModelMethodParameter>();
 
 	public String getName() {
 		return name;
@@ -31,7 +31,7 @@ public class ModelBeanMethod extends SimpleModelElement {
 		return returnValue;
 	}
 
-	public List<ModelBeanParameter> getParameterList() {
+	public List<ModelMethodParameter> getParameterList() {
 		return parameterList;
 	}
 

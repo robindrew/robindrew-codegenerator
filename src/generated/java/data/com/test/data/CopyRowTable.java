@@ -91,6 +91,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public boolean containsRowKey(IRowKey row) {
+		return delegate.containsRowKey(row);
+	}
+
+	@Override
 	public void remove(IRow element) {
 		delegate.remove(element);
 	}
@@ -163,8 +168,8 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
-	public IRow get(IRowKey key) {
-		IRow returnValue = delegate.get(key);
+	public IRow getByRowKey(IRowKey key) {
+		IRow returnValue = delegate.getByRowKey(key);
 		if (copyOnRead) {
 			returnValue = new Row(returnValue);
 		}
@@ -194,6 +199,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowById(int id) {
+		delegate.removeRowById(id);
+	}
+
+	@Override
 	public IRowData getRowDataById(int id) {
 		IRowData returnValue = delegate.getRowDataById(id);
 		if (copyOnRead) {
@@ -203,12 +213,22 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataById(int id) {
+		delegate.removeRowDataById(id);
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsById(int id) {
 		IRowDimensions returnValue = delegate.getRowDimensionsById(id);
 		if (copyOnRead) {
 			returnValue = new RowDimensions(returnValue);
 		}
 		return returnValue;
+	}
+
+	@Override
+	public void removeRowDimensionsById(int id) {
+		delegate.removeRowDimensionsById(id);
 	}
 
 	@Override
@@ -239,6 +259,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowByName(String name) {
+		delegate.removeRowByName(name);
+	}
+
+	@Override
 	public IRowData getRowDataByName(String name) {
 		IRowData returnValue = delegate.getRowDataByName(name);
 		if (copyOnRead) {
@@ -248,12 +273,22 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByName(String name) {
+		delegate.removeRowDataByName(name);
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsByName(String name) {
 		IRowDimensions returnValue = delegate.getRowDimensionsByName(name);
 		if (copyOnRead) {
 			returnValue = new RowDimensions(returnValue);
 		}
 		return returnValue;
+	}
+
+	@Override
+	public void removeRowDimensionsByName(String name) {
+		delegate.removeRowDimensionsByName(name);
 	}
 
 	@Override
@@ -275,6 +310,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByData(byte[] data) {
+		delegate.removeRowListByData(data);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByData(byte[] data) {
 		List<IRowData> list = delegate.getRowDataListByData(data);
 		if (copyOnRead) {
@@ -288,6 +328,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByData(byte[] data) {
+		delegate.removeRowDataListByData(data);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByData(byte[] data) {
 		List<IRowDimensions> list = delegate.getRowDimensionsListByData(data);
 		if (copyOnRead) {
@@ -298,6 +343,11 @@ public class CopyRowTable implements IRowTable {
 			list = copy;
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDimensionsListByData(byte[] data) {
+		delegate.removeRowDimensionsListByData(data);
 	}
 
 	@Override
@@ -319,6 +369,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByWidth(long width) {
+		delegate.removeRowListByWidth(width);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByWidth(long width) {
 		List<IRowData> list = delegate.getRowDataListByWidth(width);
 		if (copyOnRead) {
@@ -332,6 +387,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByWidth(long width) {
+		delegate.removeRowDataListByWidth(width);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByWidth(long width) {
 		List<IRowDimensions> list = delegate.getRowDimensionsListByWidth(width);
 		if (copyOnRead) {
@@ -342,6 +402,11 @@ public class CopyRowTable implements IRowTable {
 			list = copy;
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDimensionsListByWidth(long width) {
+		delegate.removeRowDimensionsListByWidth(width);
 	}
 
 	@Override
@@ -376,6 +441,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByHeight(long height) {
+		delegate.removeRowListByHeight(height);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByHeight(long height) {
 		List<IRowData> list = delegate.getRowDataListByHeight(height);
 		if (copyOnRead) {
@@ -389,6 +459,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByHeight(long height) {
+		delegate.removeRowDataListByHeight(height);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByHeight(long height) {
 		List<IRowDimensions> list = delegate.getRowDimensionsListByHeight(height);
 		if (copyOnRead) {
@@ -399,6 +474,11 @@ public class CopyRowTable implements IRowTable {
 			list = copy;
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDimensionsListByHeight(long height) {
+		delegate.removeRowDimensionsListByHeight(height);
 	}
 
 	@Override
@@ -433,6 +513,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByUnit(TimeUnit unit) {
+		delegate.removeRowListByUnit(unit);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByUnit(TimeUnit unit) {
 		List<IRowData> list = delegate.getRowDataListByUnit(unit);
 		if (copyOnRead) {
@@ -443,6 +528,11 @@ public class CopyRowTable implements IRowTable {
 			list = copy;
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDataListByUnit(TimeUnit unit) {
+		delegate.removeRowDataListByUnit(unit);
 	}
 
 	@Override
@@ -459,6 +549,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsListByUnit(TimeUnit unit) {
+		delegate.removeRowDimensionsListByUnit(unit);
+	}
+
+	@Override
 	public List<IRowData> getRowDataList() {
 		List<IRowData> list = delegate.getRowDataList();
 		if (copyOnRead) {
@@ -472,6 +567,20 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public boolean containsRowData(IRowData row) {
+		return delegate.containsRowData(row);
+	}
+
+	@Override
+	public IRowData getRowDataByRowNameKey(int id, String name) {
+		IRowData returnValue = delegate.getRowDataByRowNameKey(id, name);
+		if (copyOnRead) {
+			returnValue = new RowData(returnValue);
+		}
+		return returnValue;
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		List<IRowDimensions> list = delegate.getRowDimensionsList();
 		if (copyOnRead) {
@@ -482,5 +591,33 @@ public class CopyRowTable implements IRowTable {
 			list = copy;
 		}
 		return list;
+	}
+
+	@Override
+	public boolean containsRowDimensions(IRowDimensions row) {
+		return delegate.containsRowDimensions(row);
+	}
+
+	@Override
+	public IRowDimensions getRowDimensionsByRowNameKey(int id, String name) {
+		IRowDimensions returnValue = delegate.getRowDimensionsByRowNameKey(id, name);
+		if (copyOnRead) {
+			returnValue = new RowDimensions(returnValue);
+		}
+		return returnValue;
+	}
+
+	@Override
+	public IRow getRowByRowNameKey(int id, String name) {
+		IRow returnValue = delegate.getRowByRowNameKey(id, name);
+		if (copyOnRead) {
+			returnValue = new Row(returnValue);
+		}
+		return returnValue;
+	}
+
+	@Override
+	public boolean containsRowNameKey(IRowNameKey row) {
+		return delegate.containsRowNameKey(row);
 	}
 }

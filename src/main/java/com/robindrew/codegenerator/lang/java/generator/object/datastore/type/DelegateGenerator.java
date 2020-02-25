@@ -42,6 +42,10 @@ public class DelegateGenerator extends TypeGenerator {
 			object.addBlock(toDelegate(method));
 		}
 
+		for (JavaMethod method : getGenerator().getMethods(object, false)) {
+			object.addBlock(toDelegate(method));
+		}
+
 		// Done
 		write(object);
 	}

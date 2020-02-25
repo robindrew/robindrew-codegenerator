@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class HsqldbRowTable implements ISqlRowTable {
 
-	private volatile String table;
+	private volatile String table = "RowTable";
 	private volatile String database;
 	private volatile ISqlExecutor executor;
 	private final ReadWriteLock reentrantLock;
@@ -162,7 +162,7 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
-	public IRow get(IRowKey key) {
+	public IRow getByRowKey(IRowKey key) {
 
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
@@ -209,6 +209,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().get(sql, new RowResultSetParser());
+	}
+
+	@Override
+	public boolean containsRowKey(IRowKey row) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(row.getId());
+
+		// Execute
+		return getExecutor().getCount(sql) > 0;
 	}
 
 	@Override
@@ -445,6 +458,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public void removeRowById(int id) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
+	@Override
 	public IRowData getRowDataById(int id) {
 
 		// SQL
@@ -457,6 +483,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().get(sql, new RowDataResultSetParser());
+	}
+
+	@Override
+	public void removeRowDataById(int id) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -476,6 +515,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().get(sql, new RowDimensionsResultSetParser());
+	}
+
+	@Override
+	public void removeRowDimensionsById(int id) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -550,6 +602,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public void removeRowByName(String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
+	@Override
 	public IRowData getRowDataByName(String name) {
 
 		// SQL
@@ -562,6 +627,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().get(sql, new RowDataResultSetParser());
+	}
+
+	@Override
+	public void removeRowDataByName(String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -581,6 +659,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().get(sql, new RowDimensionsResultSetParser());
+	}
+
+	@Override
+	public void removeRowDimensionsByName(String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -622,6 +713,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public void removeRowListByData(byte[] data) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("data").sql("=").value(data);
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByData(byte[] data) {
 
 		// SQL
@@ -634,6 +738,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDataResultSetParser());
+	}
+
+	@Override
+	public void removeRowDataListByData(byte[] data) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("data").sql("=").value(data);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -653,6 +770,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDimensionsResultSetParser());
+	}
+
+	@Override
+	public void removeRowDimensionsListByData(byte[] data) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("data").sql("=").value(data);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -694,6 +824,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public void removeRowListByWidth(long width) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("width").sql("=").value(width);
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByWidth(long width) {
 
 		// SQL
@@ -706,6 +849,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDataResultSetParser());
+	}
+
+	@Override
+	public void removeRowDataListByWidth(long width) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("width").sql("=").value(width);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -725,6 +881,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDimensionsResultSetParser());
+	}
+
+	@Override
+	public void removeRowDimensionsListByWidth(long width) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("width").sql("=").value(width);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -799,6 +968,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public void removeRowListByHeight(long height) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("height").sql("=").value(height);
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByHeight(long height) {
 
 		// SQL
@@ -811,6 +993,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDataResultSetParser());
+	}
+
+	@Override
+	public void removeRowDataListByHeight(long height) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("height").sql("=").value(height);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -830,6 +1025,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDimensionsResultSetParser());
+	}
+
+	@Override
+	public void removeRowDimensionsListByHeight(long height) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("height").sql("=").value(height);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -872,7 +1080,7 @@ public class HsqldbRowTable implements ISqlRowTable {
 		ISqlBuilder sql = newSqlBuilder();
 		sql.selectCountAllFrom(getTable());
 		sql.where();
-		sql.column("unit").sql("=").value(unit);
+		sql.column("unit").sql("=").value(unit.ordinal());
 
 		// Execute
 		return getExecutor().getCount(sql) > 0;
@@ -897,10 +1105,23 @@ public class HsqldbRowTable implements ISqlRowTable {
 		sql.column("unit");
 		sql.from(getTable());
 		sql.where();
-		sql.column("unit").sql("=").value(unit);
+		sql.column("unit").sql("=").value(unit.ordinal());
 
 		// Execute
 		return getExecutor().getList(sql, new RowResultSetParser());
+	}
+
+	@Override
+	public void removeRowListByUnit(TimeUnit unit) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("unit").sql("=").value(unit.ordinal());
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -912,10 +1133,23 @@ public class HsqldbRowTable implements ISqlRowTable {
 		sql.column("data");
 		sql.from(getTable());
 		sql.where();
-		sql.column("unit").sql("=").value(unit);
+		sql.column("unit").sql("=").value(unit.ordinal());
 
 		// Execute
 		return getExecutor().getList(sql, new RowDataResultSetParser());
+	}
+
+	@Override
+	public void removeRowDataListByUnit(TimeUnit unit) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("unit").sql("=").value(unit.ordinal());
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -931,10 +1165,23 @@ public class HsqldbRowTable implements ISqlRowTable {
 		sql.column("height");
 		sql.from(getTable());
 		sql.where();
-		sql.column("unit").sql("=").value(unit);
+		sql.column("unit").sql("=").value(unit.ordinal());
 
 		// Execute
 		return getExecutor().getList(sql, new RowDimensionsResultSetParser());
+	}
+
+	@Override
+	public void removeRowDimensionsListByUnit(TimeUnit unit) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(getTable());
+		sql.where();
+		sql.column("unit").sql("=").value(unit.ordinal());
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override
@@ -948,6 +1195,35 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDataResultSetParser());
+	}
+
+	@Override
+	public boolean containsRowData(IRowData row) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("data").sql("=").value(row.getData());
+
+		// Execute
+		return getExecutor().getCount(sql) > 0;
+	}
+
+	public IRowData getRowDataByRowNameKey(int id, String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.select();
+		sql.column("data");
+		sql.from(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+		sql.and();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		return getExecutor().get(sql, new RowDataResultSetParser());
 	}
 
 	@Override
@@ -965,6 +1241,84 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getList(sql, new RowDimensionsResultSetParser());
+	}
+
+	@Override
+	public boolean containsRowDimensions(IRowDimensions row) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(row.getId());
+		sql.and();
+		sql.column("width").sql("=").value(row.getWidth());
+		sql.and();
+		sql.column("height").sql("=").value(row.getHeight());
+
+		// Execute
+		return getExecutor().getCount(sql) > 0;
+	}
+
+	public IRowDimensions getRowDimensionsByRowNameKey(int id, String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.select();
+		sql.column("id");
+		sql.sql(',');
+		sql.column("width");
+		sql.sql(',');
+		sql.column("height");
+		sql.from(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+		sql.and();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		return getExecutor().get(sql, new RowDimensionsResultSetParser());
+	}
+
+	public IRow getRowByRowNameKey(int id, String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.select();
+		sql.column("id");
+		sql.sql(',');
+		sql.column("name");
+		sql.sql(',');
+		sql.column("data");
+		sql.sql(',');
+		sql.column("width");
+		sql.sql(',');
+		sql.column("height");
+		sql.sql(',');
+		sql.column("unit");
+		sql.from(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+		sql.and();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		return getExecutor().get(sql, new RowResultSetParser());
+	}
+
+	@Override
+	public boolean containsRowNameKey(IRowNameKey row) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(row.getId());
+		sql.and();
+		sql.column("name").sql("=").value(row.getName());
+
+		// Execute
+		return getExecutor().getCount(sql) > 0;
 	}
 
 	@Override

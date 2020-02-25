@@ -52,8 +52,11 @@ public class CachedPersisterGenerator extends TypeGenerator {
 		// Constructor
 		addConstructor(object, cache, persister);
 
-		// Add methods
+		// Add Methods
 		addMethods(object);
+
+		// Custom Methods
+		getGenerator().addMethods(object, false);
 
 		write(object);
 	}

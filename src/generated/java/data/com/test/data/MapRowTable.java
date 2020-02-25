@@ -163,11 +163,17 @@ public class MapRowTable implements IRowTable {
 		return new RowKey(element);
 	}
 
-	public IRow get(IRowKey key) {
+	@Override
+	public IRow getByRowKey(IRowKey key) {
 		if (key == null) {
 			throw new NullPointerException("key");
 		}
 		return map.get(key);
+	}
+
+	@Override
+	public boolean containsRowKey(IRowKey row) {
+		return getByRowKey(row) != null;
 	}
 
 	@Override
@@ -207,6 +213,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowById(int id) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getId() == id) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public IRowData getRowDataById(int id) {
 		for (IRow element : map.values()) {
 			if (element.getId() == id) {
@@ -217,6 +232,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataById(int id) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getId() == id) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsById(int id) {
 		for (IRow element : map.values()) {
 			if (element.getId() == id) {
@@ -224,6 +248,15 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void removeRowDimensionsById(int id) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getId() == id) {
+				remove(element);
+			}
+		}
 	}
 
 	@Override
@@ -266,6 +299,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowByName(String name) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getName().equals(name)) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public IRowData getRowDataByName(String name) {
 		for (IRow element : map.values()) {
 			if (element.getName().equals(name)) {
@@ -276,6 +318,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByName(String name) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getName().equals(name)) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsByName(String name) {
 		for (IRow element : map.values()) {
 			if (element.getName().equals(name)) {
@@ -283,6 +334,15 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void removeRowDimensionsByName(String name) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getName().equals(name)) {
+				remove(element);
+			}
+		}
 	}
 
 	@Override
@@ -307,6 +367,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByData(byte[] data) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getData().equals(data)) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByData(byte[] data) {
 		List<IRowData> list = new ArrayList<IRowData>();
 		for (IRow element : map.values()) {
@@ -318,6 +387,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByData(byte[] data) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getData().equals(data)) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByData(byte[] data) {
 		List<IRowDimensions> list = new ArrayList<IRowDimensions>();
 		for (IRow element : map.values()) {
@@ -326,6 +404,15 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDimensionsListByData(byte[] data) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getData().equals(data)) {
+				remove(element);
+			}
+		}
 	}
 
 	@Override
@@ -350,6 +437,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByWidth(long width) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getWidth() == width) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByWidth(long width) {
 		List<IRowData> list = new ArrayList<IRowData>();
 		for (IRow element : map.values()) {
@@ -361,6 +457,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByWidth(long width) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getWidth() == width) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByWidth(long width) {
 		List<IRowDimensions> list = new ArrayList<IRowDimensions>();
 		for (IRow element : map.values()) {
@@ -369,6 +474,15 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDimensionsListByWidth(long width) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getWidth() == width) {
+				remove(element);
+			}
+		}
 	}
 
 	@Override
@@ -412,6 +526,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByHeight(long height) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getHeight() == height) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByHeight(long height) {
 		List<IRowData> list = new ArrayList<IRowData>();
 		for (IRow element : map.values()) {
@@ -423,6 +546,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByHeight(long height) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getHeight() == height) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByHeight(long height) {
 		List<IRowDimensions> list = new ArrayList<IRowDimensions>();
 		for (IRow element : map.values()) {
@@ -431,6 +563,15 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDimensionsListByHeight(long height) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getHeight() == height) {
+				remove(element);
+			}
+		}
 	}
 
 	@Override
@@ -474,6 +615,15 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByUnit(TimeUnit unit) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getUnit().equals(unit)) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByUnit(TimeUnit unit) {
 		List<IRowData> list = new ArrayList<IRowData>();
 		for (IRow element : map.values()) {
@@ -482,6 +632,15 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return list;
+	}
+
+	@Override
+	public void removeRowDataListByUnit(TimeUnit unit) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getUnit().equals(unit)) {
+				remove(element);
+			}
+		}
 	}
 
 	@Override
@@ -495,6 +654,15 @@ public class MapRowTable implements IRowTable {
 		return list;
 	}
 
+	@Override
+	public void removeRowDimensionsListByUnit(TimeUnit unit) {
+		for (IRow element : new ArrayList<>(map.values())) {
+			if (element.getUnit().equals(unit)) {
+				remove(element);
+			}
+		}
+	}
+
 	public List<IRowData> getRowDataList() {
 		List<IRow> elements = getAll();
 		List<IRowData> list = new ArrayList<IRowData>(elements.size());
@@ -504,6 +672,27 @@ public class MapRowTable implements IRowTable {
 		return list;
 	}
 
+	@Override
+	public boolean containsRowData(IRowData row) {
+		for (IRow element : map.values()) {
+			if (!element.getData().equals(row.getData())) {
+				continue;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public IRowData getRowDataByRowNameKey(int id, String name) {
+		for (IRow element : map.values()) {
+			if (element.getId() == id && element.getName().equals(name)) {
+				return new RowData(element);
+			}
+		}
+		return null;
+	}
+
 	public List<IRowDimensions> getRowDimensionsList() {
 		List<IRow> elements = getAll();
 		List<IRowDimensions> list = new ArrayList<IRowDimensions>(elements.size());
@@ -511,5 +700,56 @@ public class MapRowTable implements IRowTable {
 			list.add(new RowDimensions(element));
 		}
 		return list;
+	}
+
+	@Override
+	public boolean containsRowDimensions(IRowDimensions row) {
+		for (IRow element : map.values()) {
+			if (element.getId() != row.getId()) {
+				continue;
+			}
+			if (element.getWidth() != row.getWidth()) {
+				continue;
+			}
+			if (element.getHeight() != row.getHeight()) {
+				continue;
+			}
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public IRowDimensions getRowDimensionsByRowNameKey(int id, String name) {
+		for (IRow element : map.values()) {
+			if (element.getId() == id && element.getName().equals(name)) {
+				return new RowDimensions(element);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public IRow getRowByRowNameKey(int id, String name) {
+		for (IRow element : map.values()) {
+			if (element.getId() == id && element.getName().equals(name)) {
+				return new Row(element);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public boolean containsRowNameKey(IRowNameKey row) {
+		for (IRow element : map.values()) {
+			if (element.getId() != row.getId()) {
+				continue;
+			}
+			if (!element.getName().equals(row.getName())) {
+				continue;
+			}
+			return true;
+		}
+		return false;
 	}
 }

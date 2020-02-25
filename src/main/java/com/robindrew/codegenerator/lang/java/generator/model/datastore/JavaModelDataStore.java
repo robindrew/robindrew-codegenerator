@@ -6,7 +6,8 @@ import java.util.List;
 
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanField;
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethod;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
 import com.robindrew.codegenerator.lang.java.type.JavaTypeContainer;
 import com.robindrew.codegenerator.lang.java.type.JavaTypeWithGenerics;
@@ -17,6 +18,7 @@ public class JavaModelDataStore {
 
 	private final ModelDataStore model;
 	private final List<JavaModelExtends> extendsList;
+	private final List<JavaModelMethod> methodList;
 	private volatile IJavaTypeResolver resolver;
 
 	private volatile JavaModelBean elementBean;
@@ -27,9 +29,10 @@ public class JavaModelDataStore {
 	private volatile IJavaType interfaceType;
 	private volatile IJavaType readOnlyInterfaceType;
 
-	public JavaModelDataStore(ModelDataStore model, List<JavaModelExtends> extendsList) {
+	public JavaModelDataStore(ModelDataStore model, List<JavaModelExtends> extendsList, List<JavaModelMethod> methodList) {
 		this.model = model;
 		this.extendsList = extendsList;
+		this.methodList = methodList;
 	}
 
 	public String getName() {
@@ -54,6 +57,10 @@ public class JavaModelDataStore {
 
 	public List<JavaModelExtends> getExtendsList() {
 		return extendsList;
+	}
+
+	public List<JavaModelMethod> getMethodList() {
+		return methodList;
 	}
 
 	public JavaModelBean getKeyBean() {

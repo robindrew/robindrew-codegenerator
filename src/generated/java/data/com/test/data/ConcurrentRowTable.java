@@ -101,11 +101,22 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
-	public IRow get(IRowKey key) {
+	public IRow getByRowKey(IRowKey key) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
-			return delegate.get(key);
+			return delegate.getByRowKey(key);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public boolean containsRowKey(IRowKey row) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.containsRowKey(row);
 		} finally {
 			lock.unlock();
 		}
@@ -244,6 +255,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowById(int id) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowById(id);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenIds(Integer from, Integer to) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -266,11 +288,33 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataById(int id) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDataById(id);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsById(int id) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
 			return delegate.getRowDimensionsById(id);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public void removeRowDimensionsById(int id) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDimensionsById(id);
 		} finally {
 			lock.unlock();
 		}
@@ -299,6 +343,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowByName(String name) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowByName(name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public IRowData getRowDataByName(String name) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -310,11 +365,33 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByName(String name) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDataByName(name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsByName(String name) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
 			return delegate.getRowDimensionsByName(name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public void removeRowDimensionsByName(String name) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDimensionsByName(name);
 		} finally {
 			lock.unlock();
 		}
@@ -343,6 +420,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByData(byte[] data) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowListByData(data);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByData(byte[] data) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -354,11 +442,33 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByData(byte[] data) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDataListByData(data);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByData(byte[] data) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
 			return delegate.getRowDimensionsListByData(data);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public void removeRowDimensionsListByData(byte[] data) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDimensionsListByData(data);
 		} finally {
 			lock.unlock();
 		}
@@ -387,6 +497,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByWidth(long width) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowListByWidth(width);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenWidths(Long from, Long to) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -409,11 +530,33 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByWidth(long width) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDataListByWidth(width);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByWidth(long width) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
 			return delegate.getRowDimensionsListByWidth(width);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public void removeRowDimensionsListByWidth(long width) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDimensionsListByWidth(width);
 		} finally {
 			lock.unlock();
 		}
@@ -442,6 +585,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByHeight(long height) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowListByHeight(height);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenHeights(Long from, Long to) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -464,11 +618,33 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByHeight(long height) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDataListByHeight(height);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByHeight(long height) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
 			return delegate.getRowDimensionsListByHeight(height);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public void removeRowDimensionsListByHeight(long height) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDimensionsListByHeight(height);
 		} finally {
 			lock.unlock();
 		}
@@ -497,11 +673,33 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByUnit(TimeUnit unit) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowListByUnit(unit);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByUnit(TimeUnit unit) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
 			return delegate.getRowDataListByUnit(unit);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public void removeRowDataListByUnit(TimeUnit unit) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDataListByUnit(unit);
 		} finally {
 			lock.unlock();
 		}
@@ -519,6 +717,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsListByUnit(TimeUnit unit) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDimensionsListByUnit(unit);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowData> getRowDataList() {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -530,11 +739,77 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public boolean containsRowData(IRowData row) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.containsRowData(row);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public IRowData getRowDataByRowNameKey(int id, String name) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getRowDataByRowNameKey(id, name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
 			return delegate.getRowDimensionsList();
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public boolean containsRowDimensions(IRowDimensions row) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.containsRowDimensions(row);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public IRowDimensions getRowDimensionsByRowNameKey(int id, String name) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getRowDimensionsByRowNameKey(id, name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public IRow getRowByRowNameKey(int id, String name) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getRowByRowNameKey(id, name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public boolean containsRowNameKey(IRowNameKey row) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.containsRowNameKey(row);
 		} finally {
 			lock.unlock();
 		}

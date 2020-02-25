@@ -1,5 +1,6 @@
 package com.test.data;
 
+import com.robindrew.common.util.Java;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -7,8 +8,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
-
-import com.robindrew.common.util.Java;
 
 public class WriteBehindRowTable implements IRowTable {
 
@@ -133,11 +132,27 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
-	public IRow get(final IRowKey key) {
+	public IRow getByRowKey(final IRowKey key) {
 		// Synchronous
 		Future<IRow> future = executor.submit(new Callable<IRow>() {
 			public IRow call() {
-				return delegate.get(key);
+				return delegate.getByRowKey(key);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public boolean containsRowKey(final IRowKey row) {
+		// Synchronous
+		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
+			public Boolean call() {
+				return delegate.containsRowKey(row);
 			}
 		});
 
@@ -295,6 +310,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowById(final int id) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowById(id);
+			}
+		});
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenIds(final Integer from, final Integer to) {
 		// Synchronous
 		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
@@ -327,6 +352,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataById(final int id) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDataById(id);
+			}
+		});
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsById(final int id) {
 		// Synchronous
 		Future<IRowDimensions> future = executor.submit(new Callable<IRowDimensions>() {
@@ -340,6 +375,16 @@ public class WriteBehindRowTable implements IRowTable {
 		} catch(Exception e) {
 			throw Java.propagate(e);
 		}
+	}
+
+	@Override
+	public void removeRowDimensionsById(final int id) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDimensionsById(id);
+			}
+		});
 	}
 
 	@Override
@@ -375,6 +420,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowByName(final String name) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowByName(name);
+			}
+		});
+	}
+
+	@Override
 	public IRowData getRowDataByName(final String name) {
 		// Synchronous
 		Future<IRowData> future = executor.submit(new Callable<IRowData>() {
@@ -391,6 +446,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByName(final String name) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDataByName(name);
+			}
+		});
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsByName(final String name) {
 		// Synchronous
 		Future<IRowDimensions> future = executor.submit(new Callable<IRowDimensions>() {
@@ -404,6 +469,16 @@ public class WriteBehindRowTable implements IRowTable {
 		} catch(Exception e) {
 			throw Java.propagate(e);
 		}
+	}
+
+	@Override
+	public void removeRowDimensionsByName(final String name) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDimensionsByName(name);
+			}
+		});
 	}
 
 	@Override
@@ -439,6 +514,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByData(final byte[] data) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowListByData(data);
+			}
+		});
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByData(final byte[] data) {
 		// Synchronous
 		Future<List<IRowData>> future = executor.submit(new Callable<List<IRowData>>() {
@@ -455,6 +540,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByData(final byte[] data) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDataListByData(data);
+			}
+		});
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByData(final byte[] data) {
 		// Synchronous
 		Future<List<IRowDimensions>> future = executor.submit(new Callable<List<IRowDimensions>>() {
@@ -468,6 +563,16 @@ public class WriteBehindRowTable implements IRowTable {
 		} catch(Exception e) {
 			throw Java.propagate(e);
 		}
+	}
+
+	@Override
+	public void removeRowDimensionsListByData(final byte[] data) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDimensionsListByData(data);
+			}
+		});
 	}
 
 	@Override
@@ -503,6 +608,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByWidth(final long width) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowListByWidth(width);
+			}
+		});
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenWidths(final Long from, final Long to) {
 		// Synchronous
 		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
@@ -535,6 +650,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByWidth(final long width) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDataListByWidth(width);
+			}
+		});
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByWidth(final long width) {
 		// Synchronous
 		Future<List<IRowDimensions>> future = executor.submit(new Callable<List<IRowDimensions>>() {
@@ -548,6 +673,16 @@ public class WriteBehindRowTable implements IRowTable {
 		} catch(Exception e) {
 			throw Java.propagate(e);
 		}
+	}
+
+	@Override
+	public void removeRowDimensionsListByWidth(final long width) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDimensionsListByWidth(width);
+			}
+		});
 	}
 
 	@Override
@@ -583,6 +718,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByHeight(final long height) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowListByHeight(height);
+			}
+		});
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenHeights(final Long from, final Long to) {
 		// Synchronous
 		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
@@ -615,6 +760,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByHeight(final long height) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDataListByHeight(height);
+			}
+		});
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByHeight(final long height) {
 		// Synchronous
 		Future<List<IRowDimensions>> future = executor.submit(new Callable<List<IRowDimensions>>() {
@@ -628,6 +783,16 @@ public class WriteBehindRowTable implements IRowTable {
 		} catch(Exception e) {
 			throw Java.propagate(e);
 		}
+	}
+
+	@Override
+	public void removeRowDimensionsListByHeight(final long height) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDimensionsListByHeight(height);
+			}
+		});
 	}
 
 	@Override
@@ -663,6 +828,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByUnit(final TimeUnit unit) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowListByUnit(unit);
+			}
+		});
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByUnit(final TimeUnit unit) {
 		// Synchronous
 		Future<List<IRowData>> future = executor.submit(new Callable<List<IRowData>>() {
@@ -676,6 +851,16 @@ public class WriteBehindRowTable implements IRowTable {
 		} catch(Exception e) {
 			throw Java.propagate(e);
 		}
+	}
+
+	@Override
+	public void removeRowDataListByUnit(final TimeUnit unit) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDataListByUnit(unit);
+			}
+		});
 	}
 
 	@Override
@@ -695,6 +880,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsListByUnit(final TimeUnit unit) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDimensionsListByUnit(unit);
+			}
+		});
+	}
+
+	@Override
 	public List<IRowData> getRowDataList() {
 		// Synchronous
 		Future<List<IRowData>> future = executor.submit(new Callable<List<IRowData>>() {
@@ -711,11 +906,107 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public boolean containsRowData(final IRowData row) {
+		// Synchronous
+		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
+			public Boolean call() {
+				return delegate.containsRowData(row);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public IRowData getRowDataByRowNameKey(final int id, final String name) {
+		// Synchronous
+		Future<IRowData> future = executor.submit(new Callable<IRowData>() {
+			public IRowData call() {
+				return delegate.getRowDataByRowNameKey(id, name);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		// Synchronous
 		Future<List<IRowDimensions>> future = executor.submit(new Callable<List<IRowDimensions>>() {
 			public List<IRowDimensions> call() {
 				return delegate.getRowDimensionsList();
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public boolean containsRowDimensions(final IRowDimensions row) {
+		// Synchronous
+		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
+			public Boolean call() {
+				return delegate.containsRowDimensions(row);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public IRowDimensions getRowDimensionsByRowNameKey(final int id, final String name) {
+		// Synchronous
+		Future<IRowDimensions> future = executor.submit(new Callable<IRowDimensions>() {
+			public IRowDimensions call() {
+				return delegate.getRowDimensionsByRowNameKey(id, name);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public IRow getRowByRowNameKey(final int id, final String name) {
+		// Synchronous
+		Future<IRow> future = executor.submit(new Callable<IRow>() {
+			public IRow call() {
+				return delegate.getRowByRowNameKey(id, name);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public boolean containsRowNameKey(final IRowNameKey row) {
+		// Synchronous
+		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
+			public Boolean call() {
+				return delegate.containsRowNameKey(row);
 			}
 		});
 

@@ -62,6 +62,9 @@ public class RowKey implements IRowKey {
 	 */
 	@Override
 	public void setId(int id) {
+		if (id < 1) {
+			throw new IllegalArgumentException("id too small, minimum of 1, value: '" + id + "'");
+		}
 		this.id = id;
 	}
 

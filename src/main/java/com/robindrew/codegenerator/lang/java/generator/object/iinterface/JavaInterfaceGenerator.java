@@ -4,7 +4,7 @@ import static com.robindrew.codegenerator.lang.java.type.classtype.ClassType.INT
 
 import com.robindrew.codegenerator.lang.java.generator.JavaModelGenerationException;
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModel;
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelInterface;
 import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelInterfaceMethod;
 import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelInterfaceParameter;

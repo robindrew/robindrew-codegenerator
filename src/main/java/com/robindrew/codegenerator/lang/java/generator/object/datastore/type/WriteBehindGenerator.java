@@ -47,7 +47,7 @@ public class WriteBehindGenerator extends TypeGenerator {
 		// Constructor
 		object.addBlock(new WriteBehindConstructor(writeBehindType.getSimpleName(), delegate, executor));
 
-		// Write behdin methods
+		// Write-Behind Methods
 		JavaDataStoreMethods methods = new JavaDataStoreMethods(this);
 		methods.addDefaultMethods();
 		for (JavaMethod method : methods) {
@@ -57,6 +57,9 @@ public class WriteBehindGenerator extends TypeGenerator {
 				object.addBlock(toWriteBehind(method, isForceSync(method)));
 			}
 		}
+
+		// Custom Methods
+		getGenerator().addMethods(object, false);
 
 		write(object);
 	}

@@ -20,12 +20,14 @@ public class SqlTypeDeclaration {
 		map(long.class, "BIGINT");
 		map(float.class, "FLOAT");
 		map(double.class, "DOUBLE");
+		map(boolean.class, "BOOLEAN");
 		map(Byte.class, "TINYINT");
 		map(Short.class, "SMALLINT");
 		map(Integer.class, "INT");
 		map(Long.class, "BIGINT");
 		map(Float.class, "FLOAT");
 		map(Double.class, "DOUBLE");
+		map(Boolean.class, "BOOLEAN");
 		map(BigDecimal.class, "DECIMAL");
 	}
 

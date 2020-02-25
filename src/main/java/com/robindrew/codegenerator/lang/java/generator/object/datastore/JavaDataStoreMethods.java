@@ -9,6 +9,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.A
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.AddAutoMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.AddMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ClearMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.CreateMethod;
@@ -23,6 +24,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.G
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.IsEmptyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveAllMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.SetAllMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.SetMethod;
@@ -60,6 +62,7 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 		add(new GetAllMethod(dataStore.getDataStore()));
 		add(new GetMethod(dataStore.getDataStore()));
 		add(new GetByBeanMethod(dataStore.getDataStore()));
+		add(new ContainsRowMethod(dataStore.getDataStore(), dataStore.getDataStore().getKeyBean()));
 
 		if (!readOnly) {
 			add(new ClearMethod());
@@ -87,6 +90,9 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 			boolean unique = field.isUnique();
 			JavaModelBean bean = dataStore.getDataStore().getElementBean();
 			add(new GetListByMethod(dataStore.getDataStore(), field, bean, unique));
+			if (!readOnly) {
+				add(new RemoveListByMethod(dataStore.getDataStore(), field, bean, unique));
+			}
 
 			// GetAllBetween
 			if (field.isNumeric()) {
@@ -95,12 +101,16 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 
 			for (JavaModelBean row : dataStore.getDataStore().getRowBeans()) {
 				add(new GetListByMethod(dataStore.getDataStore(), field, row, unique));
+				if (!readOnly) {
+					add(new RemoveListByMethod(dataStore.getDataStore(), field, row, unique));
+				}
 			}
 		}
 
 		// Rows
 		for (JavaModelBean row : dataStore.getDataStore().getRowBeans()) {
 			add(new GetListMethod(dataStore.getDataStore(), row));
+			add(new ContainsRowMethod(dataStore.getDataStore(), row));
 
 			for (JavaModelDataStoreKey key : dataStore.getDataStore().getKeyBeans()) {
 				add(new GetByKeyMethod(dataStore.getDataStore(), row, key));
@@ -110,6 +120,7 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 		// Keys
 		for (JavaModelDataStoreKey key : dataStore.getDataStore().getKeyBeans()) {
 			add(new GetByKeyMethod(dataStore.getDataStore(), dataStore.getDataStore().getElementBean(), key));
+			add(new ContainsRowMethod(dataStore.getDataStore(), key.getBean()));
 		}
 	}
 

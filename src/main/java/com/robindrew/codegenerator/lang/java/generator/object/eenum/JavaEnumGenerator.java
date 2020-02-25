@@ -4,10 +4,10 @@ import static com.robindrew.codegenerator.lang.java.type.block.visibility.JavaVi
 import static com.robindrew.codegenerator.lang.java.type.classtype.ClassType.ENUM;
 
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModel;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnum;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnumConstant;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnumField;
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.generator.object.JavaObjectGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.context.IJavaContext;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;

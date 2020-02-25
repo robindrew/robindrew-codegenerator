@@ -13,6 +13,14 @@ public class LatchedExecutor {
 	private final ExecutorService service;
 	private final AtomicReference<Throwable> throwable = new AtomicReference<Throwable>();
 
+	public LatchedExecutor(ExecutorService service, int size) {
+		if (service == null) {
+			throw new NullPointerException("service");
+		}
+		this.service = service;
+		this.latch = new CountDownLatch(size);
+	}
+
 	public LatchedExecutor(ExecutorService service, Collection<?> collection) {
 		if (collection.isEmpty()) {
 			throw new IllegalArgumentException("collection is empty");

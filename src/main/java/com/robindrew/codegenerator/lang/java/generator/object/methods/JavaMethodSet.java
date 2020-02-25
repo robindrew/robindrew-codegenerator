@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.generator.model.lookup.IJavaModelSet;
 import com.robindrew.codegenerator.lang.java.generator.object.lookup.IJavaMethodLookup;
 import com.robindrew.codegenerator.lang.java.generator.object.lookup.JavaMethodLookup;

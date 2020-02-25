@@ -13,7 +13,7 @@ import com.robindrew.codegenerator.lang.java.type.name.JavaName;
 public class GetterMethod extends JavaMethod {
 
 	private static IJavaName getName(IJavaName name) {
-		return new JavaName("get" + name.toUpper().toString());
+		return new JavaName("get" + name.toUpper());
 	}
 
 	private final IJavaName fieldName;

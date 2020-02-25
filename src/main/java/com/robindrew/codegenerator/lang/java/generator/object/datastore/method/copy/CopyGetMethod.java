@@ -20,15 +20,18 @@ public class CopyGetMethod extends DelegateMethod {
 	}
 
 	private IJavaCodeBlock getMethodContents() {
-		String returnType = dataStore.getElementBean().getInterfaceType().getSimpleName(true);
-		String beanType = dataStore.getElementBean().getType().getSimpleName(true);
+		String returnType = getReturnType().getSimpleName(true);
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line(returnType + " returnValue = " + getDelegateCall() + ";");
 		code.line("if (copyOnRead) {");
-		code.line(1, "returnValue = new " + beanType + "(returnValue);");
+		code.line(1, "returnValue = new " + returnType.substring(1) + "(returnValue);");
 		code.line("}");
 		code.line("return returnValue;");
 		return code;
+	}
+
+	public JavaModelDataStore getDataStore() {
+		return dataStore;
 	}
 }

@@ -13,7 +13,7 @@ public class GetByBeanMethod extends JavaMethod {
 	}
 
 	public GetByBeanMethod(JavaModelDataStore dataStore, JavaModelBean bean) {
-		super("get", dataStore.getElementBean().getInterfaceType());
+		super("getBy" + bean.getType().getSimpleName(false), dataStore.getElementBean().getInterfaceType());
 		this.bean = bean;
 		getParameters().add("key", bean.getInterfaceType());
 	}

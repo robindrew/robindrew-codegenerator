@@ -57,8 +57,13 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
-	public IRow get(IRowKey key) {
-		return delegate.get(key);
+	public IRow getByRowKey(IRowKey key) {
+		return delegate.getByRowKey(key);
+	}
+
+	@Override
+	public boolean containsRowKey(IRowKey row) {
+		return delegate.containsRowKey(row);
 	}
 
 	@Override
@@ -122,6 +127,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowById(int id) {
+		delegate.removeRowById(id);
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenIds(Integer from, Integer to) {
 		return delegate.getRowListBetweenIds(from, to);
 	}
@@ -132,8 +142,18 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataById(int id) {
+		delegate.removeRowDataById(id);
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsById(int id) {
 		return delegate.getRowDimensionsById(id);
+	}
+
+	@Override
+	public void removeRowDimensionsById(int id) {
+		delegate.removeRowDimensionsById(id);
 	}
 
 	@Override
@@ -147,13 +167,28 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowByName(String name) {
+		delegate.removeRowByName(name);
+	}
+
+	@Override
 	public IRowData getRowDataByName(String name) {
 		return delegate.getRowDataByName(name);
 	}
 
 	@Override
+	public void removeRowDataByName(String name) {
+		delegate.removeRowDataByName(name);
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsByName(String name) {
 		return delegate.getRowDimensionsByName(name);
+	}
+
+	@Override
+	public void removeRowDimensionsByName(String name) {
+		delegate.removeRowDimensionsByName(name);
 	}
 
 	@Override
@@ -167,13 +202,28 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByData(byte[] data) {
+		delegate.removeRowListByData(data);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByData(byte[] data) {
 		return delegate.getRowDataListByData(data);
 	}
 
 	@Override
+	public void removeRowDataListByData(byte[] data) {
+		delegate.removeRowDataListByData(data);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByData(byte[] data) {
 		return delegate.getRowDimensionsListByData(data);
+	}
+
+	@Override
+	public void removeRowDimensionsListByData(byte[] data) {
+		delegate.removeRowDimensionsListByData(data);
 	}
 
 	@Override
@@ -187,6 +237,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByWidth(long width) {
+		delegate.removeRowListByWidth(width);
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenWidths(Long from, Long to) {
 		return delegate.getRowListBetweenWidths(from, to);
 	}
@@ -197,8 +252,18 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByWidth(long width) {
+		delegate.removeRowDataListByWidth(width);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByWidth(long width) {
 		return delegate.getRowDimensionsListByWidth(width);
+	}
+
+	@Override
+	public void removeRowDimensionsListByWidth(long width) {
+		delegate.removeRowDimensionsListByWidth(width);
 	}
 
 	@Override
@@ -212,6 +277,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByHeight(long height) {
+		delegate.removeRowListByHeight(height);
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenHeights(Long from, Long to) {
 		return delegate.getRowListBetweenHeights(from, to);
 	}
@@ -222,8 +292,18 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByHeight(long height) {
+		delegate.removeRowDataListByHeight(height);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByHeight(long height) {
 		return delegate.getRowDimensionsListByHeight(height);
+	}
+
+	@Override
+	public void removeRowDimensionsListByHeight(long height) {
+		delegate.removeRowDimensionsListByHeight(height);
 	}
 
 	@Override
@@ -237,8 +317,18 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByUnit(TimeUnit unit) {
+		delegate.removeRowListByUnit(unit);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByUnit(TimeUnit unit) {
 		return delegate.getRowDataListByUnit(unit);
+	}
+
+	@Override
+	public void removeRowDataListByUnit(TimeUnit unit) {
+		delegate.removeRowDataListByUnit(unit);
 	}
 
 	@Override
@@ -247,12 +337,47 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsListByUnit(TimeUnit unit) {
+		delegate.removeRowDimensionsListByUnit(unit);
+	}
+
+	@Override
 	public List<IRowData> getRowDataList() {
 		return delegate.getRowDataList();
 	}
 
 	@Override
+	public boolean containsRowData(IRowData row) {
+		return delegate.containsRowData(row);
+	}
+
+	@Override
+	public IRowData getRowDataByRowNameKey(int id, String name) {
+		return delegate.getRowDataByRowNameKey(id, name);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		return delegate.getRowDimensionsList();
+	}
+
+	@Override
+	public boolean containsRowDimensions(IRowDimensions row) {
+		return delegate.containsRowDimensions(row);
+	}
+
+	@Override
+	public IRowDimensions getRowDimensionsByRowNameKey(int id, String name) {
+		return delegate.getRowDimensionsByRowNameKey(id, name);
+	}
+
+	@Override
+	public IRow getRowByRowNameKey(int id, String name) {
+		return delegate.getRowByRowNameKey(id, name);
+	}
+
+	@Override
+	public boolean containsRowNameKey(IRowNameKey row) {
+		return delegate.containsRowNameKey(row);
 	}
 }

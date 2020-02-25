@@ -1,5 +1,8 @@
 package com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map;
 
+import static com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetListMethod.getCopyOf;
+import static com.robindrew.codegenerator.lang.java.type.name.JavaName.toUpper;
+
 import java.util.ArrayList;
 
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
@@ -9,7 +12,6 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.G
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeBlock;
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeLines;
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.JavaCodeLines;
-import com.robindrew.codegenerator.lang.java.type.name.JavaName;
 
 public class MapGetListByMethod extends GetListByMethod {
 
@@ -38,13 +40,12 @@ public class MapGetListByMethod extends GetListByMethod {
 	private IJavaCodeBlock getIdentityContents(JavaModelBean bean) {
 		boolean newInstance = !dataStore.getElementBean().equals(bean);
 		String type = dataStore.getElementBean().getInterfaceType().getSimpleName(true);
-		String newType = bean.getType().getSimpleName(true);
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("for (" + type + " element : map.values()) {");
 		code.line(1, "if (element." + getEquals() + ") {");
 		if (newInstance) {
-			code.line(2, "return new " + newType + "(element);");
+			code.line(2, "return " + getCopyOf(this, bean.getType()) + ";");
 		} else {
 			code.line(2, "return element;");
 		}
@@ -57,7 +58,6 @@ public class MapGetListByMethod extends GetListByMethod {
 	private IJavaCodeBlock getListContents(JavaModelBean bean) {
 		boolean newInstance = !dataStore.getElementBean().equals(bean);
 		String type = dataStore.getElementBean().getInterfaceType().getSimpleName(true);
-		String newType = bean.getType().getSimpleName(true);
 		String returnType = bean.getInterfaceType().getSimpleName(true);
 
 		IJavaCodeLines code = new JavaCodeLines();
@@ -65,7 +65,7 @@ public class MapGetListByMethod extends GetListByMethod {
 		code.line("for (" + type + " element : map.values()) {");
 		code.line(1, "if (element." + getEquals() + ") {");
 		if (newInstance) {
-			code.line(2, "list.add(new " + newType + "(element));");
+			code.line(2, "list.add(" + getCopyOf(this, bean.getType()) + ");");
 		} else {
 			code.line(2, "list.add(element);");
 		}
@@ -77,12 +77,7 @@ public class MapGetListByMethod extends GetListByMethod {
 
 	private String getEquals() {
 		StringBuilder code = new StringBuilder();
-		if (parameter.getType().isBoolean()) {
-			code.append("is");
-		} else {
-			code.append("get");
-		}
-		code.append(JavaName.toUpper(parameter.getName())).append("()");
+		code.append("get").append(toUpper(parameter.getName())).append("()");
 		if (parameter.getType().isPrimitive()) {
 			code.append(" == ").append(parameter.getName());
 		} else {

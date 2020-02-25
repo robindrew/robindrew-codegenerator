@@ -2,6 +2,7 @@ package com.robindrew.codegenerator.lang.java.generator.model.iinterface;
 
 import java.util.List;
 
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
 import com.robindrew.codegenerator.model.object.iinterface.ModelInterface;
 

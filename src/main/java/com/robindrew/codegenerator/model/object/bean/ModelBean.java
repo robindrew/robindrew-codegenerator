@@ -7,7 +7,8 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementList;
 
 import com.robindrew.codegenerator.model.object.ModelObject;
-import com.robindrew.codegenerator.model.object.iinterface.ModelExtends;
+import com.robindrew.codegenerator.model.object.common.ModelExtends;
+import com.robindrew.codegenerator.model.object.common.ModelMethod;
 
 public class ModelBean extends ModelObject {
 
@@ -26,7 +27,7 @@ public class ModelBean extends ModelObject {
 	@ElementList(entry = "Constructor", inline = true, required = false)
 	private List<ModelBeanConstructor> constructorList = new ArrayList<ModelBeanConstructor>();
 	@ElementList(entry = "Method", inline = true, required = false)
-	private List<ModelBeanMethod> methodList = new ArrayList<ModelBeanMethod>();
+	private List<ModelMethod> methodList = new ArrayList<ModelMethod>();
 
 	public List<ModelExtends> getExtendsList() {
 		return extendsList;
@@ -36,7 +37,7 @@ public class ModelBean extends ModelObject {
 		return constructorList;
 	}
 
-	public List<ModelBeanMethod> getMethodList() {
+	public List<ModelMethod> getMethodList() {
 		return methodList;
 	}
 

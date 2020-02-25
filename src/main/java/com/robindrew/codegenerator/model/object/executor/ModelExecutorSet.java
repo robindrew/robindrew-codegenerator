@@ -6,7 +6,7 @@ import java.util.List;
 import org.simpleframework.xml.ElementList;
 
 import com.robindrew.codegenerator.model.object.ModelObject;
-import com.robindrew.codegenerator.model.object.iinterface.ModelExtends;
+import com.robindrew.codegenerator.model.object.common.ModelExtends;
 
 public class ModelExecutorSet extends ModelObject {
 

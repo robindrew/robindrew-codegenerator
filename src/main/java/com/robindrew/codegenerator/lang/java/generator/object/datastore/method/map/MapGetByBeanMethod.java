@@ -10,6 +10,7 @@ public class MapGetByBeanMethod extends GetByBeanMethod {
 
 	public MapGetByBeanMethod(JavaModelDataStore dataStore) {
 		super(dataStore);
+		setOverride();
 		IJavaCodeLines code = new JavaCodeLines();
 		new NullPointerConstraint("key").appendTo(code);
 		code.line("return map.get(key);");

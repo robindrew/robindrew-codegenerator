@@ -1,10 +1,10 @@
-package com.robindrew.codegenerator.model.object.bean;
+package com.robindrew.codegenerator.model.object.common;
 
 import org.simpleframework.xml.Attribute;
 
 import com.robindrew.codegenerator.model.object.SimpleModelElement;
 
-public class ModelBeanParameter extends SimpleModelElement {
+public class ModelMethodParameter extends SimpleModelElement {
 
 	@Attribute
 	private String name;

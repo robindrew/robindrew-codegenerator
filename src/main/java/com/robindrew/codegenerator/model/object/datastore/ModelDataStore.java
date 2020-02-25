@@ -8,7 +8,8 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 
 import com.robindrew.codegenerator.model.object.ModelObject;
-import com.robindrew.codegenerator.model.object.iinterface.ModelExtends;
+import com.robindrew.codegenerator.model.object.common.ModelExtends;
+import com.robindrew.codegenerator.model.object.common.ModelMethod;
 import com.robindrew.codegenerator.model.object.name.ModelName;
 
 public class ModelDataStore extends ModelObject {
@@ -41,6 +42,8 @@ public class ModelDataStore extends ModelObject {
 	private List<ModelDataStoreKey> keyList = new ArrayList<ModelDataStoreKey>();
 	@Element(name = "ReadOnlyName", required = false)
 	private ModelName readOnlyName = new ModelName("I", "ReadOnly");
+	@ElementList(entry = "Method", inline = true, required = false)
+	private List<ModelMethod> methodList = new ArrayList<ModelMethod>();
 
 	public String getElement() {
 		return element;
@@ -60,6 +63,10 @@ public class ModelDataStore extends ModelObject {
 
 	public List<ModelDataStoreKey> getKeyList() {
 		return keyList;
+	}
+
+	public List<ModelMethod> getMethodList() {
+		return methodList;
 	}
 
 	public boolean isConcurrent() {

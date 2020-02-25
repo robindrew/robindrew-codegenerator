@@ -57,8 +57,13 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
-	public IRow get(IRowKey key) {
-		return cache.get(key);
+	public IRow getByRowKey(IRowKey key) {
+		return cache.getByRowKey(key);
+	}
+
+	@Override
+	public boolean containsRowKey(IRowKey row) {
+		return cache.containsRowKey(row);
 	}
 
 	@Override
@@ -149,6 +154,12 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowById(int id) {
+		cache.removeRowById(id);
+		persister.removeRowById(id);
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenIds(Integer from, Integer to) {
 		return cache.getRowListBetweenIds(from, to);
 	}
@@ -159,8 +170,20 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataById(int id) {
+		cache.removeRowDataById(id);
+		persister.removeRowDataById(id);
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsById(int id) {
 		return cache.getRowDimensionsById(id);
+	}
+
+	@Override
+	public void removeRowDimensionsById(int id) {
+		cache.removeRowDimensionsById(id);
+		persister.removeRowDimensionsById(id);
 	}
 
 	@Override
@@ -174,13 +197,31 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowByName(String name) {
+		cache.removeRowByName(name);
+		persister.removeRowByName(name);
+	}
+
+	@Override
 	public IRowData getRowDataByName(String name) {
 		return cache.getRowDataByName(name);
 	}
 
 	@Override
+	public void removeRowDataByName(String name) {
+		cache.removeRowDataByName(name);
+		persister.removeRowDataByName(name);
+	}
+
+	@Override
 	public IRowDimensions getRowDimensionsByName(String name) {
 		return cache.getRowDimensionsByName(name);
+	}
+
+	@Override
+	public void removeRowDimensionsByName(String name) {
+		cache.removeRowDimensionsByName(name);
+		persister.removeRowDimensionsByName(name);
 	}
 
 	@Override
@@ -194,13 +235,31 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByData(byte[] data) {
+		cache.removeRowListByData(data);
+		persister.removeRowListByData(data);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByData(byte[] data) {
 		return cache.getRowDataListByData(data);
 	}
 
 	@Override
+	public void removeRowDataListByData(byte[] data) {
+		cache.removeRowDataListByData(data);
+		persister.removeRowDataListByData(data);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByData(byte[] data) {
 		return cache.getRowDimensionsListByData(data);
+	}
+
+	@Override
+	public void removeRowDimensionsListByData(byte[] data) {
+		cache.removeRowDimensionsListByData(data);
+		persister.removeRowDimensionsListByData(data);
 	}
 
 	@Override
@@ -214,6 +273,12 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByWidth(long width) {
+		cache.removeRowListByWidth(width);
+		persister.removeRowListByWidth(width);
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenWidths(Long from, Long to) {
 		return cache.getRowListBetweenWidths(from, to);
 	}
@@ -224,8 +289,20 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByWidth(long width) {
+		cache.removeRowDataListByWidth(width);
+		persister.removeRowDataListByWidth(width);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByWidth(long width) {
 		return cache.getRowDimensionsListByWidth(width);
+	}
+
+	@Override
+	public void removeRowDimensionsListByWidth(long width) {
+		cache.removeRowDimensionsListByWidth(width);
+		persister.removeRowDimensionsListByWidth(width);
 	}
 
 	@Override
@@ -239,6 +316,12 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByHeight(long height) {
+		cache.removeRowListByHeight(height);
+		persister.removeRowListByHeight(height);
+	}
+
+	@Override
 	public List<IRow> getRowListBetweenHeights(Long from, Long to) {
 		return cache.getRowListBetweenHeights(from, to);
 	}
@@ -249,8 +332,20 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataListByHeight(long height) {
+		cache.removeRowDataListByHeight(height);
+		persister.removeRowDataListByHeight(height);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsListByHeight(long height) {
 		return cache.getRowDimensionsListByHeight(height);
+	}
+
+	@Override
+	public void removeRowDimensionsListByHeight(long height) {
+		cache.removeRowDimensionsListByHeight(height);
+		persister.removeRowDimensionsListByHeight(height);
 	}
 
 	@Override
@@ -264,8 +359,20 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowListByUnit(TimeUnit unit) {
+		cache.removeRowListByUnit(unit);
+		persister.removeRowListByUnit(unit);
+	}
+
+	@Override
 	public List<IRowData> getRowDataListByUnit(TimeUnit unit) {
 		return cache.getRowDataListByUnit(unit);
+	}
+
+	@Override
+	public void removeRowDataListByUnit(TimeUnit unit) {
+		cache.removeRowDataListByUnit(unit);
+		persister.removeRowDataListByUnit(unit);
 	}
 
 	@Override
@@ -274,12 +381,48 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsListByUnit(TimeUnit unit) {
+		cache.removeRowDimensionsListByUnit(unit);
+		persister.removeRowDimensionsListByUnit(unit);
+	}
+
+	@Override
 	public List<IRowData> getRowDataList() {
 		return cache.getRowDataList();
 	}
 
 	@Override
+	public boolean containsRowData(IRowData row) {
+		return cache.containsRowData(row);
+	}
+
+	@Override
+	public IRowData getRowDataByRowNameKey(int id, String name) {
+		return cache.getRowDataByRowNameKey(id, name);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		return cache.getRowDimensionsList();
+	}
+
+	@Override
+	public boolean containsRowDimensions(IRowDimensions row) {
+		return cache.containsRowDimensions(row);
+	}
+
+	@Override
+	public IRowDimensions getRowDimensionsByRowNameKey(int id, String name) {
+		return cache.getRowDimensionsByRowNameKey(id, name);
+	}
+
+	@Override
+	public IRow getRowByRowNameKey(int id, String name) {
+		return cache.getRowByRowNameKey(id, name);
+	}
+
+	@Override
+	public boolean containsRowNameKey(IRowNameKey row) {
+		return cache.containsRowNameKey(row);
 	}
 }

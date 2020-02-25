@@ -4,7 +4,7 @@ import com.robindrew.codegenerator.api.bean.IBean;
 
 public interface IRowData extends IBean, Comparable<IRowData> {
 
-	int SERIALIZATION_ID = 2003;
+	int SERIALIZATION_ID = 2004;
 
 	/**
 	 * Returns the serialization id.

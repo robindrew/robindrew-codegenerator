@@ -21,7 +21,9 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 
 	IRow get(int id);
 
-	IRow get(IRowKey key);
+	IRow getByRowKey(IRowKey key);
+
+	boolean containsRowKey(IRowKey row);
 
 	void addAuto(IRow element);
 
@@ -81,5 +83,17 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 
 	List<IRowData> getRowDataList();
 
+	boolean containsRowData(IRowData row);
+
+	IRowData getRowDataByRowNameKey(int id, String name);
+
 	List<IRowDimensions> getRowDimensionsList();
+
+	boolean containsRowDimensions(IRowDimensions row);
+
+	IRowDimensions getRowDimensionsByRowNameKey(int id, String name);
+
+	IRow getRowByRowNameKey(int id, String name);
+
+	boolean containsRowNameKey(IRowNameKey row);
 }

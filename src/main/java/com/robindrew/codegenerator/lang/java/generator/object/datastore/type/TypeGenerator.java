@@ -27,6 +27,10 @@ public abstract class TypeGenerator implements IJavaGenerator, IJavaDataStoreGen
 		this.generator = generator;
 	}
 
+	public JavaDataStoreGenerator getGenerator() {
+		return generator;
+	}
+	
 	@Override
 	public void registerPrimaryTypes() {
 	}
@@ -40,11 +44,11 @@ public abstract class TypeGenerator implements IJavaGenerator, IJavaDataStoreGen
 	}
 
 	public IJavaContext getContext() {
-		return generator.getContext();
+		return getGenerator().getContext();
 	}
 
 	public JavaModelDataStore getDataStore() {
-		return generator.getDataStore();
+		return getGenerator().getDataStore();
 	}
 
 	public JavaModelBean getElementBean() {
@@ -52,31 +56,31 @@ public abstract class TypeGenerator implements IJavaGenerator, IJavaDataStoreGen
 	}
 
 	public JavaModelBean getKeyBean() {
-		return generator.getDataStore().getKeyBean();
+		return getGenerator().getDataStore().getKeyBean();
 	}
 
 	public IJavaType resolve(Class<?> type) {
-		return generator.resolve(type);
+		return getGenerator().resolve(type);
 	}
 
 	public IJavaType resolve(Class<?> type, IJavaType... genericsList) {
-		return generator.resolve(type, genericsList);
+		return getGenerator().resolve(type, genericsList);
 	}
 
 	public IJavaType resolve(String name) {
-		return generator.resolve(name);
+		return getGenerator().resolve(name);
 	}
 
 	public IJavaType registerJavaType(String name, IClassType classType) {
-		return generator.registerJavaType(name, classType);
+		return getGenerator().registerJavaType(name, classType);
 	}
 
 	public IJavaNamedTypeSet getKeyFields() {
-		return generator.getKeyFields();
+		return getGenerator().getKeyFields();
 	}
 
 	public void write(IJavaTypedWritable writable) {
-		generator.write(writable);
+		getGenerator().write(writable);
 	}
 
 	protected IJavaMethod toDelegate(JavaMethod method) {
@@ -84,11 +88,11 @@ public abstract class TypeGenerator implements IJavaGenerator, IJavaDataStoreGen
 	}
 
 	public String getName(ModelName typeName, String name) {
-		return generator.getName(typeName, name);
+		return getGenerator().getName(typeName, name);
 	}
 
 	public String getName(ModelObject object, String name) {
-		return generator.getName(object, name);
+		return getGenerator().getName(object, name);
 	}
 
 }

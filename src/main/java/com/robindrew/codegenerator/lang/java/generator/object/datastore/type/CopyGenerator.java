@@ -14,6 +14,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.A
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ClearMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.CreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.DestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ExistsMethod;
@@ -26,6 +27,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.G
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.IsEmptyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveAllMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.SetAllMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.SetMethod;
@@ -78,7 +80,12 @@ public class CopyGenerator extends TypeGenerator {
 		object.addBlock(new GetterMethod(copyOnRead));
 		object.addBlock(new GetterMethod(copyOnWrite));
 
+		// Copy Methods
 		addCopyMethods(object, delegateField);
+
+		// Custom Methods
+		getGenerator().addMethods(object, false);
+
 		write(object);
 	}
 
@@ -93,6 +100,7 @@ public class CopyGenerator extends TypeGenerator {
 		object.addBlock(toDelegate(new CreateMethod()));
 		object.addBlock(toDelegate(new DestroyMethod()));
 		object.addBlock(toDelegate(new ContainsMethod(getDataStore())));
+		object.addBlock(toDelegate(new ContainsRowMethod(getDataStore(), getDataStore().getKeyBean())));
 		object.addBlock(toDelegate(new RemoveMethod(getDataStore())));
 		object.addBlock(toDelegate(new RemoveAllMethod(getDataStore())));
 
@@ -117,9 +125,11 @@ public class CopyGenerator extends TypeGenerator {
 
 			boolean unique = field.isUnique();
 			object.addBlock(new CopyGetListMethod(new GetListByMethod(getDataStore(), field, getElementBean(), unique), getDataStore(), unique));
+			object.addBlock(toDelegate(new RemoveListByMethod(getDataStore(), field, getElementBean(), unique)));
 
 			for (JavaModelBean row : getDataStore().getRowBeans()) {
 				object.addBlock(new CopyGetListMethod(new GetListByMethod(getDataStore(), field, row, unique), getDataStore(), unique, row));
+				object.addBlock(toDelegate(new RemoveListByMethod(getDataStore(), field, row, unique)));
 			}
 
 			// GetAllBetween
@@ -131,6 +141,7 @@ public class CopyGenerator extends TypeGenerator {
 		// Rows
 		for (JavaModelBean row : getDataStore().getRowBeans()) {
 			object.addBlock(new CopyGetListMethod(new GetListMethod(getDataStore(), row), getDataStore(), false, row));
+			object.addBlock(toDelegate(new ContainsRowMethod(getDataStore(), row)));
 
 			// Row Keys
 			for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
@@ -152,6 +163,7 @@ public class CopyGenerator extends TypeGenerator {
 			} else {
 				object.addBlock(new CopyGetListMethod(method, getDataStore(), false).setOverride());
 			}
+			object.addBlock(toDelegate(new ContainsRowMethod(getDataStore(), key.getBean())));
 		}
 	}
 

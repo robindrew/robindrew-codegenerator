@@ -13,9 +13,9 @@ import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanAnnotation;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanConstructor;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanField;
-import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanMethod;
-import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanParameter;
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethod;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethodParameter;
 import com.robindrew.codegenerator.lang.java.generator.model.validator.JavaModelValidator;
 import com.robindrew.codegenerator.lang.java.generator.object.JavaObjectGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.context.IJavaContext;
@@ -177,11 +177,11 @@ public class JavaBeanGenerator extends JavaObjectGenerator {
 			}
 
 			// Method
-			for (JavaModelBeanMethod method : bean.getMethodList()) {
+			for (JavaModelMethod method : bean.getMethodList()) {
 				method.setType(resolve(method.get().getReturnType()));
 
 				// Parameters
-				for (JavaModelBeanParameter parameter : method.getParameterList()) {
+				for (JavaModelMethodParameter parameter : method.getParameterList()) {
 					parameter.setType(resolve(parameter.get().getType()));
 				}
 			}
@@ -275,14 +275,14 @@ public class JavaBeanGenerator extends JavaObjectGenerator {
 	}
 
 	private void addMethods(JavaObject object) {
-		for (JavaModelBeanMethod method : getBean().getMethodList()) {
+		for (JavaModelMethod method : getBean().getMethodList()) {
 			object.addBlock(getMethod(object, method));
 		}
 	}
 
-	private JavaMethod getMethod(JavaObject object, JavaModelBeanMethod method) {
+	private JavaMethod getMethod(JavaObject object, JavaModelMethod method) {
 		JavaMethod value = new JavaMethod(method.getName(), method.getReturnType());
-		for (JavaModelBeanParameter parameter : method.getParameterList()) {
+		for (JavaModelMethodParameter parameter : method.getParameterList()) {
 			value.getParameters().add(parameter.toNamedType());
 		}
 		if (method.getReturnValue() != null) {
@@ -306,17 +306,6 @@ public class JavaBeanGenerator extends JavaObjectGenerator {
 			return returnType.getSimpleName() + "." + returnValue;
 		}
 
-		// Guess! - works but not necessary (maybe)
-		// int dotIndex = returnValue.indexOf(".");
-		// if (dotIndex != -1) {
-		// String prefix = returnValue.substring(0, dotIndex);
-		// try {
-		// IJavaType type = getContext().getResolver().resolveJavaType(prefix);
-		// object.addImport(type);
-		// } catch (Exception e) {
-		// log.warn("Enable to guess type from return value: " + returnValue);
-		// }
-		// }
 		return returnValue;
 	}
 

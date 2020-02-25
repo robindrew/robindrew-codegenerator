@@ -22,6 +22,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.s
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlConstructor;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlContainsMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlContainsRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlCreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlDestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetAllMethod;
@@ -31,6 +32,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.s
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetListMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlRemoveListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlRemoveMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlSetMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlSizeMethod;
@@ -93,6 +95,9 @@ public abstract class SqlGenerator extends TypeGenerator {
 
 		object.addBlocks(methods);
 
+		// Custom Methods
+		getGenerator().addMethods(object, false);
+
 		// Done
 		write(object);
 	}
@@ -111,6 +116,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 		methods.add(new SqlGetAllMethod(getDataStore()));
 		methods.add(new SqlGetByBeanMethod(getDataStore()));
 		methods.add(new SqlGetMethod(getDataStore()));
+		methods.add(new SqlContainsRowMethod(getDataStore(), getDataStore().getKeyBean()));
 
 		// Write Methods
 		methods.add(new SqlClearMethod());
@@ -136,9 +142,11 @@ public abstract class SqlGenerator extends TypeGenerator {
 
 			boolean unique = field.isUnique();
 			methods.add(new SqlGetListByMethod(getDataStore(), field, getElementBean(), unique));
+			methods.add(new SqlRemoveListByMethod(getDataStore(), field, getElementBean(), unique));
 
 			for (JavaModelBean row : getDataStore().getRowBeans()) {
 				methods.add(new SqlGetListByMethod(getDataStore(), field, row, unique));
+				methods.add(new SqlRemoveListByMethod(getDataStore(), field, row, unique));
 			}
 
 			if (field.isNumeric()) {
@@ -149,6 +157,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 		// Rows
 		for (JavaModelBean row : getDataStore().getRowBeans()) {
 			methods.add(new SqlGetListMethod(getDataStore(), row));
+			methods.add(new SqlContainsRowMethod(getDataStore(), row));
 
 			for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 				methods.add(new SqlGetByKeyMethod(getDataStore(), row, key));
@@ -159,6 +168,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 		for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 			JavaModelBean bean = getDataStore().getElementBean();
 			methods.add(new SqlGetByKeyMethod(getDataStore(), bean, key));
+			methods.add(new SqlContainsRowMethod(getDataStore(), key.getBean()));
 		}
 
 		// Special implementations

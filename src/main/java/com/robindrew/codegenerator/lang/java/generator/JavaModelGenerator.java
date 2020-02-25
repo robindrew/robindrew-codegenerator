@@ -68,6 +68,7 @@ import com.robindrew.codegenerator.model.reader.ModelReaderLookup;
 import com.robindrew.codegenerator.setup.ISetup;
 import com.robindrew.codegenerator.setup.source.ISource;
 import com.robindrew.codegenerator.setup.target.ITarget;
+import com.robindrew.codegenerator.setup.target.TargetFilesystem;
 import com.robindrew.codegenerator.util.LatchedExecutor;
 
 public class JavaModelGenerator {
@@ -104,9 +105,12 @@ public class JavaModelGenerator {
 
 		IJavaGeneratorStats generatorStats = new JavaGeneratorStats();
 		try {
+			TargetFilesystem filesystem = new TargetFilesystem();
+			filesystem.register(setup.getTargetList());
+			filesystem.beforeGeneration();
 
 			// Clean directories
-			cleanTargetDirectories();
+			// cleanTargetDirectories();
 
 			// Model set
 			IJavaModelSet modelSet = readModelSet();
@@ -123,6 +127,8 @@ public class JavaModelGenerator {
 			// Generate!
 			generate(generators);
 
+			filesystem.afterGeneration();
+			
 			// Finished
 			timer.stop();
 			int classCount = generatorStats.getGeneratedClassCount();

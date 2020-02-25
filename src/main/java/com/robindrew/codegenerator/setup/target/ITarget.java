@@ -4,6 +4,10 @@ public interface ITarget {
 
 	String getName();
 
+	String getDirectory();
+
 	ITargetWriter getWriter();
+
+	void setWriter(ITargetWriter writer);
 
 }

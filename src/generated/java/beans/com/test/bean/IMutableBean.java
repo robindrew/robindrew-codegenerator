@@ -1,11 +1,10 @@
 package com.test.bean;
 
+import com.robindrew.codegenerator.api.executable.bean.IExecutableBean;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import com.robindrew.codegenerator.api.executable.bean.IExecutableBean;
 
 public interface IMutableBean extends IExecutableBean<List<Integer>>, IValueBean, Comparable<IMutableBean> {
 

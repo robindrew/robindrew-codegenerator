@@ -1,4 +1,4 @@
-package com.robindrew.codegenerator.model.object.iinterface;
+package com.robindrew.codegenerator.model.object.common;
 
 import org.simpleframework.xml.Attribute;
 

@@ -8,6 +8,7 @@ public class Target implements ITarget {
 	private String name;
 	@Attribute
 	private String directory;
+	private ITargetWriter writer;
 
 	public String getName() {
 		return name;
@@ -17,8 +18,13 @@ public class Target implements ITarget {
 		return directory;
 	}
 
+	public void setWriter(ITargetWriter writer) {
+		this.writer = writer;
+	}
+
 	@Override
 	public ITargetWriter getWriter() {
-		return new DirectoryTargetWriter(directory);
+		return writer;
+		// return new DirectoryTargetWriter(directory);
 	}
 }

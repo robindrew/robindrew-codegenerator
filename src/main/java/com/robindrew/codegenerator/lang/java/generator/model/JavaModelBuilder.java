@@ -8,14 +8,14 @@ import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanAnnotation;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanConstructor;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanField;
-import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanMethod;
-import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanParameter;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethod;
+import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethodParameter;
 import com.robindrew.codegenerator.lang.java.generator.model.datastore.JavaModelDataStore;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnum;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnumConstant;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnumField;
 import com.robindrew.codegenerator.lang.java.generator.model.executor.JavaModelExecutorSet;
-import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelInterface;
 import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelInterfaceMethod;
 import com.robindrew.codegenerator.lang.java.generator.model.iinterface.JavaModelInterfaceParameter;
@@ -30,14 +30,14 @@ import com.robindrew.codegenerator.model.object.bean.ModelBean;
 import com.robindrew.codegenerator.model.object.bean.ModelBeanAnnotation;
 import com.robindrew.codegenerator.model.object.bean.ModelBeanConstructor;
 import com.robindrew.codegenerator.model.object.bean.ModelBeanField;
-import com.robindrew.codegenerator.model.object.bean.ModelBeanMethod;
-import com.robindrew.codegenerator.model.object.bean.ModelBeanParameter;
+import com.robindrew.codegenerator.model.object.common.ModelExtends;
+import com.robindrew.codegenerator.model.object.common.ModelMethod;
+import com.robindrew.codegenerator.model.object.common.ModelMethodParameter;
 import com.robindrew.codegenerator.model.object.datastore.ModelDataStore;
 import com.robindrew.codegenerator.model.object.eenum.ModelEnum;
 import com.robindrew.codegenerator.model.object.eenum.ModelEnumConstant;
 import com.robindrew.codegenerator.model.object.eenum.ModelEnumField;
 import com.robindrew.codegenerator.model.object.executor.ModelExecutorSet;
-import com.robindrew.codegenerator.model.object.iinterface.ModelExtends;
 import com.robindrew.codegenerator.model.object.iinterface.ModelInterface;
 import com.robindrew.codegenerator.model.object.iinterface.ModelInterfaceMethod;
 import com.robindrew.codegenerator.model.object.iinterface.ModelInterfaceParameter;
@@ -131,8 +131,20 @@ public class JavaModelBuilder {
 		// Extends
 		List<JavaModelExtends> extendsList = getExtendsList(store.getExtendsList());
 
+		// Methods
+		List<JavaModelMethod> methodList = new ArrayList<JavaModelMethod>();
+		for (ModelMethod method : store.getMethodList()) {
+
+			// Parameters
+			List<JavaModelMethodParameter> parameterList = new ArrayList<JavaModelMethodParameter>();
+			for (ModelMethodParameter parameter : method.getParameterList()) {
+				parameterList.add(new JavaModelMethodParameter(parameter));
+			}
+			methodList.add(new JavaModelMethod(method, parameterList));
+		}
+
 		// Done
-		return new JavaModelDataStore(store, extendsList);
+		return new JavaModelDataStore(store, extendsList, methodList);
 	}
 
 	private List<JavaModelDataSerializer> getDataSerializerList() {
@@ -227,15 +239,15 @@ public class JavaModelBuilder {
 		}
 
 		// Methods
-		List<JavaModelBeanMethod> methodList = new ArrayList<JavaModelBeanMethod>();
-		for (ModelBeanMethod method : bean.getMethodList()) {
+		List<JavaModelMethod> methodList = new ArrayList<JavaModelMethod>();
+		for (ModelMethod method : bean.getMethodList()) {
 
 			// Parameters
-			List<JavaModelBeanParameter> parameterList = new ArrayList<JavaModelBeanParameter>();
-			for (ModelBeanParameter parameter : method.getParameterList()) {
-				parameterList.add(new JavaModelBeanParameter(parameter));
+			List<JavaModelMethodParameter> parameterList = new ArrayList<JavaModelMethodParameter>();
+			for (ModelMethodParameter parameter : method.getParameterList()) {
+				parameterList.add(new JavaModelMethodParameter(parameter));
 			}
-			methodList.add(new JavaModelBeanMethod(method, parameterList));
+			methodList.add(new JavaModelMethod(method, parameterList));
 		}
 
 		// Done
