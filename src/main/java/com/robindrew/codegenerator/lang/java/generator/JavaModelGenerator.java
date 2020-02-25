@@ -67,7 +67,6 @@ import com.robindrew.codegenerator.model.reader.IModelReader;
 import com.robindrew.codegenerator.model.reader.ModelReaderLookup;
 import com.robindrew.codegenerator.setup.ISetup;
 import com.robindrew.codegenerator.setup.source.ISource;
-import com.robindrew.codegenerator.setup.target.ITarget;
 import com.robindrew.codegenerator.setup.target.TargetFilesystem;
 import com.robindrew.codegenerator.util.LatchedExecutor;
 
@@ -105,12 +104,11 @@ public class JavaModelGenerator {
 
 		IJavaGeneratorStats generatorStats = new JavaGeneratorStats();
 		try {
+
+			// Prepare filesystem (root directories)
 			TargetFilesystem filesystem = new TargetFilesystem();
 			filesystem.register(setup.getTargetList());
 			filesystem.beforeGeneration();
-
-			// Clean directories
-			// cleanTargetDirectories();
 
 			// Model set
 			IJavaModelSet modelSet = readModelSet();
@@ -127,8 +125,9 @@ public class JavaModelGenerator {
 			// Generate!
 			generate(generators);
 
+			// Cleanup
 			filesystem.afterGeneration();
-			
+
 			// Finished
 			timer.stop();
 			int classCount = generatorStats.getGeneratedClassCount();
@@ -162,22 +161,6 @@ public class JavaModelGenerator {
 
 		executor.await();
 		return new JavaModelSet(modelList);
-	}
-
-	private void cleanTargetDirectories() {
-		log.info("[Cleaning Target Directories]");
-		Stopwatch timer = Stopwatch.createStarted();
-
-		List<ITarget> list = setup.getTargetList();
-		LatchedExecutor executor = new LatchedExecutor(service, list);
-		for (final ITarget target : list) {
-			executor.submit(() -> target.getWriter().clean());
-		}
-		executor.await();
-
-		// Finished
-		timer.stop();
-		log.info("[Cleaning Target Directories] completed in {}", timer);
 	}
 
 	private void generate(List<IJavaGenerator> generators) {
