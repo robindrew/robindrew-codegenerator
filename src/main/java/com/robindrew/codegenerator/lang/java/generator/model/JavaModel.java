@@ -2,6 +2,8 @@ package com.robindrew.codegenerator.lang.java.generator.model;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.CompareToBuilder;
+
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.datastore.JavaModelDataStore;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnum;
@@ -15,7 +17,7 @@ import com.robindrew.codegenerator.lang.java.generator.model.sql.JavaModelResult
 import com.robindrew.codegenerator.lang.java.generator.model.validator.JavaModelValidator;
 import com.robindrew.codegenerator.model.IModel;
 
-public class JavaModel {
+public class JavaModel implements Comparable<JavaModel> {
 
 	private final IModel model;
 	private volatile List<JavaModelValidator> validatorList;
@@ -164,6 +166,15 @@ public class JavaModel {
 			throw new NullPointerException("list");
 		}
 		this.executorSetList = list;
+	}
+
+	@Override
+	public int compareTo(JavaModel that) {
+		CompareToBuilder compare = new CompareToBuilder();
+		compare.append(this.get().getId(), that.get().getId());
+		compare.append(this.get().getPackage(), that.get().getPackage());
+		compare.append(this.get().getTarget(), that.get().getTarget());
+		return compare.toComparison();
 	}
 
 }

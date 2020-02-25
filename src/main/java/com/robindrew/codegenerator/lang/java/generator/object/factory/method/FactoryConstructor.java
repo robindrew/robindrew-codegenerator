@@ -1,5 +1,7 @@
 package com.robindrew.codegenerator.lang.java.generator.object.factory.method;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModel;
@@ -24,6 +26,10 @@ public class FactoryConstructor extends JavaConstructor {
 
 	private void setConstructorContents(List<JavaModel> models, FactoryType factoryType) {
 		IJavaCodeLines code = new JavaCodeLines();
+
+		// Ensure models are always in the same order
+		models = new ArrayList<>(models);
+		Collections.sort(models);
 
 		for (JavaModel model : models) {
 
