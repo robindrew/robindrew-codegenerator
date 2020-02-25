@@ -5,9 +5,9 @@ import static com.google.common.base.Charsets.UTF_8;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,14 +25,16 @@ public class TargetDirectory implements ITargetWriter {
 	private static final Logger log = LoggerFactory.getLogger(TargetDirectory.class);
 
 	private final File directory;
-	private final Map<File, Boolean> cachedFileMap = new LinkedHashMap<>();
-	private final Map<String, ITarget> targetMap = new LinkedHashMap<>();
+	private final Map<File, Boolean> cachedFileMap = new ConcurrentHashMap<>();
+	private final Map<String, ITarget> targetMap = new ConcurrentHashMap<>();
 
-	public TargetDirectory(String directory) {
-		this.directory = new File(directory);
-		if (!this.directory.exists()) {
+	public TargetDirectory(File directory) {
+		this.directory = directory;
+		if (!directory.exists()) {
 			throw new IllegalArgumentException("directory does not exist: " + directory);
 		}
+
+		log.info("[Directory] {}", directory.getAbsolutePath());
 	}
 
 	public String getName() {
@@ -65,7 +67,7 @@ public class TargetDirectory implements ITargetWriter {
 			}
 		}
 		timer.stop();
-		log.info("Deleted {} files in {}", count, timer);
+		log.info("Deleted {} files from {} in {}", count, directory, timer);
 	}
 
 	private void forceDelete(File file) {

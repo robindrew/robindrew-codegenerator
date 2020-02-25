@@ -58,10 +58,6 @@ public class SqlTypeDeclaration {
 	private String getComplexDeclaration(JavaModelBeanField field) {
 		IJavaType type = field.getType();
 
-		if (field.getName().equals("xml")) {
-			System.out.println(field);
-		}
-
 		// Text
 		long length = getLength(field.getValidator());
 		if (type.isType(String.class)) {
