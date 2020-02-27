@@ -9,15 +9,16 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.A
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.AddAutoMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.AddMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ClearMethod;
-import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.CreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.DestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ExistsMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetAllMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetByBeanMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetByKeyMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetByRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetListBetweenMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetListMethod;
@@ -111,6 +112,7 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 		for (JavaModelBean row : dataStore.getDataStore().getRowBeans()) {
 			add(new GetListMethod(dataStore.getDataStore(), row));
 			add(new ContainsRowMethod(dataStore.getDataStore(), row));
+			add(new GetByRowMethod(dataStore.getDataStore(), dataStore.getDataStore().getElementBean(), row));
 
 			for (JavaModelDataStoreKey key : dataStore.getDataStore().getKeyBeans()) {
 				add(new GetByKeyMethod(dataStore.getDataStore(), row, key));

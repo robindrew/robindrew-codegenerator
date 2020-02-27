@@ -28,6 +28,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.s
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetAllMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetByBeanMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetByKeyMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetByRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetListBetweenMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetListMethod;
@@ -158,6 +159,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 		for (JavaModelBean row : getDataStore().getRowBeans()) {
 			methods.add(new SqlGetListMethod(getDataStore(), row));
 			methods.add(new SqlContainsRowMethod(getDataStore(), row));
+			methods.add(new SqlGetByRowMethod(getDataStore(), getDataStore().getElementBean(), row));
 
 			for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 				methods.add(new SqlGetByKeyMethod(getDataStore(), row, key));

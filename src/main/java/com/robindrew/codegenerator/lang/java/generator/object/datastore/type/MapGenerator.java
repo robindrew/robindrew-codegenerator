@@ -18,14 +18,15 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.m
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapAddMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapClearMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapConstructor;
-import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapContainsRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapContainsMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapContainsRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapCreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapDestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetAllMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetByBeanMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetByKeyMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetByRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetKeyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetListBetweenMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetListByMethod;
@@ -165,6 +166,7 @@ public class MapGenerator extends TypeGenerator {
 		for (JavaModelBean row : getDataStore().getRowBeans()) {
 			object.addBlock(new MapGetListMethod(getDataStore(), row));
 			object.addBlock(new MapContainsRowMethod(getDataStore(), row));
+			object.addBlock(new MapGetByRowMethod(getDataStore(), getDataStore().getElementBean(), row));
 
 			for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 				object.addBlock(new MapGetByKeyMethod(getDataStore(), row, key));

@@ -21,6 +21,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.E
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetAllMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetByBeanMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetByKeyMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetByRowMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetListBetweenMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetListMethod;
@@ -142,6 +143,7 @@ public class CopyGenerator extends TypeGenerator {
 		for (JavaModelBean row : getDataStore().getRowBeans()) {
 			object.addBlock(new CopyGetListMethod(new GetListMethod(getDataStore(), row), getDataStore(), false, row));
 			object.addBlock(toDelegate(new ContainsRowMethod(getDataStore(), row)));
+			object.addBlock(new CopyGetListMethod(new GetByRowMethod(getDataStore(), getDataStore().getElementBean(), row), getDataStore(), false, getDataStore().getElementBean()));
 
 			// Row Keys
 			for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
