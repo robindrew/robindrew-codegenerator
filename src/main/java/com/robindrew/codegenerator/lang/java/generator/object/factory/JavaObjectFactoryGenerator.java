@@ -8,7 +8,6 @@ import java.util.List;
 import com.robindrew.codegenerator.api.bean.IBean;
 import com.robindrew.codegenerator.api.executable.bean.IExecutableBean;
 import com.robindrew.codegenerator.api.factory.IObjectFactory;
-import com.robindrew.codegenerator.api.serializer.data.IDataSerializer;
 import com.robindrew.codegenerator.api.serializer.json.IJsonSerializer;
 import com.robindrew.codegenerator.api.serializer.xml.IXmlSerializer;
 import com.robindrew.codegenerator.api.servlet.IServletRequestAdapter;
@@ -27,6 +26,7 @@ import com.robindrew.codegenerator.lang.java.type.object.JavaObject;
 import com.robindrew.codegenerator.lang.java.type.resolver.IJavaTypeResolver;
 import com.robindrew.codegenerator.model.object.factory.ModelObjectFactory;
 import com.robindrew.codegenerator.setup.ISetup;
+import com.robindrew.common.io.data.IDataSerializer;
 
 public class JavaObjectFactoryGenerator extends JavaObjectGenerator {
 

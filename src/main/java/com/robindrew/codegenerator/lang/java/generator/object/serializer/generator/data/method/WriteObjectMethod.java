@@ -4,7 +4,6 @@ import static com.robindrew.codegenerator.lang.java.generator.object.serializer.
 
 import java.io.IOException;
 
-import com.robindrew.codegenerator.api.serializer.data.IDataWriter;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.lookup.IJavaModelSet;
 import com.robindrew.codegenerator.lang.java.generator.object.serializer.field.SerializedField;
@@ -14,6 +13,7 @@ import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeLines
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.JavaCodeLines;
 import com.robindrew.codegenerator.lang.java.type.block.method.JavaMethod;
 import com.robindrew.codegenerator.lang.java.type.resolver.IJavaTypeResolver;
+import com.robindrew.common.io.data.IDataWriter;
 
 public class WriteObjectMethod extends JavaMethod {
 

@@ -397,6 +397,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public List<IRow> getByRowData(byte[] data) {
+		return cache.getByRowData(data);
+	}
+
+	@Override
 	public IRowData getRowDataByRowNameKey(int id, String name) {
 		return cache.getRowDataByRowNameKey(id, name);
 	}
@@ -409,6 +414,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	@Override
 	public boolean containsRowDimensions(IRowDimensions row) {
 		return cache.containsRowDimensions(row);
+	}
+
+	@Override
+	public List<IRow> getByRowDimensions(int id, long width, long height) {
+		return cache.getByRowDimensions(id, width, height);
 	}
 
 	@Override

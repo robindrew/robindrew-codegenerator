@@ -85,11 +85,15 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 
 	boolean containsRowData(IRowData row);
 
+	List<IRow> getByRowData(byte[] data);
+
 	IRowData getRowDataByRowNameKey(int id, String name);
 
 	List<IRowDimensions> getRowDimensionsList();
 
 	boolean containsRowDimensions(IRowDimensions row);
+
+	List<IRow> getByRowDimensions(int id, long width, long height);
 
 	IRowDimensions getRowDimensionsByRowNameKey(int id, String name);
 

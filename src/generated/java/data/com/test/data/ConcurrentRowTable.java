@@ -750,6 +750,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public List<IRow> getByRowData(byte[] data) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getByRowData(data);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public IRowData getRowDataByRowNameKey(int id, String name) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -777,6 +788,17 @@ public class ConcurrentRowTable implements IRowTable {
 		lock.lock();
 		try {
 			return delegate.containsRowDimensions(row);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public List<IRow> getByRowDimensions(int id, long width, long height) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getByRowDimensions(id, width, height);
 		} finally {
 			lock.unlock();
 		}

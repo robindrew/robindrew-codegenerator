@@ -4,27 +4,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.BooleanArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.ByteArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.CharArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.DoubleArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.FloatArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.IntArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.LongArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.array.ShortArraySerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.BooleanSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.ByteSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.CharacterSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.DoubleSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.FloatSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.IntegerSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.LongSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.ShortSerializer;
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.StringSerializer;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnum;
 import com.robindrew.codegenerator.lang.java.generator.model.lookup.IJavaModelSet;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
+import com.robindrew.common.io.data.serializer.array.BooleanArraySerializer;
+import com.robindrew.common.io.data.serializer.array.ByteArraySerializer;
+import com.robindrew.common.io.data.serializer.array.CharArraySerializer;
+import com.robindrew.common.io.data.serializer.array.DoubleArraySerializer;
+import com.robindrew.common.io.data.serializer.array.FloatArraySerializer;
+import com.robindrew.common.io.data.serializer.array.IntArraySerializer;
+import com.robindrew.common.io.data.serializer.array.LongArraySerializer;
+import com.robindrew.common.io.data.serializer.array.ShortArraySerializer;
+import com.robindrew.common.io.data.serializer.lang.BooleanSerializer;
+import com.robindrew.common.io.data.serializer.lang.ByteSerializer;
+import com.robindrew.common.io.data.serializer.lang.CharacterSerializer;
+import com.robindrew.common.io.data.serializer.lang.DoubleSerializer;
+import com.robindrew.common.io.data.serializer.lang.FloatSerializer;
+import com.robindrew.common.io.data.serializer.lang.IntegerSerializer;
+import com.robindrew.common.io.data.serializer.lang.LongSerializer;
+import com.robindrew.common.io.data.serializer.lang.ShortSerializer;
+import com.robindrew.common.io.data.serializer.lang.StringSerializer;
 
 public class DataSerializedTypeFactory {
 

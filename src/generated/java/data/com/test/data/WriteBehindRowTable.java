@@ -922,6 +922,22 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public List<IRow> getByRowData(final byte[] data) {
+		// Synchronous
+		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
+			public List<IRow> call() {
+				return delegate.getByRowData(data);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
 	public IRowData getRowDataByRowNameKey(final int id, final String name) {
 		// Synchronous
 		Future<IRowData> future = executor.submit(new Callable<IRowData>() {
@@ -959,6 +975,22 @@ public class WriteBehindRowTable implements IRowTable {
 		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
 			public Boolean call() {
 				return delegate.containsRowDimensions(row);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public List<IRow> getByRowDimensions(final int id, final long width, final long height) {
+		// Synchronous
+		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
+			public List<IRow> call() {
+				return delegate.getByRowDimensions(id, width, height);
 			}
 		});
 

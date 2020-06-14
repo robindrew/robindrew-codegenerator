@@ -684,6 +684,17 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public List<IRow> getByRowData(byte[] data) {
+		List<IRow> list = new ArrayList<IRow>();
+		for (IRow element : map.values()) {
+			if (element.getData().equals(data)) {
+				list.add(new Row(element));
+			}
+		}
+		return list;
+	}
+
+	@Override
 	public IRowData getRowDataByRowNameKey(int id, String name) {
 		for (IRow element : map.values()) {
 			if (element.getId() == id && element.getName().equals(name)) {
@@ -717,6 +728,17 @@ public class MapRowTable implements IRowTable {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<IRow> getByRowDimensions(int id, long width, long height) {
+		List<IRow> list = new ArrayList<IRow>();
+		for (IRow element : map.values()) {
+			if (element.getId() == id && element.getWidth() == width && element.getHeight() == height) {
+				list.add(new Row(element));
+			}
+		}
+		return list;
 	}
 
 	@Override

@@ -1210,6 +1210,30 @@ public class HsqldbRowTable implements ISqlRowTable {
 		return getExecutor().getCount(sql) > 0;
 	}
 
+	public List<IRow> getByRowData(byte[] data) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.select();
+		sql.column("id");
+		sql.sql(',');
+		sql.column("name");
+		sql.sql(',');
+		sql.column("data");
+		sql.sql(',');
+		sql.column("width");
+		sql.sql(',');
+		sql.column("height");
+		sql.sql(',');
+		sql.column("unit");
+		sql.from(getTable());
+		sql.where();
+		sql.column("data").sql("=").value(data);
+
+		// Execute
+		return getExecutor().getList(sql, new RowResultSetParser());
+	}
+
 	public IRowData getRowDataByRowNameKey(int id, String name) {
 
 		// SQL
@@ -1258,6 +1282,34 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getCount(sql) > 0;
+	}
+
+	public List<IRow> getByRowDimensions(int id, long width, long height) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.select();
+		sql.column("id");
+		sql.sql(',');
+		sql.column("name");
+		sql.sql(',');
+		sql.column("data");
+		sql.sql(',');
+		sql.column("width");
+		sql.sql(',');
+		sql.column("height");
+		sql.sql(',');
+		sql.column("unit");
+		sql.from(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+		sql.and();
+		sql.column("width").sql("=").value(width);
+		sql.and();
+		sql.column("height").sql("=").value(height);
+
+		// Execute
+		return getExecutor().getList(sql, new RowResultSetParser());
 	}
 
 	public IRowDimensions getRowDimensionsByRowNameKey(int id, String name) {

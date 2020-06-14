@@ -1,8 +1,8 @@
 package com.robindrew.codegenerator.lang.java.generator.object.serializer.field.data.type;
 
-import com.robindrew.codegenerator.api.serializer.data.serializer.lang.EnumSerializer;
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
 import com.robindrew.codegenerator.lang.java.type.set.IJavaTypeSet;
+import com.robindrew.common.io.data.serializer.lang.EnumSerializer;
 
 public class EnumSerializedType extends DataSerializedType {
 

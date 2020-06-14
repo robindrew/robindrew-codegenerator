@@ -352,6 +352,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public List<IRow> getByRowData(byte[] data) {
+		return delegate.getByRowData(data);
+	}
+
+	@Override
 	public IRowData getRowDataByRowNameKey(int id, String name) {
 		return delegate.getRowDataByRowNameKey(id, name);
 	}
@@ -364,6 +369,11 @@ public class DelegateRowTable implements IRowTable {
 	@Override
 	public boolean containsRowDimensions(IRowDimensions row) {
 		return delegate.containsRowDimensions(row);
+	}
+
+	@Override
+	public List<IRow> getByRowDimensions(int id, long width, long height) {
+		return delegate.getByRowDimensions(id, width, height);
 	}
 
 	@Override

@@ -572,6 +572,19 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public List<IRow> getByRowData(byte[] data) {
+		List<IRow> list = delegate.getByRowData(data);
+		if (copyOnRead) {
+			List<IRow> copy = new ArrayList<IRow>(list.size());
+			for (IRow dataStore : list) {
+				copy.add(new Row(dataStore));
+			}
+			list = copy;
+		}
+		return list;
+	}
+
+	@Override
 	public IRowData getRowDataByRowNameKey(int id, String name) {
 		IRowData returnValue = delegate.getRowDataByRowNameKey(id, name);
 		if (copyOnRead) {
@@ -596,6 +609,19 @@ public class CopyRowTable implements IRowTable {
 	@Override
 	public boolean containsRowDimensions(IRowDimensions row) {
 		return delegate.containsRowDimensions(row);
+	}
+
+	@Override
+	public List<IRow> getByRowDimensions(int id, long width, long height) {
+		List<IRow> list = delegate.getByRowDimensions(id, width, height);
+		if (copyOnRead) {
+			List<IRow> copy = new ArrayList<IRow>(list.size());
+			for (IRow dataStore : list) {
+				copy.add(new Row(dataStore));
+			}
+			list = copy;
+		}
+		return list;
 	}
 
 	@Override

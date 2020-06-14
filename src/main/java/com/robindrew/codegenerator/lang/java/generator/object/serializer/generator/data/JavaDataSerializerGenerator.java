@@ -2,7 +2,6 @@ package com.robindrew.codegenerator.lang.java.generator.object.serializer.genera
 
 import static com.robindrew.codegenerator.lang.java.type.classtype.ClassType.CLASS;
 
-import com.robindrew.codegenerator.api.serializer.data.serializer.ObjectSerializer;
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModel;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.lookup.IJavaModelSet;
@@ -19,6 +18,7 @@ import com.robindrew.codegenerator.lang.java.type.block.parameter.JavaNamedType;
 import com.robindrew.codegenerator.lang.java.type.object.JavaObject;
 import com.robindrew.codegenerator.lang.java.type.resolver.IJavaTypeResolver;
 import com.robindrew.codegenerator.setup.ISetup;
+import com.robindrew.common.io.data.serializer.ObjectSerializer;
 
 public class JavaDataSerializerGenerator extends JavaObjectGenerator {
 

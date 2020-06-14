@@ -20,7 +20,7 @@
 		<Field name="valueObjectInteger" type="Integer" />
 		<Field name="valueObjectLong" type="Long" />
 		<Field name="valueObjectFloat" type="Float" />
-		<Field name="valueObjectDouble" type="double" />
+		<Field name="valueObjectDouble" type="Double" />
 		<Field name="valueObjectString" type="String" />
 		<Field name="valueObjectBytes" type="byte[]" />
 		<Field name="valueObjectTimeUnit" type="TimeUnit" />
@@ -46,7 +46,7 @@
 		<Field name="valueObjectInteger" type="Integer" />
 		<Field name="valueObjectLong" type="Long" />
 		<Field name="valueObjectFloat" type="Float" />
-		<Field name="valueObjectDouble" type="double" />
+		<Field name="valueObjectDouble" type="Double" />
 		<Field name="valueObjectString" type="String" />
 		<Field name="valueObjectBytes" type="byte[]" />
 		<Field name="valueObjectTimeUnit" type="TimeUnit" />
