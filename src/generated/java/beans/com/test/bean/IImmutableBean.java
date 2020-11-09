@@ -110,7 +110,7 @@ public interface IImmutableBean extends IBean, IValueBean, Comparable<IImmutable
 	 * Getter for the valueObjectDouble field.
 	 * @return the value of the valueObjectDouble field.
 	 */
-	double getValueObjectDouble();
+	Double getValueObjectDouble();
 
 	/**
 	 * Getter for the valueObjectString field.
@@ -264,7 +264,7 @@ public interface IImmutableBean extends IBean, IValueBean, Comparable<IImmutable
 	 * @param valueObjectDouble the valueObjectDouble value to set.
 	 * @return a copy of this object.
 	 */
-	IImmutableBean setValueObjectDouble(double valueObjectDouble);
+	IImmutableBean setValueObjectDouble(Double valueObjectDouble);
 
 	/**
 	 * Setter for the valueObjectString field, return a copy with the field set.

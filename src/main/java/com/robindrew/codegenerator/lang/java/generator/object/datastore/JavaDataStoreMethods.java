@@ -25,6 +25,8 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.G
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.IsEmptyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveAllMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveByBeanMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveByKeyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.SetAllMethod;
@@ -75,6 +77,7 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 			add(new AddAllMethod(dataStore.getDataStore()));
 			add(new SetAllMethod(dataStore.getDataStore()));
 			add(new RemoveAllMethod(dataStore.getDataStore()));
+			add(new RemoveByBeanMethod(dataStore.getDataStore()));
 		}
 
 		// Auto Increment
@@ -116,13 +119,19 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 
 			for (JavaModelDataStoreKey key : dataStore.getDataStore().getKeyBeans()) {
 				add(new GetByKeyMethod(dataStore.getDataStore(), row, key));
+				if (!readOnly) {
+					add(new RemoveByKeyMethod(dataStore.getDataStore(), row, key));
+				}
 			}
 		}
-		
+
 		// Keys
 		for (JavaModelDataStoreKey key : dataStore.getDataStore().getKeyBeans()) {
 			add(new GetByKeyMethod(dataStore.getDataStore(), dataStore.getDataStore().getElementBean(), key));
 			add(new ContainsRowMethod(dataStore.getDataStore(), key.getBean()));
+			if (!readOnly) {
+				add(new RemoveByKeyMethod(dataStore.getDataStore(), dataStore.getDataStore().getElementBean(), key));
+			}
 		}
 	}
 

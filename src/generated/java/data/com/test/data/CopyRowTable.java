@@ -106,6 +106,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeByRowKey(IRowKey key) {
+		delegate.removeByRowKey(key);
+	}
+
+	@Override
 	public void add(IRow element) {
 		if (copyOnWrite) {
 			element = new Row(element);
@@ -594,6 +599,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByRowNameKey(int id, String name) {
+		delegate.removeRowDataByRowNameKey(id, name);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		List<IRowDimensions> list = delegate.getRowDimensionsList();
 		if (copyOnRead) {
@@ -634,6 +644,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsByRowNameKey(int id, String name) {
+		delegate.removeRowDimensionsByRowNameKey(id, name);
+	}
+
+	@Override
 	public IRow getRowByRowNameKey(int id, String name) {
 		IRow returnValue = delegate.getRowByRowNameKey(id, name);
 		if (copyOnRead) {
@@ -645,5 +660,10 @@ public class CopyRowTable implements IRowTable {
 	@Override
 	public boolean containsRowNameKey(IRowNameKey row) {
 		return delegate.containsRowNameKey(row);
+	}
+
+	@Override
+	public void removeRowByRowNameKey(int id, String name) {
+		delegate.removeRowByRowNameKey(id, name);
 	}
 }

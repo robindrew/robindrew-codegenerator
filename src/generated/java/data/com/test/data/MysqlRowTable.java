@@ -211,6 +211,18 @@ public class MysqlRowTable implements ISqlRowTable {
 		return getExecutor().get(sql, new RowResultSetParser());
 	}
 
+	public void removeByRowKey(IRowKey key) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(table);
+		sql.where();
+		sql.column("id").sql("=").value(key.getId());
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
 	@Override
 	public boolean containsRowKey(IRowKey row) {
 
@@ -1253,6 +1265,20 @@ public class MysqlRowTable implements ISqlRowTable {
 		return getExecutor().get(sql, new RowDataResultSetParser());
 	}
 
+	public void removeRowDataByRowNameKey(int id, String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(table);
+		sql.where();
+		sql.column("id").sql("=").value(id);
+		sql.and();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
 	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 
@@ -1335,6 +1361,20 @@ public class MysqlRowTable implements ISqlRowTable {
 		return getExecutor().get(sql, new RowDimensionsResultSetParser());
 	}
 
+	public void removeRowDimensionsByRowNameKey(int id, String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(table);
+		sql.where();
+		sql.column("id").sql("=").value(id);
+		sql.and();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		getExecutor().execute(sql);
+	}
+
 	public IRow getRowByRowNameKey(int id, String name) {
 
 		// SQL
@@ -1359,6 +1399,20 @@ public class MysqlRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().get(sql, new RowResultSetParser());
+	}
+
+	public void removeRowByRowNameKey(int id, String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.deleteFrom(table);
+		sql.where();
+		sql.column("id").sql("=").value(id);
+		sql.and();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		getExecutor().execute(sql);
 	}
 
 	@Override

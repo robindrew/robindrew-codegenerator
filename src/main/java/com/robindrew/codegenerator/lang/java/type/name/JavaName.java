@@ -19,6 +19,10 @@ public class JavaName implements IJavaName {
 		return new JavaName(name).toUpper().get();
 	}
 
+	public static String toGetter(String name, boolean isBoolean) {
+		return (isBoolean ? "is" : "get") + new JavaName(name).toUpper().get() + "()";
+	}
+
 	private final String name;
 	private final boolean immutable;
 

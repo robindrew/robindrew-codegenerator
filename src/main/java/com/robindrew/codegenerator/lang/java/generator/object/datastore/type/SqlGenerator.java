@@ -33,6 +33,8 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.s
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetListMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlRemoveByBeanMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlRemoveByKeyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlRemoveListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlRemoveMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlSetMethod;
@@ -117,6 +119,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 		methods.add(new SqlGetAllMethod(getDataStore()));
 		methods.add(new SqlGetByBeanMethod(getDataStore()));
 		methods.add(new SqlGetMethod(getDataStore()));
+		methods.add(new SqlRemoveByBeanMethod(getDataStore()));
 		methods.add(new SqlContainsRowMethod(getDataStore(), getDataStore().getKeyBean()));
 
 		// Write Methods
@@ -163,6 +166,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 
 			for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 				methods.add(new SqlGetByKeyMethod(getDataStore(), row, key));
+				methods.add(new SqlRemoveByKeyMethod(getDataStore(), row, key));
 			}
 		}
 
@@ -170,6 +174,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 		for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 			JavaModelBean bean = getDataStore().getElementBean();
 			methods.add(new SqlGetByKeyMethod(getDataStore(), bean, key));
+			methods.add(new SqlRemoveByKeyMethod(getDataStore(), bean, key));
 			methods.add(new SqlContainsRowMethod(getDataStore(), key.getBean()));
 		}
 

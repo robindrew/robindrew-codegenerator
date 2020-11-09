@@ -43,7 +43,7 @@ public class ImmutableBean implements IImmutableBean {
 	/** The valueObjectFloat field. */
 	private final Float valueObjectFloat;
 	/** The valueObjectDouble field. */
-	private final double valueObjectDouble;
+	private final Double valueObjectDouble;
 	/** The valueObjectString field. */
 	private final String valueObjectString;
 	/** The valueObjectBytes field. */
@@ -62,7 +62,7 @@ public class ImmutableBean implements IImmutableBean {
 	/**
 	 * The fields constructor.
 	 */
-	public ImmutableBean(char valueChar, boolean valueBoolean, byte valueByte, short valueShort, int valueInt, long valueLong, float valueFloat, double valueDouble, Character valueObjectCharacter, Boolean valueObjectBoolean, Byte valueObjectByte, Short valueObjectShort, Integer valueObjectInteger, Long valueObjectLong, Float valueObjectFloat, double valueObjectDouble, String valueObjectString, byte[] valueObjectBytes, TimeUnit valueObjectTimeUnit, List<String> valueObjectList, Set<Integer> valueObjectSet, Map<String, IMutableBean> valueObjectMap, boolean set) {
+	public ImmutableBean(char valueChar, boolean valueBoolean, byte valueByte, short valueShort, int valueInt, long valueLong, float valueFloat, double valueDouble, Character valueObjectCharacter, Boolean valueObjectBoolean, Byte valueObjectByte, Short valueObjectShort, Integer valueObjectInteger, Long valueObjectLong, Float valueObjectFloat, Double valueObjectDouble, String valueObjectString, byte[] valueObjectBytes, TimeUnit valueObjectTimeUnit, List<String> valueObjectList, Set<Integer> valueObjectSet, Map<String, IMutableBean> valueObjectMap, boolean set) {
 		this.valueChar = valueChar;
 		this.valueBoolean = valueBoolean;
 		this.valueByte = valueByte;
@@ -266,7 +266,7 @@ public class ImmutableBean implements IImmutableBean {
 	 * @return the value of the valueObjectDouble field.
 	 */
 	@Override
-	public double getValueObjectDouble() {
+	public Double getValueObjectDouble() {
 		return valueObjectDouble;
 	}
 
@@ -489,7 +489,7 @@ public class ImmutableBean implements IImmutableBean {
 	 * @return a copy of this object.
 	 */
 	@Override
-	public IImmutableBean setValueObjectDouble(double valueObjectDouble) {
+	public IImmutableBean setValueObjectDouble(Double valueObjectDouble) {
 		return new ImmutableBean(valueChar, valueBoolean, valueByte, valueShort, valueInt, valueLong, valueFloat, valueDouble, valueObjectCharacter, valueObjectBoolean, valueObjectByte, valueObjectShort, valueObjectInteger, valueObjectLong, valueObjectFloat, valueObjectDouble, valueObjectString, valueObjectBytes, valueObjectTimeUnit, valueObjectList, valueObjectSet, valueObjectMap, set);
 	}
 

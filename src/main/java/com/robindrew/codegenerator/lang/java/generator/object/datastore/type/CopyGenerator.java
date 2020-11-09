@@ -28,6 +28,8 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.G
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.GetMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.IsEmptyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveAllMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveByBeanMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveByKeyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.RemoveMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.SetAllMethod;
@@ -104,6 +106,7 @@ public class CopyGenerator extends TypeGenerator {
 		object.addBlock(toDelegate(new ContainsRowMethod(getDataStore(), getDataStore().getKeyBean())));
 		object.addBlock(toDelegate(new RemoveMethod(getDataStore())));
 		object.addBlock(toDelegate(new RemoveAllMethod(getDataStore())));
+		object.addBlock(toDelegate(new RemoveByBeanMethod(getDataStore())));
 
 		object.addBlock(set(new CopySetMethod(new AddMethod(getDataStore()), getDataStore())));
 		object.addBlock(set(new CopySetMethod(new SetMethod(getDataStore()), getDataStore())));
@@ -153,6 +156,7 @@ public class CopyGenerator extends TypeGenerator {
 				} else {
 					object.addBlock(new CopyGetListMethod(method, getDataStore(), false).setOverride());
 				}
+				object.addBlock(toDelegate(new RemoveByKeyMethod(getDataStore(), row, key)));
 			}
 		}
 
@@ -166,6 +170,7 @@ public class CopyGenerator extends TypeGenerator {
 				object.addBlock(new CopyGetListMethod(method, getDataStore(), false).setOverride());
 			}
 			object.addBlock(toDelegate(new ContainsRowMethod(getDataStore(), key.getBean())));
+			object.addBlock(toDelegate(new RemoveByKeyMethod(getDataStore(), bean, key)));
 		}
 	}
 

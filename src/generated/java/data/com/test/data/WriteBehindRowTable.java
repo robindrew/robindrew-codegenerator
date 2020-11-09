@@ -268,6 +268,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeByRowKey(final IRowKey key) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeByRowKey(key);
+			}
+		});
+	}
+
+	@Override
 	public void addAuto(final IRow element) {
 		// Aysyncronous (Write Behind)
 		executor.submit(new Runnable() {
@@ -954,6 +964,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByRowNameKey(final int id, final String name) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDataByRowNameKey(id, name);
+			}
+		});
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		// Synchronous
 		Future<List<IRowDimensions>> future = executor.submit(new Callable<List<IRowDimensions>>() {
@@ -1018,6 +1038,16 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsByRowNameKey(final int id, final String name) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowDimensionsByRowNameKey(id, name);
+			}
+		});
+	}
+
+	@Override
 	public IRow getRowByRowNameKey(final int id, final String name) {
 		// Synchronous
 		Future<IRow> future = executor.submit(new Callable<IRow>() {
@@ -1047,5 +1077,15 @@ public class WriteBehindRowTable implements IRowTable {
 		} catch(Exception e) {
 			throw Java.propagate(e);
 		}
+	}
+
+	@Override
+	public void removeRowByRowNameKey(final int id, final String name) {
+		// Aysyncronous (Write Behind)
+		executor.submit(new Runnable() {
+			public void run() {
+				delegate.removeRowByRowNameKey(id, name);
+			}
+		});
 	}
 }

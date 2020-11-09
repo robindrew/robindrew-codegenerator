@@ -177,6 +177,16 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeByRowKey(IRowKey key) {
+		List<IRow> elements = new ArrayList<>(map.values());
+		for (IRow element : elements) {
+			if (element.getId() == key.getId()) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public void addAuto(IRow element) {
 		if (nameSet.contains(element.getName())) {
 			throw new IllegalStateException("name already exists: " + element.getName());
@@ -704,6 +714,16 @@ public class MapRowTable implements IRowTable {
 		return null;
 	}
 
+	@Override
+	public void removeRowDataByRowNameKey(int id, String name) {
+		List<IRow> elements = new ArrayList<>(map.values());
+		for (IRow element : elements) {
+			if (element.getId() == id && element.getName().equals(name)) {
+				remove(element);
+			}
+		}
+	}
+
 	public List<IRowDimensions> getRowDimensionsList() {
 		List<IRow> elements = getAll();
 		List<IRowDimensions> list = new ArrayList<IRowDimensions>(elements.size());
@@ -752,6 +772,16 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsByRowNameKey(int id, String name) {
+		List<IRow> elements = new ArrayList<>(map.values());
+		for (IRow element : elements) {
+			if (element.getId() == id && element.getName().equals(name)) {
+				remove(element);
+			}
+		}
+	}
+
+	@Override
 	public IRow getRowByRowNameKey(int id, String name) {
 		for (IRow element : map.values()) {
 			if (element.getId() == id && element.getName().equals(name)) {
@@ -759,6 +789,16 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void removeRowByRowNameKey(int id, String name) {
+		List<IRow> elements = new ArrayList<>(map.values());
+		for (IRow element : elements) {
+			if (element.getId() == id && element.getName().equals(name)) {
+				remove(element);
+			}
+		}
 	}
 
 	@Override

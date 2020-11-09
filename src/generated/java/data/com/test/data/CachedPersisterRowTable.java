@@ -133,6 +133,12 @@ public class CachedPersisterRowTable implements IRowTable {
 		persister.removeAll(elements);
 	}
 
+	@Override
+	public void removeByRowKey(IRowKey key) {
+		cache.removeByRowKey(key);
+		persister.removeByRowKey(key);
+	}
+
 	/**
 	 * Note: this method will not update the element parameter correctly
 	 * if wrapped in a copy-on-write {@link IDataStore}.
@@ -407,6 +413,12 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByRowNameKey(int id, String name) {
+		cache.removeRowDataByRowNameKey(id, name);
+		persister.removeRowDataByRowNameKey(id, name);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		return cache.getRowDimensionsList();
 	}
@@ -427,6 +439,12 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsByRowNameKey(int id, String name) {
+		cache.removeRowDimensionsByRowNameKey(id, name);
+		persister.removeRowDimensionsByRowNameKey(id, name);
+	}
+
+	@Override
 	public IRow getRowByRowNameKey(int id, String name) {
 		return cache.getRowByRowNameKey(id, name);
 	}
@@ -434,5 +452,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	@Override
 	public boolean containsRowNameKey(IRowNameKey row) {
 		return cache.containsRowNameKey(row);
+	}
+
+	@Override
+	public void removeRowByRowNameKey(int id, String name) {
+		cache.removeRowByRowNameKey(id, name);
+		persister.removeRowByRowNameKey(id, name);
 	}
 }

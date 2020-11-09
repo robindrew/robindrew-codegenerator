@@ -46,6 +46,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	void removeAll(Collection<? extends IRow> elements);
 
+	void removeByRowKey(IRowKey key);
+
 	void addAuto(IRow element);
 
 	boolean containsId(int id);
@@ -146,6 +148,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	IRowData getRowDataByRowNameKey(int id, String name);
 
+	void removeRowDataByRowNameKey(int id, String name);
+
 	List<IRowDimensions> getRowDimensionsList();
 
 	boolean containsRowDimensions(IRowDimensions row);
@@ -154,7 +158,11 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	IRowDimensions getRowDimensionsByRowNameKey(int id, String name);
 
+	void removeRowDimensionsByRowNameKey(int id, String name);
+
 	IRow getRowByRowNameKey(int id, String name);
 
 	boolean containsRowNameKey(IRowNameKey row);
+
+	void removeRowByRowNameKey(int id, String name);
 }

@@ -10,6 +10,7 @@ import com.robindrew.common.io.data.serializer.collection.SetSerializer;
 import com.robindrew.common.io.data.serializer.lang.BooleanSerializer;
 import com.robindrew.common.io.data.serializer.lang.ByteSerializer;
 import com.robindrew.common.io.data.serializer.lang.CharacterSerializer;
+import com.robindrew.common.io.data.serializer.lang.DoubleSerializer;
 import com.robindrew.common.io.data.serializer.lang.EnumSerializer;
 import com.robindrew.common.io.data.serializer.lang.FloatSerializer;
 import com.robindrew.common.io.data.serializer.lang.IntegerSerializer;
@@ -49,7 +50,7 @@ public class MutableBeanDataSerializer extends ObjectSerializer<IMutableBean> {
 		Integer param13 = reader.readObject(new IntegerSerializer(false));
 		Long param14 = reader.readObject(new LongSerializer(false));
 		Float param15 = reader.readObject(new FloatSerializer(false));
-		double param16 = reader.readDouble();
+		Double param16 = reader.readObject(new DoubleSerializer(false));
 		String param17 = reader.readObject(new StringSerializer(false));
 		byte[] param18 = reader.readObject(new ByteArraySerializer(false));
 		TimeUnit param19 = reader.readObject(new EnumSerializer<TimeUnit>(TimeUnit.class, false));
@@ -77,7 +78,7 @@ public class MutableBeanDataSerializer extends ObjectSerializer<IMutableBean> {
 		writer.writeObject(object.getValueObjectInteger(), new IntegerSerializer(false));
 		writer.writeObject(object.getValueObjectLong(), new LongSerializer(false));
 		writer.writeObject(object.getValueObjectFloat(), new FloatSerializer(false));
-		writer.writeDouble(object.getValueObjectDouble());
+		writer.writeObject(object.getValueObjectDouble(), new DoubleSerializer(false));
 		writer.writeObject(object.getValueObjectString(), new StringSerializer(false));
 		writer.writeObject(object.getValueObjectBytes(), new ByteArraySerializer(false));
 		writer.writeObject(object.getValueObjectTimeUnit(), new EnumSerializer<TimeUnit>(TimeUnit.class, false));

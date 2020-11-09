@@ -110,7 +110,7 @@ public interface IMutableBean extends IExecutableBean<List<Integer>>, IValueBean
 	 * Getter for the valueObjectDouble field.
 	 * @return the value of the valueObjectDouble field.
 	 */
-	double getValueObjectDouble();
+	Double getValueObjectDouble();
 
 	/**
 	 * Getter for the valueObjectString field.
@@ -248,7 +248,7 @@ public interface IMutableBean extends IExecutableBean<List<Integer>>, IValueBean
 	 * Setter for the valueObjectDouble field.
 	 * @param valueObjectDouble the valueObjectDouble value to set.
 	 */
-	void setValueObjectDouble(double valueObjectDouble);
+	void setValueObjectDouble(Double valueObjectDouble);
 
 	/**
 	 * Setter for the valueObjectString field.

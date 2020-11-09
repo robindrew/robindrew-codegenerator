@@ -10,6 +10,7 @@ import com.robindrew.codegenerator.api.serializer.xml.serializer.collection.SetS
 import com.robindrew.codegenerator.api.serializer.xml.serializer.lang.BooleanSerializer;
 import com.robindrew.codegenerator.api.serializer.xml.serializer.lang.ByteSerializer;
 import com.robindrew.codegenerator.api.serializer.xml.serializer.lang.CharacterSerializer;
+import com.robindrew.codegenerator.api.serializer.xml.serializer.lang.DoubleSerializer;
 import com.robindrew.codegenerator.api.serializer.xml.serializer.lang.EnumSerializer;
 import com.robindrew.codegenerator.api.serializer.xml.serializer.lang.FloatSerializer;
 import com.robindrew.codegenerator.api.serializer.xml.serializer.lang.IntegerSerializer;
@@ -59,7 +60,7 @@ public class MutableBeanXmlSerializer implements IXmlSerializer<IMutableBean> {
 		Integer param13 = reader.readObject(new IntegerSerializer("valueObjectInteger"));
 		Long param14 = reader.readObject(new LongSerializer("valueObjectLong"));
 		Float param15 = reader.readObject(new FloatSerializer("valueObjectFloat"));
-		double param16 = reader.readDouble("valueObjectDouble");
+		Double param16 = reader.readObject(new DoubleSerializer("valueObjectDouble"));
 		String param17 = reader.readObject(new StringSerializer("valueObjectString"));
 		byte[] param18 = reader.readObject(new ByteArraySerializer("valueObjectBytes"));
 		TimeUnit param19 = reader.readObject(new EnumSerializer<TimeUnit>(TimeUnit.class, "valueObjectTimeUnit"));
@@ -91,7 +92,7 @@ public class MutableBeanXmlSerializer implements IXmlSerializer<IMutableBean> {
 		writer.writeObject(object.getValueObjectInteger(), new IntegerSerializer("valueObjectInteger"));
 		writer.writeObject(object.getValueObjectLong(), new LongSerializer("valueObjectLong"));
 		writer.writeObject(object.getValueObjectFloat(), new FloatSerializer("valueObjectFloat"));
-		writer.writeDouble("valueObjectDouble", object.getValueObjectDouble());
+		writer.writeObject(object.getValueObjectDouble(), new DoubleSerializer("valueObjectDouble"));
 		writer.writeObject(object.getValueObjectString(), new StringSerializer("valueObjectString"));
 		writer.writeObject(object.getValueObjectBytes(), new ByteArraySerializer("valueObjectBytes"));
 		writer.writeObject(object.getValueObjectTimeUnit(), new EnumSerializer<TimeUnit>(TimeUnit.class, "valueObjectTimeUnit"));

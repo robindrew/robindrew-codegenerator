@@ -33,6 +33,8 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.m
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetListMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapRemoveAllMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapRemoveByBeanMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapRemoveByKeyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapRemoveListByMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapRemoveMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapSetAllMethod;
@@ -135,6 +137,7 @@ public class MapGenerator extends TypeGenerator {
 		object.addBlock(new MapGetKeyMethod(getDataStore()));
 		object.addBlock(new MapGetByBeanMethod(getDataStore()));
 		object.addBlock(new MapContainsRowMethod(getDataStore()));
+		object.addBlock(new MapRemoveByBeanMethod(getDataStore()));
 
 		// Auto Increment
 		if (getDataStore().isAutoIncrement()) {
@@ -170,6 +173,7 @@ public class MapGenerator extends TypeGenerator {
 
 			for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 				object.addBlock(new MapGetByKeyMethod(getDataStore(), row, key));
+				object.addBlock(new MapRemoveByKeyMethod(getDataStore(), row, key));
 			}
 		}
 
@@ -177,6 +181,7 @@ public class MapGenerator extends TypeGenerator {
 		for (JavaModelDataStoreKey key : getDataStore().getKeyBeans()) {
 			JavaModelBean bean = getDataStore().getElementBean();
 			object.addBlock(new MapGetByKeyMethod(getDataStore(), bean, key));
+			object.addBlock(new MapRemoveByKeyMethod(getDataStore(), bean, key));
 			object.addBlock(new MapContainsRowMethod(getDataStore(), key.getBean()));
 		}
 	}

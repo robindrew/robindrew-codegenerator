@@ -112,6 +112,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeByRowKey(IRowKey key) {
+		delegate.removeByRowKey(key);
+	}
+
+	@Override
 	public void addAuto(IRow element) {
 		delegate.addAuto(element);
 	}
@@ -362,6 +367,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByRowNameKey(int id, String name) {
+		delegate.removeRowDataByRowNameKey(id, name);
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		return delegate.getRowDimensionsList();
 	}
@@ -382,6 +392,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsByRowNameKey(int id, String name) {
+		delegate.removeRowDimensionsByRowNameKey(id, name);
+	}
+
+	@Override
 	public IRow getRowByRowNameKey(int id, String name) {
 		return delegate.getRowByRowNameKey(id, name);
 	}
@@ -389,5 +404,10 @@ public class DelegateRowTable implements IRowTable {
 	@Override
 	public boolean containsRowNameKey(IRowNameKey row) {
 		return delegate.containsRowNameKey(row);
+	}
+
+	@Override
+	public void removeRowByRowNameKey(int id, String name) {
+		delegate.removeRowByRowNameKey(id, name);
 	}
 }

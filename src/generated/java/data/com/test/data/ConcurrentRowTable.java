@@ -222,6 +222,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeByRowKey(IRowKey key) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeByRowKey(key);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public void addAuto(IRow element) {
 		Lock lock = getWriteLock();
 		lock.lock();
@@ -772,6 +783,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDataByRowNameKey(int id, String name) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDataByRowNameKey(id, name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRowDimensions> getRowDimensionsList() {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -816,6 +838,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public void removeRowDimensionsByRowNameKey(int id, String name) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowDimensionsByRowNameKey(id, name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public IRow getRowByRowNameKey(int id, String name) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -832,6 +865,17 @@ public class ConcurrentRowTable implements IRowTable {
 		lock.lock();
 		try {
 			return delegate.containsRowNameKey(row);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public void removeRowByRowNameKey(int id, String name) {
+		Lock lock = getWriteLock();
+		lock.lock();
+		try {
+			delegate.removeRowByRowNameKey(id, name);
 		} finally {
 			lock.unlock();
 		}
