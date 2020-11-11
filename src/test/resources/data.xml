@@ -1,11 +1,11 @@
 <Model id="2000" package="com.test.data" target="DATA">
 
 	<Validator name="RowId" type="int" min="1" />
-	<Validator name="RowName" type="String" min="6" max="200" />
+	<Validator name="RowName" type="String" min="3" max="200" />
 	<Validator name="RowBytes" type="byte[]" notNull="false" min="0" max="200" />
 
 	<Bean name="Row">
-		<Field name="id" type="RowId" identity="true" autoIncrement="true" />
+		<Field name="id" type="RowId" identity="true" />
 		<Field name="name" type="RowName" unique="true" />
 		<Field name="data" type="RowBytes" />
 		<Field name="width" type="long" />
@@ -27,7 +27,6 @@
 	</Bean>
 	<Bean name="RowDimensions">
 		<Constructor type="IRow" />
-		<Field name="id" type="RowId" identity="true" />
 		<Field name="width" type="long" />
 		<Field name="height" type="long" />
 	</Bean>

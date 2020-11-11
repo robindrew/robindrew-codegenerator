@@ -31,6 +31,10 @@ public class SqlTypeDeclaration {
 		map(BigDecimal.class, "DECIMAL");
 	}
 
+	public String get(Class<?> type) {
+		return basicMap.get(type);
+	}
+	
 	private void map(Class<?> type, String name) {
 		basicMap.put(type, name);
 	}
@@ -55,7 +59,7 @@ public class SqlTypeDeclaration {
 		return null;
 	}
 
-	private String getComplexDeclaration(JavaModelBeanField field) {
+	protected String getComplexDeclaration(JavaModelBeanField field) {
 		IJavaType type = field.getType();
 
 		// Text
@@ -77,14 +81,14 @@ public class SqlTypeDeclaration {
 
 		// Enum
 		if (type.isEnum()) {
-			return basicMap.get(Short.class);
+			return get(Short.class);
 		}
 
 		// Not Supported
 		throw new IllegalArgumentException("type not supported: " + type);
 	}
 
-	private long getLength(JavaModelValidator validator) {
+	protected long getLength(JavaModelValidator validator) {
 		if (validator == null) {
 			return 255;
 		}

@@ -13,12 +13,6 @@ public interface IRowDimensions extends IBean, Comparable<IRowDimensions> {
 	int getSerializationId();
 
 	/**
-	 * Getter for the id field.
-	 * @return the value of the id field.
-	 */
-	int getId();
-
-	/**
 	 * Getter for the width field.
 	 * @return the value of the width field.
 	 */
@@ -29,12 +23,6 @@ public interface IRowDimensions extends IBean, Comparable<IRowDimensions> {
 	 * @return the value of the height field.
 	 */
 	long getHeight();
-
-	/**
-	 * Setter for the id field.
-	 * @param id the id value to set.
-	 */
-	void setId(int id);
 
 	/**
 	 * Setter for the width field.

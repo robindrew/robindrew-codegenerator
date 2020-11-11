@@ -117,11 +117,6 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
-	public void addAuto(IRow element) {
-		delegate.addAuto(element);
-	}
-
-	@Override
 	public boolean containsId(int id) {
 		return delegate.containsId(id);
 	}
@@ -382,8 +377,8 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
-	public List<IRow> getByRowDimensions(int id, long width, long height) {
-		return delegate.getByRowDimensions(id, width, height);
+	public List<IRow> getByRowDimensions(long width, long height) {
+		return delegate.getByRowDimensions(width, height);
 	}
 
 	@Override

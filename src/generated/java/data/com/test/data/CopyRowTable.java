@@ -182,14 +182,6 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
-	public void addAuto(IRow element) {
-		if (copyOnWrite) {
-			element = new Row(element);
-		}
-		delegate.addAuto(element);
-	}
-
-	@Override
 	public boolean containsId(int id) {
 		return delegate.containsId(id);
 	}
@@ -622,8 +614,8 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
-	public List<IRow> getByRowDimensions(int id, long width, long height) {
-		List<IRow> list = delegate.getByRowDimensions(id, width, height);
+	public List<IRow> getByRowDimensions(long width, long height) {
+		List<IRow> list = delegate.getByRowDimensions(width, height);
 		if (copyOnRead) {
 			List<IRow> copy = new ArrayList<IRow>(list.size());
 			for (IRow dataStore : list) {

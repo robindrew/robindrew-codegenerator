@@ -8,10 +8,9 @@ public class RowDimensionsResultSetParser implements IResultSetAdapter<IRowDimen
 
 	@Override
 	public IRowDimensions adapt(ResultSet set) {
-		int id = ResultSetTypes.parseInt(set, 1, "id");
-		long width = ResultSetTypes.parseLong(set, 2, "width");
-		long height = ResultSetTypes.parseLong(set, 3, "height");
-		IRowDimensions row = new RowDimensions(id, width, height);
+		long width = ResultSetTypes.parseLong(set, 1, "width");
+		long height = ResultSetTypes.parseLong(set, 2, "height");
+		IRowDimensions row = new RowDimensions(width, height);
 		return row;
 	}
 }

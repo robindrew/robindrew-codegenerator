@@ -278,16 +278,6 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
-	public void addAuto(final IRow element) {
-		// Aysyncronous (Write Behind)
-		executor.submit(new Runnable() {
-			public void run() {
-				delegate.addAuto(element);
-			}
-		});
-	}
-
-	@Override
 	public boolean containsId(final int id) {
 		// Synchronous
 		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
@@ -1006,11 +996,11 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
-	public List<IRow> getByRowDimensions(final int id, final long width, final long height) {
+	public List<IRow> getByRowDimensions(final long width, final long height) {
 		// Synchronous
 		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
 			public List<IRow> call() {
-				return delegate.getByRowDimensions(id, width, height);
+				return delegate.getByRowDimensions(width, height);
 			}
 		});
 

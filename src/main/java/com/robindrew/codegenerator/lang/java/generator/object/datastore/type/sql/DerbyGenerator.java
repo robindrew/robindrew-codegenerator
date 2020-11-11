@@ -3,6 +3,7 @@ package com.robindrew.codegenerator.lang.java.generator.object.datastore.type.sq
 import com.robindrew.codegenerator.api.sql.builder.ISqlBuilder;
 import com.robindrew.codegenerator.api.sql.builder.derby.DerbySqlBuilder;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.JavaDataStoreGenerator;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.derby.DerbyCreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.derby.DerbyExistsMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.type.SqlGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.methods.JavaMethodSet;
@@ -25,6 +26,7 @@ public class DerbyGenerator extends SqlGenerator {
 
 	@Override
 	protected void addSpecialImplementations(JavaMethodSet methods) {
+		methods.add(new DerbyCreateMethod(getDataStore()));
 		methods.add(new DerbyExistsMethod());
 	}
 

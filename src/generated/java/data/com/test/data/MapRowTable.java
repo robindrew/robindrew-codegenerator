@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -16,7 +15,6 @@ public class MapRowTable implements IRowTable {
 
 	private final ReadWriteLock reentrantLock;
 	private final Map<IRowKey, IRow> map;
-	private final AtomicInteger autoIncrement;
 	private final Set<String> nameSet = new HashSet<String>();
 
 	public MapRowTable(Map<IRowKey, IRow> map, ReadWriteLock reentrantLock) {
@@ -25,7 +23,6 @@ public class MapRowTable implements IRowTable {
 		}
 		this.map = map;
 		this.reentrantLock = reentrantLock;
-		this.autoIncrement = new AtomicInteger(0);
 	}
 
 	public MapRowTable(Map<IRowKey, IRow> map) {
@@ -34,7 +31,6 @@ public class MapRowTable implements IRowTable {
 		}
 		this.map = map;
 		this.reentrantLock = new ReentrantReadWriteLock(true);
-		this.autoIncrement = new AtomicInteger(0);
 	}
 
 	/**
@@ -155,7 +151,6 @@ public class MapRowTable implements IRowTable {
 	@Override
 	public void destroy() {
 		map.clear();
-		autoIncrement.set(0);
 		nameSet.clear();
 	}
 
@@ -182,22 +177,6 @@ public class MapRowTable implements IRowTable {
 		for (IRow element : elements) {
 			if (element.getId() == key.getId()) {
 				remove(element);
-			}
-		}
-	}
-
-	@Override
-	public void addAuto(IRow element) {
-		if (nameSet.contains(element.getName())) {
-			throw new IllegalStateException("name already exists: " + element.getName());
-		}
-		// We loop until we find a key we can add ...
-		while (true) {
-			element.setId(autoIncrement.addAndGet(1));
-			IRowKey key = getKey(element);
-			if (!map.containsKey(key)) {
-				map.put(key, element);
-				return;
 			}
 		}
 	}
@@ -736,9 +715,6 @@ public class MapRowTable implements IRowTable {
 	@Override
 	public boolean containsRowDimensions(IRowDimensions row) {
 		for (IRow element : map.values()) {
-			if (element.getId() != row.getId()) {
-				continue;
-			}
 			if (element.getWidth() != row.getWidth()) {
 				continue;
 			}
@@ -751,10 +727,10 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
-	public List<IRow> getByRowDimensions(int id, long width, long height) {
+	public List<IRow> getByRowDimensions(long width, long height) {
 		List<IRow> list = new ArrayList<IRow>();
 		for (IRow element : map.values()) {
-			if (element.getId() == id && element.getWidth() == width && element.getHeight() == height) {
+			if (element.getWidth() == width && element.getHeight() == height) {
 				list.add(new Row(element));
 			}
 		}

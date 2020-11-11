@@ -48,8 +48,6 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	void removeByRowKey(IRowKey key);
 
-	void addAuto(IRow element);
-
 	boolean containsId(int id);
 
 	IRow getRowById(int id);
@@ -154,7 +152,7 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	boolean containsRowDimensions(IRowDimensions row);
 
-	List<IRow> getByRowDimensions(int id, long width, long height);
+	List<IRow> getByRowDimensions(long width, long height);
 
 	IRowDimensions getRowDimensionsByRowNameKey(int id, String name);
 

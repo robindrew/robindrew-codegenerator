@@ -29,7 +29,7 @@ public class HsqldbCreateMethod extends SqlCreateMethod {
 
 		// Columns
 		boolean comma = false;
-		SqlTypeDeclaration declaration = new SqlTypeDeclaration();
+		SqlTypeDeclaration declaration = getTypeDeclaration();
 		List<JavaModelBeanField> uniqueList = new ArrayList<JavaModelBeanField>();
 		for (JavaModelBeanField field : getDataStore().getElementBean().getFieldList()) {
 			if (field.isUnique() && !field.isIdentity()) {
@@ -65,7 +65,6 @@ public class HsqldbCreateMethod extends SqlCreateMethod {
 			}
 			code.line("sql.sql(')');");
 		}
-		code.line("sql.sql(')');");
 
 		// Unique Keys
 		for (JavaModelBeanField field : uniqueList) {

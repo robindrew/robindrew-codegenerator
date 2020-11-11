@@ -91,8 +91,8 @@ public class RowNameKey implements IRowNameKey {
 		if (name == null) {
 			throw new NullPointerException("name");
 		}
-		if (name.length() < 6) {
-			throw new IllegalArgumentException("name too short, minimum of 6 characters, value: '" + name + "'");
+		if (name.length() < 3) {
+			throw new IllegalArgumentException("name too short, minimum of 3 characters, value: '" + name + "'");
 		}
 		if (name.length() > 200) {
 			throw new IllegalArgumentException("name too long, maximum of 200 characters, value: '" + name + "'");

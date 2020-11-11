@@ -259,7 +259,6 @@ public class H2RowTable implements ISqlRowTable {
 		sql.sql('(');
 		sql.column("id").sql(" INT");
 		sql.notNull();
-		sql.autoIncrement();
 		sql.sql(',');
 		sql.column("name").sql(" VARCHAR(200)");
 		sql.notNull();
@@ -404,37 +403,6 @@ public class H2RowTable implements ISqlRowTable {
 	}
 
 	@Override
-	public void addAuto(IRow element) {
-
-		// SQL
-		ISqlBuilder sql = newSqlBuilder();
-		sql.insertInto(getTable());
-		sql.sql('(');
-		sql.column("name");
-		sql.sql(',');
-		sql.column("data");
-		sql.sql(',');
-		sql.column("width");
-		sql.sql(',');
-		sql.column("height");
-		sql.sql(',');
-		sql.column("unit");
-		sql.sql(") VALUES (?,?,?,?,?)");
-
-		// Values
-		ISqlValues values = new SqlValues();
-		values.add(element.getName());
-		values.add(element.getData());
-		values.add(element.getWidth());
-		values.add(element.getHeight());
-		values.add(element.getUnit());
-
-		// Execute
-		int id = getExecutor().executeAutoIncrement(sql, values);
-		element.setId(id);
-	}
-
-	@Override
 	public boolean containsId(int id) {
 
 		// SQL
@@ -519,8 +487,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");
@@ -663,8 +629,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");
@@ -774,8 +738,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");
@@ -885,8 +847,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");
@@ -1029,8 +989,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");
@@ -1173,8 +1131,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");
@@ -1285,8 +1241,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");
@@ -1303,8 +1257,6 @@ public class H2RowTable implements ISqlRowTable {
 		ISqlBuilder sql = newSqlBuilder();
 		sql.selectCountAllFrom(getTable());
 		sql.where();
-		sql.column("id").sql("=").value(row.getId());
-		sql.and();
 		sql.column("width").sql("=").value(row.getWidth());
 		sql.and();
 		sql.column("height").sql("=").value(row.getHeight());
@@ -1313,7 +1265,7 @@ public class H2RowTable implements ISqlRowTable {
 		return getExecutor().getCount(sql) > 0;
 	}
 
-	public List<IRow> getByRowDimensions(int id, long width, long height) {
+	public List<IRow> getByRowDimensions(long width, long height) {
 
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
@@ -1331,8 +1283,6 @@ public class H2RowTable implements ISqlRowTable {
 		sql.column("unit");
 		sql.from(getTable());
 		sql.where();
-		sql.column("id").sql("=").value(id);
-		sql.and();
 		sql.column("width").sql("=").value(width);
 		sql.and();
 		sql.column("height").sql("=").value(height);
@@ -1346,8 +1296,6 @@ public class H2RowTable implements ISqlRowTable {
 		// SQL
 		ISqlBuilder sql = newSqlBuilder();
 		sql.select();
-		sql.column("id");
-		sql.sql(',');
 		sql.column("width");
 		sql.sql(',');
 		sql.column("height");

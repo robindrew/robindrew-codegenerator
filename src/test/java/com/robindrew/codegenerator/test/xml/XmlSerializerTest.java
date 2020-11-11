@@ -18,6 +18,7 @@ public class XmlSerializerTest {
 	@Test
 	public void testSerialization() {
 		MutableBean bean = new MutableBean();
+		bean.setValueObjectString("");
 		bean.setValueChar('c');
 		bean.setValueDouble(2.2);
 		bean.setValueLong(Long.MAX_VALUE);
@@ -31,6 +32,8 @@ public class XmlSerializerTest {
 
 		IMutableBean compare = new XmlReaderSerializer().fromXml(serializer, xml);
 
+		System.out.println(bean);
+		System.out.println(compare);
 		Assert.assertEquals(bean, compare);
 	}
 }

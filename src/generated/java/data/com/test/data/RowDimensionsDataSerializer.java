@@ -17,15 +17,13 @@ public class RowDimensionsDataSerializer extends ObjectSerializer<IRowDimensions
 
 	@Override
 	public IRowDimensions readValue(IDataReader reader) throws IOException {
-		int param1 = reader.readInt();
+		long param1 = reader.readLong();
 		long param2 = reader.readLong();
-		long param3 = reader.readLong();
-		return new RowDimensions(param1, param2, param3);
+		return new RowDimensions(param1, param2);
 	}
 
 	@Override
 	public void writeValue(IDataWriter writer, IRowDimensions object) throws IOException {
-		writer.writeInt(object.getId());
 		writer.writeLong(object.getWidth());
 		writer.writeLong(object.getHeight());
 	}

@@ -233,17 +233,6 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
-	public void addAuto(IRow element) {
-		Lock lock = getWriteLock();
-		lock.lock();
-		try {
-			delegate.addAuto(element);
-		} finally {
-			lock.unlock();
-		}
-	}
-
-	@Override
 	public boolean containsId(int id) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -816,11 +805,11 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
-	public List<IRow> getByRowDimensions(int id, long width, long height) {
+	public List<IRow> getByRowDimensions(long width, long height) {
 		Lock lock = getReadLock();
 		lock.lock();
 		try {
-			return delegate.getByRowDimensions(id, width, height);
+			return delegate.getByRowDimensions(width, height);
 		} finally {
 			lock.unlock();
 		}

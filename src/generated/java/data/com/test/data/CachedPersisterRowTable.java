@@ -1,6 +1,5 @@
 package com.test.data;
 
-import com.robindrew.codegenerator.api.datastore.IDataStore;
 import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -137,16 +136,6 @@ public class CachedPersisterRowTable implements IRowTable {
 	public void removeByRowKey(IRowKey key) {
 		cache.removeByRowKey(key);
 		persister.removeByRowKey(key);
-	}
-
-	/**
-	 * Note: this method will not update the element parameter correctly
-	 * if wrapped in a copy-on-write {@link IDataStore}.
-	 */
-	@Override
-	public void addAuto(IRow element) {
-		cache.addAuto(element);
-		persister.add(element);
 	}
 
 	@Override
@@ -429,8 +418,8 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
-	public List<IRow> getByRowDimensions(int id, long width, long height) {
-		return cache.getByRowDimensions(id, width, height);
+	public List<IRow> getByRowDimensions(long width, long height) {
+		return cache.getByRowDimensions(width, height);
 	}
 
 	@Override
