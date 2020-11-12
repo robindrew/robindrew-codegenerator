@@ -4,7 +4,7 @@
 	<Validator name="RowName" type="String" min="3" max="200" />
 	<Validator name="RowBytes" type="byte[]" notNull="false" min="0" max="200" />
 
-	<Bean name="Row">
+	<Bean name="Row" immutable="true">
 		<Field name="id" type="RowId" identity="true" />
 		<Field name="name" type="RowName" unique="true" />
 		<Field name="data" type="RowBytes" />

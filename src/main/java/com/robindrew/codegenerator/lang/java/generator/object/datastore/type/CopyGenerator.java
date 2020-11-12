@@ -15,6 +15,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.C
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsRowMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.CountColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.CreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.DestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ExistsMethod;
@@ -126,6 +127,7 @@ public class CopyGenerator extends TypeGenerator {
 		for (JavaModelBeanField field : fields) {
 
 			object.addBlock(toDelegate(new ContainsColumnMethod(field)));
+			object.addBlock(toDelegate(new CountColumnMethod(field)));
 
 			boolean unique = field.isUnique();
 			object.addBlock(new CopyGetListMethod(new GetListByMethod(getDataStore(), field, getElementBean(), unique), getDataStore(), unique));

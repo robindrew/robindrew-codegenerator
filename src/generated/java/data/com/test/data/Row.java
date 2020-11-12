@@ -10,46 +10,52 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class Row implements IRow {
 
 	/** The id field. */
-	private int id = 0;
+	private final int id;
 	/** The name field. */
-	private String name = null;
+	private final String name;
 	/** The data field. */
-	private byte[] data = null;
+	private final byte[] data;
 	/** The width field. */
-	private long width = 0l;
+	private final long width;
 	/** The height field. */
-	private long height = 0l;
+	private final long height;
 	/** The unit field. */
-	private TimeUnit unit = null;
-
-	/**
-	 * The empty constructor.
-	 */
-	public Row() {
-	}
+	private final TimeUnit unit;
 
 	/**
 	 * The fields constructor.
 	 */
 	public Row(int id, String name, byte[] data, long width, long height, TimeUnit unit) {
-		setId(id);
-		setName(name);
-		setData(data);
-		setWidth(width);
-		setHeight(height);
-		setUnit(unit);
+		if (id < 1) {
+			throw new IllegalArgumentException("id too small, minimum of 1, value: '" + id + "'");
+		}
+		if (name == null) {
+			throw new NullPointerException("name");
+		}
+		if (name.length() < 3) {
+			throw new IllegalArgumentException("name too short, minimum of 3 characters, value: '" + name + "'");
+		}
+		if (name.length() > 200) {
+			throw new IllegalArgumentException("name too long, maximum of 200 characters, value: '" + name + "'");
+		}
+		this.id = id;
+		this.name = name;
+		this.data = data;
+		this.width = width;
+		this.height = height;
+		this.unit = unit;
 	}
 
 	/**
 	 * The clone constructor.
 	 */
 	public Row(IRow clone) {
-		setId(clone.getId());
-		setName(clone.getName());
-		setData(clone.getData());
-		setWidth(clone.getWidth());
-		setHeight(clone.getHeight());
-		setUnit(clone.getUnit());
+		this.id = clone.getId();
+		this.name = clone.getName();
+		this.data = clone.getData();
+		this.width = clone.getWidth();
+		this.height = clone.getHeight();
+		this.unit = clone.getUnit();
 	}
 
 	/**
@@ -116,23 +122,25 @@ public class Row implements IRow {
 	}
 
 	/**
-	 * Setter for the id field.
+	 * Setter for the id field, return a copy with the field set.
 	 * @param id the id value to set.
+	 * @return a copy of this object.
 	 */
 	@Override
-	public void setId(int id) {
+	public IRow setId(int id) {
 		if (id < 1) {
 			throw new IllegalArgumentException("id too small, minimum of 1, value: '" + id + "'");
 		}
-		this.id = id;
+		return new Row(id, name, data, width, height, unit);
 	}
 
 	/**
-	 * Setter for the name field.
+	 * Setter for the name field, return a copy with the field set.
 	 * @param name the name value to set.
+	 * @return a copy of this object.
 	 */
 	@Override
-	public void setName(String name) {
+	public IRow setName(String name) {
 		if (name == null) {
 			throw new NullPointerException("name");
 		}
@@ -142,43 +150,47 @@ public class Row implements IRow {
 		if (name.length() > 200) {
 			throw new IllegalArgumentException("name too long, maximum of 200 characters, value: '" + name + "'");
 		}
-		this.name = name;
+		return new Row(id, name, data, width, height, unit);
 	}
 
 	/**
-	 * Setter for the data field.
+	 * Setter for the data field, return a copy with the field set.
 	 * @param data the data value to set.
+	 * @return a copy of this object.
 	 */
 	@Override
-	public void setData(byte[] data) {
-		this.data = data;
+	public IRow setData(byte[] data) {
+		return new Row(id, name, data, width, height, unit);
 	}
 
 	/**
-	 * Setter for the width field.
+	 * Setter for the width field, return a copy with the field set.
 	 * @param width the width value to set.
+	 * @return a copy of this object.
 	 */
 	@Override
-	public void setWidth(long width) {
-		this.width = width;
+	public IRow setWidth(long width) {
+		return new Row(id, name, data, width, height, unit);
 	}
 
 	/**
-	 * Setter for the height field.
+	 * Setter for the height field, return a copy with the field set.
 	 * @param height the height value to set.
+	 * @return a copy of this object.
 	 */
 	@Override
-	public void setHeight(long height) {
-		this.height = height;
+	public IRow setHeight(long height) {
+		return new Row(id, name, data, width, height, unit);
 	}
 
 	/**
-	 * Setter for the unit field.
+	 * Setter for the unit field, return a copy with the field set.
 	 * @param unit the unit value to set.
+	 * @return a copy of this object.
 	 */
 	@Override
-	public void setUnit(TimeUnit unit) {
-		this.unit = unit;
+	public IRow setUnit(TimeUnit unit) {
+		return new Row(id, name, data, width, height, unit);
 	}
 
 	@Override

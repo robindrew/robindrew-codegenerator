@@ -118,6 +118,35 @@ public class ImmutableBean implements IImmutableBean {
 	}
 
 	/**
+	 * The clone constructor.
+	 */
+	public ImmutableBean(IMutableBean clone) {
+		this.valueChar = clone.getValueChar();
+		this.valueBoolean = clone.getValueBoolean();
+		this.valueByte = clone.getValueByte();
+		this.valueShort = clone.getValueShort();
+		this.valueInt = clone.getValueInt();
+		this.valueLong = clone.getValueLong();
+		this.valueFloat = clone.getValueFloat();
+		this.valueDouble = clone.getValueDouble();
+		this.valueObjectCharacter = clone.getValueObjectCharacter();
+		this.valueObjectBoolean = clone.getValueObjectBoolean();
+		this.valueObjectByte = clone.getValueObjectByte();
+		this.valueObjectShort = clone.getValueObjectShort();
+		this.valueObjectInteger = clone.getValueObjectInteger();
+		this.valueObjectLong = clone.getValueObjectLong();
+		this.valueObjectFloat = clone.getValueObjectFloat();
+		this.valueObjectDouble = clone.getValueObjectDouble();
+		this.valueObjectString = clone.getValueObjectString();
+		this.valueObjectBytes = clone.getValueObjectBytes();
+		this.valueObjectTimeUnit = clone.getValueObjectTimeUnit();
+		this.valueObjectList = clone.getValueObjectList();
+		this.valueObjectSet = clone.getValueObjectSet();
+		this.valueObjectMap = clone.getValueObjectMap();
+		this.set = clone.getSet();
+	}
+
+	/**
 	 * Returns the serialization id.
 	 * @return the serialization id.
 	 */

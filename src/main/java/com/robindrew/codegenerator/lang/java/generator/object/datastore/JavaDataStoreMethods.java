@@ -12,6 +12,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.C
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ContainsRowMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.CountColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.CreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.DestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.ExistsMethod;
@@ -85,11 +86,12 @@ public class JavaDataStoreMethods extends JavaMethodSet {
 			add(new AddAutoMethod(dataStore.getDataStore()));
 		}
 
-		// GetListBy ...
+		// Fields
 		List<JavaModelBeanField> fields = dataStore.getDataStore().getElementBean().getFieldList();
 		for (JavaModelBeanField field : fields) {
 
 			add(new ContainsColumnMethod(field));
+			add(new CountColumnMethod(field));
 
 			boolean unique = field.isUnique();
 			JavaModelBean bean = dataStore.getDataStore().getElementBean();

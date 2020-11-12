@@ -27,6 +27,8 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 
 	boolean containsId(int id);
 
+	int getIdCount(int id);
+
 	IRow getRowById(int id);
 
 	List<IRow> getRowListBetweenIds(Integer from, Integer to);
@@ -37,6 +39,8 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 
 	boolean containsName(String name);
 
+	int getNameCount(String name);
+
 	IRow getRowByName(String name);
 
 	IRowData getRowDataByName(String name);
@@ -45,6 +49,8 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 
 	boolean containsData(byte[] data);
 
+	int getDataCount(byte[] data);
+
 	List<IRow> getRowListByData(byte[] data);
 
 	List<IRowData> getRowDataListByData(byte[] data);
@@ -52,6 +58,8 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 	List<IRowDimensions> getRowDimensionsListByData(byte[] data);
 
 	boolean containsWidth(long width);
+
+	int getWidthCount(long width);
 
 	List<IRow> getRowListByWidth(long width);
 
@@ -63,6 +71,8 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 
 	boolean containsHeight(long height);
 
+	int getHeightCount(long height);
+
 	List<IRow> getRowListByHeight(long height);
 
 	List<IRow> getRowListBetweenHeights(Long from, Long to);
@@ -72,6 +82,8 @@ public interface IRowTableReadOnly extends IDataView<IRow> {
 	List<IRowDimensions> getRowDimensionsListByHeight(long height);
 
 	boolean containsUnit(TimeUnit unit);
+
+	int getUnitCount(TimeUnit unit);
 
 	List<IRow> getRowListByUnit(TimeUnit unit);
 

@@ -14,6 +14,8 @@ public class ModelAdapter extends ModelObject {
 	private String from;
 	@Attribute
 	private String to;
+	@Attribute(required = false)
+	private boolean constructor = false;
 	@ElementList(entry = "Field", inline = true)
 	private List<ModelAdapterField> fieldList = new ArrayList<ModelAdapterField>();
 
@@ -23,6 +25,10 @@ public class ModelAdapter extends ModelObject {
 
 	public String getTo() {
 		return to;
+	}
+
+	public boolean isConstructor() {
+		return constructor;
 	}
 
 	public List<ModelAdapterField> getFieldList() {

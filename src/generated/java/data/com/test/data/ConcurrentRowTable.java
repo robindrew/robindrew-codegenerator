@@ -244,6 +244,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getIdCount(int id) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getIdCount(id);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public IRow getRowById(int id) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -332,6 +343,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getNameCount(String name) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getNameCount(name);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public IRow getRowByName(String name) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -409,6 +431,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getDataCount(byte[] data) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getDataCount(data);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRow> getRowListByData(byte[] data) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -480,6 +513,17 @@ public class ConcurrentRowTable implements IRowTable {
 		lock.lock();
 		try {
 			return delegate.containsWidth(width);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public int getWidthCount(long width) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getWidthCount(width);
 		} finally {
 			lock.unlock();
 		}
@@ -574,6 +618,17 @@ public class ConcurrentRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getHeightCount(long height) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getHeightCount(height);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
 	public List<IRow> getRowListByHeight(long height) {
 		Lock lock = getReadLock();
 		lock.lock();
@@ -656,6 +711,17 @@ public class ConcurrentRowTable implements IRowTable {
 		lock.lock();
 		try {
 			return delegate.containsUnit(unit);
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	@Override
+	public int getUnitCount(TimeUnit unit) {
+		Lock lock = getReadLock();
+		lock.lock();
+		try {
+			return delegate.getUnitCount(unit);
 		} finally {
 			lock.unlock();
 		}

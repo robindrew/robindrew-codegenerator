@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import com.robindrew.codegenerator.api.sql.executor.LoggingSqlExecutor;
 import com.robindrew.codegenerator.api.sql.executor.SqlExecutor;
+import com.test.data.CopyRowTable;
 import com.test.data.DerbyRowTable;
 import com.test.data.H2RowTable;
 import com.test.data.HsqldbRowTable;
@@ -32,7 +33,9 @@ public class MapTest {
 
 	@Test
 	public void testMap() {
-		testTable(new MapRowTable(new ConcurrentHashMap<>()));
+		IRowTable table = new MapRowTable(new ConcurrentHashMap<>());
+		table = new CopyRowTable(table, true, false);
+		testTable(table);
 	}
 
 	@Test
@@ -101,7 +104,17 @@ public class MapTest {
 		table.add(row4);
 		table.add(row5);
 
+		Assert.assertTrue(table.get(1) != row1);
+		Assert.assertTrue(table.get(2) != row2);
+		Assert.assertTrue(table.get(3) != row3);
+		Assert.assertTrue(table.get(4) != row4);
+		Assert.assertTrue(table.get(5) != row5);
+
 		Assert.assertEquals(5, table.size());
+		Assert.assertEquals(2, table.getWidthCount(33));
+		Assert.assertEquals(2, table.getHeightCount(103));
+		Assert.assertEquals(1, table.getHeightCount(109));
+		Assert.assertEquals(3, table.getUnitCount(TimeUnit.NANOSECONDS));
 
 		Assert.assertTrue(table.contains(row1));
 		Assert.assertTrue(table.contains(row2));

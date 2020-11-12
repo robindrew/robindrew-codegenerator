@@ -23,6 +23,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.s
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlContainsMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlContainsRowMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlCountColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlCreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlDestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.sql.SqlGetAllMethod;
@@ -143,6 +144,7 @@ public abstract class SqlGenerator extends TypeGenerator {
 		for (JavaModelBeanField field : fields) {
 
 			methods.add(new SqlContainsColumnMethod(field));
+			methods.add(new SqlCountColumnMethod(field));
 
 			boolean unique = field.isUnique();
 			methods.add(new SqlGetListByMethod(getDataStore(), field, getElementBean(), unique));

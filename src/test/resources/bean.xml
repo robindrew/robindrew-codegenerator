@@ -31,6 +31,7 @@
 	</Bean>
 	<Bean name="ImmutableBean" immutable="true">
 		<Extends type="IValueBean" />
+		<Constructor type="IMutableBean" />
 		<Field name="valueChar" type="char" />
 		<Field name="valueBoolean" type="boolean" />
 		<Field name="valueByte" type="byte" />
@@ -76,6 +77,32 @@
 		<Field from="valueObjectString" />
 		<Field from="valueObjectBytes" />
 		<Field from="valueObjectTimeUnit" />
+	</Adapter>
+
+	<Adapter name="ImmutableBeanAdaptor" from="MutableBean" to="ImmutableBean" constructor="true">
+		<Field from="valueChar" />
+		<Field from="valueBoolean" />
+		<Field from="valueByte" />
+		<Field from="valueShort" />
+		<Field from="valueInt" />
+		<Field from="valueLong" />
+		<Field from="valueFloat" />
+		<Field from="valueDouble" />
+		<Field from="valueObjectCharacter" />
+		<Field from="valueObjectBoolean" />
+		<Field from="valueObjectByte" />
+		<Field from="valueObjectShort" />
+		<Field from="valueObjectInteger" />
+		<Field from="valueObjectLong" />
+		<Field from="valueObjectFloat" />
+		<Field from="valueObjectDouble" />
+		<Field from="valueObjectString" />
+		<Field from="valueObjectBytes" />
+		<Field from="valueObjectTimeUnit" />
+		<Field from="valueObjectList" />
+		<Field from="valueObjectSet" />
+		<Field from="valueObjectMap" />
+		<Field from="set" />
 	</Adapter>
 
 	<Comparator name="MutableBeanComparator" type="MutableBean">

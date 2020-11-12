@@ -50,38 +50,44 @@ public interface IRow extends IBean, Comparable<IRow> {
 	TimeUnit getUnit();
 
 	/**
-	 * Setter for the id field.
+	 * Setter for the id field, return a copy with the field set.
 	 * @param id the id value to set.
+	 * @return a copy of this object.
 	 */
-	void setId(int id);
+	IRow setId(int id);
 
 	/**
-	 * Setter for the name field.
+	 * Setter for the name field, return a copy with the field set.
 	 * @param name the name value to set.
+	 * @return a copy of this object.
 	 */
-	void setName(String name);
+	IRow setName(String name);
 
 	/**
-	 * Setter for the data field.
+	 * Setter for the data field, return a copy with the field set.
 	 * @param data the data value to set.
+	 * @return a copy of this object.
 	 */
-	void setData(byte[] data);
+	IRow setData(byte[] data);
 
 	/**
-	 * Setter for the width field.
+	 * Setter for the width field, return a copy with the field set.
 	 * @param width the width value to set.
+	 * @return a copy of this object.
 	 */
-	void setWidth(long width);
+	IRow setWidth(long width);
 
 	/**
-	 * Setter for the height field.
+	 * Setter for the height field, return a copy with the field set.
 	 * @param height the height value to set.
+	 * @return a copy of this object.
 	 */
-	void setHeight(long height);
+	IRow setHeight(long height);
 
 	/**
-	 * Setter for the unit field.
+	 * Setter for the unit field, return a copy with the field set.
 	 * @param unit the unit value to set.
+	 * @return a copy of this object.
 	 */
-	void setUnit(TimeUnit unit);
+	IRow setUnit(TimeUnit unit);
 }

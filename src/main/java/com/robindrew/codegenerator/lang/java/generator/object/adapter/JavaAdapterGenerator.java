@@ -82,7 +82,7 @@ public class JavaAdapterGenerator extends JavaObjectGenerator {
 
 	private void addBlocks(JavaObject object) {
 		Map<IJavaName, IJavaName> fieldMap = getFieldMap();
-		object.addBlock(new AdaptMethod(fromType, toType, getToInstanceType(), fieldMap).setOverride());
+		object.addBlock(new AdaptMethod(fromType, toType, getToInstanceType(), fieldMap, adapter.isConstructor()).setOverride());
 	}
 
 	private Map<IJavaName, IJavaName> getFieldMap() {

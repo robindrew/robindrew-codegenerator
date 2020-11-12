@@ -21,6 +21,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.m
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapContainsColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapContainsMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapContainsRowMethod;
+import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapCountColumnMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapCreateMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapDestroyMethod;
 import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetAllMethod;
@@ -149,6 +150,7 @@ public class MapGenerator extends TypeGenerator {
 		for (JavaModelBeanField field : fields) {
 
 			object.addBlock(new MapContainsColumnMethod(getDataStore(), field));
+			object.addBlock(new MapCountColumnMethod(getDataStore(), field));
 
 			boolean unique = field.isUnique();
 			object.addBlock(new MapGetListByMethod(getDataStore(), field, getElementBean(), unique));

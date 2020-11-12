@@ -16,7 +16,7 @@ public class AdaptMethod extends JavaMethod {
 	private final IJavaType toInstanceType;
 	private final Map<IJavaName, IJavaName> fieldMap;
 
-	public AdaptMethod(IJavaType fromType, IJavaType toType, IJavaType toInstanceType, Map<IJavaName, IJavaName> fieldMap) {
+	public AdaptMethod(IJavaType fromType, IJavaType toType, IJavaType toInstanceType, Map<IJavaName, IJavaName> fieldMap, boolean constructor) {
 		super("adapt", toType);
 		if (fieldMap.isEmpty()) {
 			throw new IllegalArgumentException("fieldMap is empty");
@@ -44,10 +44,34 @@ public class AdaptMethod extends JavaMethod {
 		getReferences().add(toInstanceType);
 
 		// Method contents!
-		setContents(createContents());
+		if (constructor) {
+			setContents(adaptConstructor());
+		} else {
+			setContents(adaptFields());
+		}
 	}
 
-	private IJavaCodeBlock createContents() {
+	private IJavaCodeBlock adaptConstructor() {
+		String toInstanceName = toInstanceType.getSimpleName();
+
+		// Slightly nasty way to build an object if the constructor is large
+		// but what can you do? This is intended for objects that have no setters
+		boolean comma = false;
+		StringBuilder parameters = new StringBuilder();
+		for (Entry<IJavaName, IJavaName> entry : fieldMap.entrySet()) {
+			if (comma) {
+				parameters.append(", ");
+			}
+			comma = true;
+			IJavaName from = entry.getKey();
+			parameters.append("from." + toGetter(from) + "()");
+		}
+		JavaCodeLines code = new JavaCodeLines();
+		code.line("return new " + toInstanceName + "(" + parameters + ");");
+		return code;
+	}
+
+	private IJavaCodeBlock adaptFields() {
 		String toName = toType.getSimpleName();
 		String toInstanceName = toInstanceType.getSimpleName();
 

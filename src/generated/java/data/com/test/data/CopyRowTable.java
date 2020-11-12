@@ -187,6 +187,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getIdCount(int id) {
+		return delegate.getIdCount(id);
+	}
+
+	@Override
 	public IRow getRowById(int id) {
 		IRow returnValue = delegate.getRowById(id);
 		if (copyOnRead) {
@@ -247,6 +252,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getNameCount(String name) {
+		return delegate.getNameCount(name);
+	}
+
+	@Override
 	public IRow getRowByName(String name) {
 		IRow returnValue = delegate.getRowByName(name);
 		if (copyOnRead) {
@@ -291,6 +301,11 @@ public class CopyRowTable implements IRowTable {
 	@Override
 	public boolean containsData(byte[] data) {
 		return delegate.containsData(data);
+	}
+
+	@Override
+	public int getDataCount(byte[] data) {
+		return delegate.getDataCount(data);
 	}
 
 	@Override
@@ -350,6 +365,11 @@ public class CopyRowTable implements IRowTable {
 	@Override
 	public boolean containsWidth(long width) {
 		return delegate.containsWidth(width);
+	}
+
+	@Override
+	public int getWidthCount(long width) {
+		return delegate.getWidthCount(width);
 	}
 
 	@Override
@@ -425,6 +445,11 @@ public class CopyRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getHeightCount(long height) {
+		return delegate.getHeightCount(height);
+	}
+
+	@Override
 	public List<IRow> getRowListByHeight(long height) {
 		List<IRow> list = delegate.getRowListByHeight(height);
 		if (copyOnRead) {
@@ -494,6 +519,11 @@ public class CopyRowTable implements IRowTable {
 	@Override
 	public boolean containsUnit(TimeUnit unit) {
 		return delegate.containsUnit(unit);
+	}
+
+	@Override
+	public int getUnitCount(TimeUnit unit) {
+		return delegate.getUnitCount(unit);
 	}
 
 	@Override

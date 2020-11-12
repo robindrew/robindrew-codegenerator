@@ -122,6 +122,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getIdCount(int id) {
+		return delegate.getIdCount(id);
+	}
+
+	@Override
 	public IRow getRowById(int id) {
 		return delegate.getRowById(id);
 	}
@@ -162,6 +167,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getNameCount(String name) {
+		return delegate.getNameCount(name);
+	}
+
+	@Override
 	public IRow getRowByName(String name) {
 		return delegate.getRowByName(name);
 	}
@@ -197,6 +207,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getDataCount(byte[] data) {
+		return delegate.getDataCount(data);
+	}
+
+	@Override
 	public List<IRow> getRowListByData(byte[] data) {
 		return delegate.getRowListByData(data);
 	}
@@ -229,6 +244,11 @@ public class DelegateRowTable implements IRowTable {
 	@Override
 	public boolean containsWidth(long width) {
 		return delegate.containsWidth(width);
+	}
+
+	@Override
+	public int getWidthCount(long width) {
+		return delegate.getWidthCount(width);
 	}
 
 	@Override
@@ -272,6 +292,11 @@ public class DelegateRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getHeightCount(long height) {
+		return delegate.getHeightCount(height);
+	}
+
+	@Override
 	public List<IRow> getRowListByHeight(long height) {
 		return delegate.getRowListByHeight(height);
 	}
@@ -309,6 +334,11 @@ public class DelegateRowTable implements IRowTable {
 	@Override
 	public boolean containsUnit(TimeUnit unit) {
 		return delegate.containsUnit(unit);
+	}
+
+	@Override
+	public int getUnitCount(TimeUnit unit) {
+		return delegate.getUnitCount(unit);
 	}
 
 	@Override

@@ -294,6 +294,22 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getIdCount(final int id) {
+		// Synchronous
+		Future<Integer> future = executor.submit(new Callable<Integer>() {
+			public Integer call() {
+				return delegate.getIdCount(id);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
 	public IRow getRowById(final int id) {
 		// Synchronous
 		Future<IRow> future = executor.submit(new Callable<IRow>() {
@@ -404,6 +420,22 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getNameCount(final String name) {
+		// Synchronous
+		Future<Integer> future = executor.submit(new Callable<Integer>() {
+			public Integer call() {
+				return delegate.getNameCount(name);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
 	public IRow getRowByName(final String name) {
 		// Synchronous
 		Future<IRow> future = executor.submit(new Callable<IRow>() {
@@ -498,6 +530,22 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getDataCount(final byte[] data) {
+		// Synchronous
+		Future<Integer> future = executor.submit(new Callable<Integer>() {
+			public Integer call() {
+				return delegate.getDataCount(data);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
 	public List<IRow> getRowListByData(final byte[] data) {
 		// Synchronous
 		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
@@ -581,6 +629,22 @@ public class WriteBehindRowTable implements IRowTable {
 		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
 			public Boolean call() {
 				return delegate.containsWidth(width);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public int getWidthCount(final long width) {
+		// Synchronous
+		Future<Integer> future = executor.submit(new Callable<Integer>() {
+			public Integer call() {
+				return delegate.getWidthCount(width);
 			}
 		});
 
@@ -702,6 +766,22 @@ public class WriteBehindRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getHeightCount(final long height) {
+		// Synchronous
+		Future<Integer> future = executor.submit(new Callable<Integer>() {
+			public Integer call() {
+				return delegate.getHeightCount(height);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
 	public List<IRow> getRowListByHeight(final long height) {
 		// Synchronous
 		Future<List<IRow>> future = executor.submit(new Callable<List<IRow>>() {
@@ -801,6 +881,22 @@ public class WriteBehindRowTable implements IRowTable {
 		Future<Boolean> future = executor.submit(new Callable<Boolean>() {
 			public Boolean call() {
 				return delegate.containsUnit(unit);
+			}
+		});
+
+		try {
+			return future.get();
+		} catch(Exception e) {
+			throw Java.propagate(e);
+		}
+	}
+
+	@Override
+	public int getUnitCount(final TimeUnit unit) {
+		// Synchronous
+		Future<Integer> future = executor.submit(new Callable<Integer>() {
+			public Integer call() {
+				return delegate.getUnitCount(unit);
 			}
 		});
 

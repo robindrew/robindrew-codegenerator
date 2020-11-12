@@ -416,6 +416,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public int getIdCount(int id) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("id").sql("=").value(id);
+
+		// Execute
+		return getExecutor().getCount(sql);
+	}
+
+	@Override
 	public IRow getRowById(int id) {
 
 		// SQL
@@ -558,6 +571,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public int getNameCount(String name) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("name").sql("=").value(name);
+
+		// Execute
+		return getExecutor().getCount(sql);
+	}
+
+	@Override
 	public IRow getRowByName(String name) {
 
 		// SQL
@@ -667,6 +693,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public int getDataCount(byte[] data) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("data").sql("=").value(data);
+
+		// Execute
+		return getExecutor().getCount(sql);
+	}
+
+	@Override
 	public List<IRow> getRowListByData(byte[] data) {
 
 		// SQL
@@ -773,6 +812,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getCount(sql) > 0;
+	}
+
+	@Override
+	public int getWidthCount(long width) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("width").sql("=").value(width);
+
+		// Execute
+		return getExecutor().getCount(sql);
 	}
 
 	@Override
@@ -918,6 +970,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 	}
 
 	@Override
+	public int getHeightCount(long height) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("height").sql("=").value(height);
+
+		// Execute
+		return getExecutor().getCount(sql);
+	}
+
+	@Override
 	public List<IRow> getRowListByHeight(long height) {
 
 		// SQL
@@ -1057,6 +1122,19 @@ public class HsqldbRowTable implements ISqlRowTable {
 
 		// Execute
 		return getExecutor().getCount(sql) > 0;
+	}
+
+	@Override
+	public int getUnitCount(TimeUnit unit) {
+
+		// SQL
+		ISqlBuilder sql = newSqlBuilder();
+		sql.selectCountAllFrom(getTable());
+		sql.where();
+		sql.column("unit").sql("=").value(unit.ordinal());
+
+		// Execute
+		return getExecutor().getCount(sql);
 	}
 
 	@Override

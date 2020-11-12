@@ -192,6 +192,17 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getIdCount(int id) {
+		int count = 0;
+		for (IRow element : map.values()) {
+			if (element.getId() == id) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
 	public IRow getRowById(int id) {
 		for (IRow element : map.values()) {
 			if (element.getId() == id) {
@@ -278,6 +289,17 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getNameCount(String name) {
+		int count = 0;
+		for (IRow element : map.values()) {
+			if (element.getName().equals(name)) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
 	public IRow getRowByName(String name) {
 		for (IRow element : map.values()) {
 			if (element.getName().equals(name)) {
@@ -342,6 +364,17 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int getDataCount(byte[] data) {
+		int count = 0;
+		for (IRow element : map.values()) {
+			if (element.getData().equals(data)) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	@Override
@@ -412,6 +445,17 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int getWidthCount(long width) {
+		int count = 0;
+		for (IRow element : map.values()) {
+			if (element.getWidth() == width) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	@Override
@@ -504,6 +548,17 @@ public class MapRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getHeightCount(long height) {
+		int count = 0;
+		for (IRow element : map.values()) {
+			if (element.getHeight() == height) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	@Override
 	public List<IRow> getRowListByHeight(long height) {
 		List<IRow> list = new ArrayList<IRow>();
 		for (IRow element : map.values()) {
@@ -590,6 +645,17 @@ public class MapRowTable implements IRowTable {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public int getUnitCount(TimeUnit unit) {
+		int count = 0;
+		for (IRow element : map.values()) {
+			if (element.getUnit().equals(unit)) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	@Override

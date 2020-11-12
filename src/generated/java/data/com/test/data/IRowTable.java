@@ -50,6 +50,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	boolean containsId(int id);
 
+	int getIdCount(int id);
+
 	IRow getRowById(int id);
 
 	void removeRowById(int id);
@@ -66,6 +68,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	boolean containsName(String name);
 
+	int getNameCount(String name);
+
 	IRow getRowByName(String name);
 
 	void removeRowByName(String name);
@@ -80,6 +84,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	boolean containsData(byte[] data);
 
+	int getDataCount(byte[] data);
+
 	List<IRow> getRowListByData(byte[] data);
 
 	void removeRowListByData(byte[] data);
@@ -93,6 +99,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 	void removeRowDimensionsListByData(byte[] data);
 
 	boolean containsWidth(long width);
+
+	int getWidthCount(long width);
 
 	List<IRow> getRowListByWidth(long width);
 
@@ -110,6 +118,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 
 	boolean containsHeight(long height);
 
+	int getHeightCount(long height);
+
 	List<IRow> getRowListByHeight(long height);
 
 	void removeRowListByHeight(long height);
@@ -125,6 +135,8 @@ public interface IRowTable extends IDataStore<IRow>, IRowTableReadOnly {
 	void removeRowDimensionsListByHeight(long height);
 
 	boolean containsUnit(TimeUnit unit);
+
+	int getUnitCount(TimeUnit unit);
 
 	List<IRow> getRowListByUnit(TimeUnit unit);
 

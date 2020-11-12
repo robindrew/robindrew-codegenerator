@@ -144,6 +144,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getIdCount(int id) {
+		return cache.getIdCount(id);
+	}
+
+	@Override
 	public IRow getRowById(int id) {
 		return cache.getRowById(id);
 	}
@@ -187,6 +192,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getNameCount(String name) {
+		return cache.getNameCount(name);
+	}
+
+	@Override
 	public IRow getRowByName(String name) {
 		return cache.getRowByName(name);
 	}
@@ -225,6 +235,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getDataCount(byte[] data) {
+		return cache.getDataCount(data);
+	}
+
+	@Override
 	public List<IRow> getRowListByData(byte[] data) {
 		return cache.getRowListByData(data);
 	}
@@ -260,6 +275,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	@Override
 	public boolean containsWidth(long width) {
 		return cache.containsWidth(width);
+	}
+
+	@Override
+	public int getWidthCount(long width) {
+		return cache.getWidthCount(width);
 	}
 
 	@Override
@@ -306,6 +326,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	}
 
 	@Override
+	public int getHeightCount(long height) {
+		return cache.getHeightCount(height);
+	}
+
+	@Override
 	public List<IRow> getRowListByHeight(long height) {
 		return cache.getRowListByHeight(height);
 	}
@@ -346,6 +371,11 @@ public class CachedPersisterRowTable implements IRowTable {
 	@Override
 	public boolean containsUnit(TimeUnit unit) {
 		return cache.containsUnit(unit);
+	}
+
+	@Override
+	public int getUnitCount(TimeUnit unit) {
+		return cache.getUnitCount(unit);
 	}
 
 	@Override
