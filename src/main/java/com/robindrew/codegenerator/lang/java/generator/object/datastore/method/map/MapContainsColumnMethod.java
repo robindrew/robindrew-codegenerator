@@ -19,7 +19,7 @@ public class MapContainsColumnMethod extends ContainsColumnMethod {
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("for (" + type + " element : map.values()) {");
-		code.line(1, "if (" + new Equals().method1(field, "element").field2(field).get() + ") {");
+		code.line(1, "if (" + new Equals().method1(field, "element").field2(field) + ") {");
 		code.line(2, "return true;");
 		code.line(1, "}");
 		code.line("}");

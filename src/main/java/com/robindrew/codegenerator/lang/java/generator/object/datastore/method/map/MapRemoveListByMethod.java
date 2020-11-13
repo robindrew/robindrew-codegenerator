@@ -35,7 +35,7 @@ public class MapRemoveListByMethod extends RemoveListByMethod {
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("for (" + type + " element : new ArrayList<>(map.values())) {");
-		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter).get() + ") {");
+		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter) + ") {");
 		code.line(2, "remove(element);");
 		code.line(1, "}");
 		code.line("}");

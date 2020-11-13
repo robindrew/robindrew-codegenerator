@@ -93,7 +93,7 @@ public class Equals {
 		code.append("get").append(methodName).append("()");
 	}
 
-	public String get() {
+	public String toString() {
 		return appendTo(new StringBuilder()).toString();
 	}
 

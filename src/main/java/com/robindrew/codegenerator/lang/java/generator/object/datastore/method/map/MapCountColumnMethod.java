@@ -20,7 +20,7 @@ public class MapCountColumnMethod extends CountColumnMethod {
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("int count = 0;");
 		code.line("for (" + type + " element : map.values()) {");
-		code.line(1, "if (" + new Equals().method1(field, "element").field2(field).get() + ") {");
+		code.line(1, "if (" + new Equals().method1(field, "element").field2(field) + ") {");
 		code.line(2, "count++;");
 		code.line(1, "}");
 		code.line("}");

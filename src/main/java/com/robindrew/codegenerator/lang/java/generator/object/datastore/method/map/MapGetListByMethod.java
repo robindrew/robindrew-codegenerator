@@ -47,7 +47,7 @@ public class MapGetListByMethod extends GetListByMethod {
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("for (" + type + " element : map.values()) {");
-		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter).get()  + ") {");
+		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter)  + ") {");
 		if (newInstance) {
 			code.line(2, "return " + getCopyOf(this, bean.getType()) + ";");
 		} else {
@@ -67,7 +67,7 @@ public class MapGetListByMethod extends GetListByMethod {
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("List<" + returnType + "> list = new ArrayList<" + returnType + ">();");
 		code.line("for (" + type + " element : map.values()) {");
-		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter).get() + ") {");
+		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter) + ") {");
 		if (newInstance) {
 			code.line(2, "list.add(" + getCopyOf(this, bean.getType()) + ");");
 		} else {

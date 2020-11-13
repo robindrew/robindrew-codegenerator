@@ -45,7 +45,7 @@ public class MapContainsRowMethod extends ContainsRowMethod {
 
 		code.line("for (" + beanInterfaceType + " element : map.values()) {");
 		for (JavaModelBeanField field : row.getFieldList()) {
-			code.line(1, "if (" + new Equals().not().method1(field, "element").method2(field, "row").get() + ") {");
+			code.line(1, "if (" + new Equals().not().method1(field, "element").method2(field, "row") + ") {");
 			code.line(2, "continue;");
 			code.line(1, "}");
 		}
