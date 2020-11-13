@@ -4,6 +4,10 @@ import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanF
 import com.robindrew.codegenerator.lang.java.type.IJavaType;
 import com.robindrew.codegenerator.lang.java.type.name.JavaName;
 
+/**
+ * The equals check between two fields/methods can vary depending on the data type. Arrays and primitives are handled
+ * differently from objects.
+ */
 public class Equals {
 
 	private boolean not = false;
