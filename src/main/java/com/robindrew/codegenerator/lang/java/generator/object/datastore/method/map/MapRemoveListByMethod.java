@@ -1,7 +1,5 @@
 package com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map;
 
-import static com.robindrew.codegenerator.lang.java.type.name.JavaName.toUpper;
-
 import java.util.ArrayList;
 
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
@@ -37,22 +35,10 @@ public class MapRemoveListByMethod extends RemoveListByMethod {
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("for (" + type + " element : new ArrayList<>(map.values())) {");
-		code.line(1, "if (element." + getEquals() + ") {");
+		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter).get() + ") {");
 		code.line(2, "remove(element);");
 		code.line(1, "}");
 		code.line("}");
 		return code;
 	}
-
-	private String getEquals() {
-		StringBuilder code = new StringBuilder();
-		code.append("get").append(toUpper(parameter.getName())).append("()");
-		if (parameter.getType().isPrimitive()) {
-			code.append(" == ").append(parameter.getName());
-		} else {
-			code.append(".equals(").append(parameter.getName()).append(")");
-		}
-		return code.toString();
-	}
-
 }

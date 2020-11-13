@@ -24,6 +24,7 @@ import com.test.data.IRow;
 import com.test.data.IRowTable;
 import com.test.data.MapRowTable;
 import com.test.data.Row;
+import com.test.data.RowData;
 import com.test.data.RowDimensions;
 import com.test.data.RowNameKey;
 
@@ -35,7 +36,7 @@ public class MapTest {
 	public void testMap() {
 		IRowTable table = new MapRowTable(new ConcurrentHashMap<>());
 		table = new CopyRowTable(table, true, false);
-		testTable(table);
+		testTable(table, true);
 	}
 
 	@Test
@@ -56,7 +57,7 @@ public class MapTest {
 		table.setExecutor(executor);
 		table.create();
 
-		testTable(table);
+		testTable(table, false);
 	}
 
 	@Test
@@ -72,7 +73,7 @@ public class MapTest {
 		table.setExecutor(executor);
 		table.create();
 
-		testTable(table);
+		testTable(table, false);
 	}
 
 	@Test
@@ -87,10 +88,10 @@ public class MapTest {
 		table.setExecutor(executor);
 		table.create();
 
-		testTable(table);
+		testTable(table, false);
 	}
 
-	private void testTable(IRowTable table) {
+	private void testTable(IRowTable table, boolean isMap) {
 
 		IRow row1 = new Row(1, "One", new byte[1], 11, 101, TimeUnit.NANOSECONDS);
 		IRow row2 = new Row(2, "Two", new byte[2], 22, 102, TimeUnit.MICROSECONDS);
@@ -148,8 +149,10 @@ public class MapTest {
 		Assert.assertTrue(table.getAll().contains(row4));
 		Assert.assertTrue(table.getAll().contains(row5));
 
-		// TODO: Fix array equality checks
-		// Assert.assertTrue(table.containsRowData(new RowData(new byte[1])));
+		// TODO: Fix array equality checks for databases
+		if (isMap) {
+			Assert.assertTrue(table.containsRowData(new RowData(new byte[1])));
+		}
 
 	}
 

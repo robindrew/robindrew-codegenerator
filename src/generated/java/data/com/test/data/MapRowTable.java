@@ -1,6 +1,7 @@
 package com.test.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -359,7 +360,7 @@ public class MapRowTable implements IRowTable {
 	@Override
 	public boolean containsData(byte[] data) {
 		for (IRow element : map.values()) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				return true;
 			}
 		}
@@ -370,7 +371,7 @@ public class MapRowTable implements IRowTable {
 	public int getDataCount(byte[] data) {
 		int count = 0;
 		for (IRow element : map.values()) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				count++;
 			}
 		}
@@ -381,7 +382,7 @@ public class MapRowTable implements IRowTable {
 	public List<IRow> getRowListByData(byte[] data) {
 		List<IRow> list = new ArrayList<IRow>();
 		for (IRow element : map.values()) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				list.add(element);
 			}
 		}
@@ -391,7 +392,7 @@ public class MapRowTable implements IRowTable {
 	@Override
 	public void removeRowListByData(byte[] data) {
 		for (IRow element : new ArrayList<>(map.values())) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				remove(element);
 			}
 		}
@@ -401,7 +402,7 @@ public class MapRowTable implements IRowTable {
 	public List<IRowData> getRowDataListByData(byte[] data) {
 		List<IRowData> list = new ArrayList<IRowData>();
 		for (IRow element : map.values()) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				list.add(new RowData(element));
 			}
 		}
@@ -411,7 +412,7 @@ public class MapRowTable implements IRowTable {
 	@Override
 	public void removeRowDataListByData(byte[] data) {
 		for (IRow element : new ArrayList<>(map.values())) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				remove(element);
 			}
 		}
@@ -421,7 +422,7 @@ public class MapRowTable implements IRowTable {
 	public List<IRowDimensions> getRowDimensionsListByData(byte[] data) {
 		List<IRowDimensions> list = new ArrayList<IRowDimensions>();
 		for (IRow element : map.values()) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				list.add(new RowDimensions(element));
 			}
 		}
@@ -431,7 +432,7 @@ public class MapRowTable implements IRowTable {
 	@Override
 	public void removeRowDimensionsListByData(byte[] data) {
 		for (IRow element : new ArrayList<>(map.values())) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				remove(element);
 			}
 		}
@@ -730,7 +731,7 @@ public class MapRowTable implements IRowTable {
 	@Override
 	public boolean containsRowData(IRowData row) {
 		for (IRow element : map.values()) {
-			if (!element.getData().equals(row.getData())) {
+			if (!Arrays.equals(element.getData(), row.getData())) {
 				continue;
 			}
 			return true;
@@ -742,7 +743,7 @@ public class MapRowTable implements IRowTable {
 	public List<IRow> getByRowData(byte[] data) {
 		List<IRow> list = new ArrayList<IRow>();
 		for (IRow element : map.values()) {
-			if (element.getData().equals(data)) {
+			if (Arrays.equals(element.getData(), data)) {
 				list.add(new Row(element));
 			}
 		}

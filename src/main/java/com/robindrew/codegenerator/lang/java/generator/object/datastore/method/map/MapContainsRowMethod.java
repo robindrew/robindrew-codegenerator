@@ -1,7 +1,5 @@
 package com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map;
 
-import static com.robindrew.codegenerator.lang.java.type.name.JavaName.toUpper;
-
 import java.util.ArrayList;
 
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
@@ -47,7 +45,7 @@ public class MapContainsRowMethod extends ContainsRowMethod {
 
 		code.line("for (" + beanInterfaceType + " element : map.values()) {");
 		for (JavaModelBeanField field : row.getFieldList()) {
-			code.line(1, "if (" + getNotEquals(field) + ") {");
+			code.line(1, "if (" + new Equals().not().method1(field, "element").method2(field, "row").get() + ") {");
 			code.line(2, "continue;");
 			code.line(1, "}");
 		}
@@ -55,17 +53,6 @@ public class MapContainsRowMethod extends ContainsRowMethod {
 		code.line("}");
 		code.line("return false;");
 		return code;
-	}
-
-	private String getNotEquals(JavaModelBeanField field) {
-		StringBuilder code = new StringBuilder();
-		String getter = "get" + toUpper(field.getName()) + "()";
-		if (field.getType().isPrimitive()) {
-			code.append("element.").append(getter).append(" != ").append("row.").append(getter);
-		} else {
-			code.append("!element.").append(getter).append(".equals(").append("row.").append(getter).append(")");
-		}
-		return code.toString();
 	}
 
 }

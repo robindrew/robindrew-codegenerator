@@ -7,7 +7,6 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.R
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeBlock;
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeLines;
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.JavaCodeLines;
-import com.robindrew.codegenerator.lang.java.type.name.JavaName;
 
 public class MapRemoveByBeanMethod extends RemoveByBeanMethod {
 
@@ -44,20 +43,9 @@ public class MapRemoveByBeanMethod extends RemoveByBeanMethod {
 				code.append(" && ");
 			}
 			and = true;
-			code.append(name).append('.');
-			getEquals(field, code);
+			new Equals().method1(field, name).method2(field, "key").appendTo(code);
 		}
 		return code.toString();
-	}
-
-	private void getEquals(JavaModelBeanField parameter, StringBuilder code) {
-		boolean isBoolean = parameter.getType().isBoolean();
-		code.append(JavaName.toGetter(parameter.getName(), isBoolean));
-		if (parameter.getType().isPrimitive()) {
-			code.append(" == key.").append(JavaName.toGetter(parameter.getName(), isBoolean));
-		} else {
-			code.append(".equals(key.").append(JavaName.toGetter(parameter.getName(), isBoolean)).append(")");
-		}
 	}
 
 }

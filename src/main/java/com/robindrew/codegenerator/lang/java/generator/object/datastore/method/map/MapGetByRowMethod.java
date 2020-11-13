@@ -9,7 +9,6 @@ import com.robindrew.codegenerator.lang.java.generator.object.datastore.method.G
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeBlock;
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.IJavaCodeLines;
 import com.robindrew.codegenerator.lang.java.type.block.codeblock.JavaCodeLines;
-import com.robindrew.codegenerator.lang.java.type.name.JavaName;
 
 public class MapGetByRowMethod extends GetByRowMethod {
 
@@ -54,24 +53,9 @@ public class MapGetByRowMethod extends GetByRowMethod {
 				code.append(" && ");
 			}
 			and = true;
-			code.append(name).append('.');
-			getEquals(field, code);
+			new Equals().method1(field, name).field2(field).appendTo(code);
 		}
 		return code.toString();
-	}
-
-	private void getEquals(JavaModelBeanField parameter, StringBuilder code) {
-		if (parameter.getType().isBoolean()) {
-			code.append("is");
-		} else {
-			code.append("get");
-		}
-		code.append(JavaName.toUpper(parameter.getName())).append("()");
-		if (parameter.getType().isPrimitive()) {
-			code.append(" == ").append(parameter.getName());
-		} else {
-			code.append(".equals(").append(parameter.getName()).append(")");
-		}
 	}
 
 }

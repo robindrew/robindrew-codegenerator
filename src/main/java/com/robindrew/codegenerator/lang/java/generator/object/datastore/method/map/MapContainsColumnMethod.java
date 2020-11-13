@@ -1,7 +1,5 @@
 package com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map;
 
-import static com.robindrew.codegenerator.lang.java.type.name.JavaName.toUpper;
-
 import java.util.ArrayList;
 
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanField;
@@ -12,35 +10,21 @@ import com.robindrew.codegenerator.lang.java.type.block.codeblock.JavaCodeLines;
 
 public class MapContainsColumnMethod extends ContainsColumnMethod {
 
-	private JavaModelBeanField field;
-
 	public MapContainsColumnMethod(JavaModelDataStore dataStore, JavaModelBeanField field) {
 		super(field);
 		setOverride();
 		getReferences().add(ArrayList.class);
-		this.field = field;
 
 		String type = dataStore.getElementBean().getInterfaceType().getSimpleName(true);
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("for (" + type + " element : map.values()) {");
-		code.line(1, "if (element." + getEquals() + ") {");
+		code.line(1, "if (" + new Equals().method1(field, "element").field2(field).get() + ") {");
 		code.line(2, "return true;");
 		code.line(1, "}");
 		code.line("}");
 		code.line("return false;");
 		setContents(code);
-	}
-
-	private String getEquals() {
-		StringBuilder code = new StringBuilder();
-		code.append("get").append(toUpper(field.getName())).append("()");
-		if (field.getType().isPrimitive()) {
-			code.append(" == ").append(field.getName());
-		} else {
-			code.append(".equals(").append(field.getName()).append(")");
-		}
-		return code.toString();
 	}
 
 }

@@ -1,9 +1,9 @@
 package com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map;
 
 import static com.robindrew.codegenerator.lang.java.generator.object.datastore.method.map.MapGetListMethod.getCopyOf;
-import static com.robindrew.codegenerator.lang.java.type.name.JavaName.toUpper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanField;
@@ -24,6 +24,10 @@ public class MapGetListByMethod extends GetListByMethod {
 		this.parameter = parameter;
 		setOverride();
 
+		if (parameter.getType().isArray()) {
+			getReferences().add(Arrays.class);
+		}
+
 		// Imports
 		if (!identity) {
 			getReferences().add(ArrayList.class);
@@ -43,7 +47,7 @@ public class MapGetListByMethod extends GetListByMethod {
 
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("for (" + type + " element : map.values()) {");
-		code.line(1, "if (element." + getEquals() + ") {");
+		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter).get()  + ") {");
 		if (newInstance) {
 			code.line(2, "return " + getCopyOf(this, bean.getType()) + ";");
 		} else {
@@ -63,7 +67,7 @@ public class MapGetListByMethod extends GetListByMethod {
 		IJavaCodeLines code = new JavaCodeLines();
 		code.line("List<" + returnType + "> list = new ArrayList<" + returnType + ">();");
 		code.line("for (" + type + " element : map.values()) {");
-		code.line(1, "if (element." + getEquals() + ") {");
+		code.line(1, "if (" + new Equals().method1(parameter, "element").field2(parameter).get() + ") {");
 		if (newInstance) {
 			code.line(2, "list.add(" + getCopyOf(this, bean.getType()) + ");");
 		} else {
@@ -73,17 +77,6 @@ public class MapGetListByMethod extends GetListByMethod {
 		code.line("}");
 		code.line("return list;");
 		return code;
-	}
-
-	private String getEquals() {
-		StringBuilder code = new StringBuilder();
-		code.append("get").append(toUpper(parameter.getName())).append("()");
-		if (parameter.getType().isPrimitive()) {
-			code.append(" == ").append(parameter.getName());
-		} else {
-			code.append(".equals(").append(parameter.getName()).append(")");
-		}
-		return code.toString();
 	}
 
 }
