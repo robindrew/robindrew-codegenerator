@@ -8,6 +8,7 @@ import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanAnnotation;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanConstructor;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBeanField;
+import com.robindrew.codegenerator.lang.java.generator.model.builder.JavaModelBuilder;
 import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelExtends;
 import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethod;
 import com.robindrew.codegenerator.lang.java.generator.model.common.JavaModelMethodParameter;
@@ -30,6 +31,7 @@ import com.robindrew.codegenerator.model.object.bean.ModelBean;
 import com.robindrew.codegenerator.model.object.bean.ModelBeanAnnotation;
 import com.robindrew.codegenerator.model.object.bean.ModelBeanConstructor;
 import com.robindrew.codegenerator.model.object.bean.ModelBeanField;
+import com.robindrew.codegenerator.model.object.builder.ModelBuilder;
 import com.robindrew.codegenerator.model.object.common.ModelExtends;
 import com.robindrew.codegenerator.model.object.common.ModelMethod;
 import com.robindrew.codegenerator.model.object.common.ModelMethodParameter;
@@ -48,11 +50,11 @@ import com.robindrew.codegenerator.model.object.servlet.ModelServletRequestParse
 import com.robindrew.codegenerator.model.object.sql.ModelResultSetParser;
 import com.robindrew.codegenerator.model.object.validator.ModelValidator;
 
-public class JavaModelBuilder {
+public class JavaModelTypeBuilder {
 
 	private final IModel model;
 
-	public JavaModelBuilder(IModel model) {
+	public JavaModelTypeBuilder(IModel model) {
 		if (model == null) {
 			throw new NullPointerException("model");
 		}
@@ -72,6 +74,7 @@ public class JavaModelBuilder {
 		List<JavaModelJsonSerializer> jsonSerializerList = getJsonSerializerList();
 		List<JavaModelDataStore> dataStoreList = getDataStoreList();
 		List<JavaModelInterface> interfaceList = getInterfaceList();
+		List<JavaModelBuilder> builderList = getBuilderList();
 
 		JavaModel build = new JavaModel(model);
 		build.setBeanList(beanList);
@@ -85,6 +88,7 @@ public class JavaModelBuilder {
 		build.setJsonSerializerList(jsonSerializerList);
 		build.setDataStoreList(dataStoreList);
 		build.setInterfaceList(interfaceList);
+		build.setBuilderList(builderList);
 		return build;
 	}
 
@@ -93,6 +97,14 @@ public class JavaModelBuilder {
 		for (ModelInterface store : model.getInterfaceList()) {
 			JavaModelInterface typed = getInterface(store);
 			list.add(typed);
+		}
+		return ImmutableList.copyOf(list);
+	}
+
+	private List<JavaModelBuilder> getBuilderList() {
+		List<JavaModelBuilder> list = new ArrayList<JavaModelBuilder>();
+		for (ModelBuilder builder : model.getBuilderList()) {
+			list.add(new JavaModelBuilder(builder));
 		}
 		return ImmutableList.copyOf(list);
 	}

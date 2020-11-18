@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
+import com.robindrew.codegenerator.lang.java.generator.model.builder.JavaModelBuilder;
 import com.robindrew.codegenerator.lang.java.generator.model.datastore.JavaModelDataStore;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnum;
 import com.robindrew.codegenerator.lang.java.generator.model.executor.JavaModelExecutorSet;
@@ -31,6 +32,7 @@ public class JavaModel implements Comparable<JavaModel> {
 	private volatile List<JavaModelDataStore> dataStoreList;
 	private volatile List<JavaModelInterface> interfaceList;
 	private volatile List<JavaModelExecutorSet> executorSetList;
+	private volatile List<JavaModelBuilder> builderList;
 
 	public JavaModel(IModel model) {
 		if (model == null) {
@@ -49,6 +51,10 @@ public class JavaModel implements Comparable<JavaModel> {
 
 	public IModel getModel() {
 		return model;
+	}
+
+	public List<JavaModelBuilder> getBuilderList() {
+		return builderList;
 	}
 
 	public List<JavaModelValidator> getValidatorList() {
@@ -159,6 +165,13 @@ public class JavaModel implements Comparable<JavaModel> {
 			throw new NullPointerException("list");
 		}
 		this.interfaceList = list;
+	}
+
+	public void setBuilderList(List<JavaModelBuilder> list) {
+		if (list == null) {
+			throw new NullPointerException("list");
+		}
+		this.builderList = list;
 	}
 
 	public void setExecutorSetList(List<JavaModelExecutorSet> list) {

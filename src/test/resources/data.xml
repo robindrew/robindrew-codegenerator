@@ -34,7 +34,7 @@
 	<DataStore name="RowTable" element="IRow" key="IRowKey">
 		<Row type="RowData" />
 		<Row type="RowDimensions" />
-		<Key type="RowNameKey" unique="true"/>
+		<Key type="RowNameKey" unique="true" />
 	</DataStore>
 
 	<ResultSetParser type="Row" />
@@ -46,5 +46,7 @@
 	<DataSerializer type="RowDimensions" />
 
 	<ServletRequestParser type="Row" />
+
+	<Builder name="RowBuilder" bean="Row" />
 
 </Model>

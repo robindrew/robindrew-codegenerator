@@ -6,6 +6,7 @@ import com.robindrew.codegenerator.model.object.adapter.ModelAdapter;
 import com.robindrew.codegenerator.model.object.alias.ModelAlias;
 import com.robindrew.codegenerator.model.object.annotation.ModelAnnotation;
 import com.robindrew.codegenerator.model.object.bean.ModelBean;
+import com.robindrew.codegenerator.model.object.builder.ModelBuilder;
 import com.robindrew.codegenerator.model.object.comparator.ModelComparator;
 import com.robindrew.codegenerator.model.object.datastore.ModelDataStore;
 import com.robindrew.codegenerator.model.object.delegate.ModelDelegate;
@@ -64,5 +65,7 @@ public interface IModel {
 	List<ModelAnnotation> getAnnotationList();
 
 	List<ModelServletRequestParser> getServletRequestParserList();
+
+	List<ModelBuilder> getBuilderList();
 
 }

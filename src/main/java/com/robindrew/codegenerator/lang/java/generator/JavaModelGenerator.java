@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Stopwatch;
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModel;
-import com.robindrew.codegenerator.lang.java.generator.model.JavaModelBuilder;
+import com.robindrew.codegenerator.lang.java.generator.model.JavaModelTypeBuilder;
 import com.robindrew.codegenerator.lang.java.generator.model.bean.JavaModelBean;
 import com.robindrew.codegenerator.lang.java.generator.model.datastore.JavaModelDataStore;
 import com.robindrew.codegenerator.lang.java.generator.model.eenum.JavaModelEnum;
@@ -32,6 +32,7 @@ import com.robindrew.codegenerator.lang.java.generator.object.adapter.JavaAdapte
 import com.robindrew.codegenerator.lang.java.generator.object.alias.JavaAliasGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.annotation.JavaAnnotationGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.bean.JavaBeanGenerator;
+import com.robindrew.codegenerator.lang.java.generator.object.builder.JavaBuilderGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.comparator.JavaComparatorGenerator;
 import com.robindrew.codegenerator.lang.java.generator.object.context.IJavaContext;
 import com.robindrew.codegenerator.lang.java.generator.object.context.JavaContext;
@@ -59,6 +60,7 @@ import com.robindrew.codegenerator.model.IModel;
 import com.robindrew.codegenerator.model.object.adapter.ModelAdapter;
 import com.robindrew.codegenerator.model.object.alias.ModelAlias;
 import com.robindrew.codegenerator.model.object.annotation.ModelAnnotation;
+import com.robindrew.codegenerator.model.object.builder.ModelBuilder;
 import com.robindrew.codegenerator.model.object.comparator.ModelComparator;
 import com.robindrew.codegenerator.model.object.delegate.ModelDelegate;
 import com.robindrew.codegenerator.model.object.factory.ModelObjectFactory;
@@ -154,7 +156,7 @@ public class JavaModelGenerator {
 
 				registry.setIds(model);
 
-				JavaModel javaModel = new JavaModelBuilder(model).build();
+				JavaModel javaModel = new JavaModelTypeBuilder(model).build();
 				modelList.add(javaModel);
 			});
 		}
@@ -341,7 +343,13 @@ public class JavaModelGenerator {
 			generators.add(generator);
 		}
 
+		// Builders
+		for (ModelBuilder builder : model.getBuilderList()) {
+			IJavaGenerator generator = new JavaBuilderGenerator(setup, context, javaModel, builder);
+			generator.registerPrimaryTypes();
+			generators.add(generator);
+		}
+
 		return generators;
 	}
-
 }

@@ -6,6 +6,7 @@ import static com.robindrew.codegenerator.lang.java.type.classtype.ClassType.INT
 import java.util.Set;
 
 import com.robindrew.codegenerator.api.bean.IBean;
+import com.robindrew.codegenerator.api.bean.IImmutable;
 import com.robindrew.codegenerator.api.executable.bean.IExecutableBean;
 import com.robindrew.codegenerator.lang.java.generator.JavaModelGenerationException;
 import com.robindrew.codegenerator.lang.java.generator.model.JavaModel;
@@ -210,6 +211,9 @@ public class JavaBeanGenerator extends JavaObjectGenerator {
 			objectInterface.addExtends(type);
 		}
 		addExtends(objectInterface);
+		if (isImmutable()) {
+			objectInterface.addExtends(resolve(IImmutable.class));
+		}
 
 		// For each bean we generate a class
 		JavaObject object = new JavaObject(classType);

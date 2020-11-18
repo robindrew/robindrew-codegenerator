@@ -11,6 +11,7 @@ import com.robindrew.codegenerator.model.object.adapter.ModelAdapter;
 import com.robindrew.codegenerator.model.object.alias.ModelAlias;
 import com.robindrew.codegenerator.model.object.annotation.ModelAnnotation;
 import com.robindrew.codegenerator.model.object.bean.ModelBean;
+import com.robindrew.codegenerator.model.object.builder.ModelBuilder;
 import com.robindrew.codegenerator.model.object.comparator.ModelComparator;
 import com.robindrew.codegenerator.model.object.datastore.ModelDataStore;
 import com.robindrew.codegenerator.model.object.delegate.ModelDelegate;
@@ -36,41 +37,43 @@ public class Model implements IModel {
 	@Attribute
 	private String target;
 	@ElementList(entry = "Option", inline = true, required = false)
-	private List<ModelOption> optionList = new ArrayList<ModelOption>();
+	private List<ModelOption> optionList = new ArrayList<>();
 	@ElementList(entry = "Alias", inline = true, required = false)
-	private List<ModelAlias> aliasList = new ArrayList<ModelAlias>();
+	private List<ModelAlias> aliasList = new ArrayList<>();
 	@ElementList(entry = "Validator", inline = true, required = false)
-	private List<ModelValidator> validatorList = new ArrayList<ModelValidator>();
+	private List<ModelValidator> validatorList = new ArrayList<>();
 	@ElementList(entry = "Bean", inline = true, required = false)
-	private List<ModelBean> beanList = new ArrayList<ModelBean>();
+	private List<ModelBean> beanList = new ArrayList<>();
 	@ElementList(entry = "Enum", inline = true, required = false)
-	private List<ModelEnum> enumList = new ArrayList<ModelEnum>();
+	private List<ModelEnum> enumList = new ArrayList<>();
 	@ElementList(entry = "Adapter", inline = true, required = false)
-	private List<ModelAdapter> adapterList = new ArrayList<ModelAdapter>();
+	private List<ModelAdapter> adapterList = new ArrayList<>();
 	@ElementList(entry = "Comparator", inline = true, required = false)
-	private List<ModelComparator> comparatorList = new ArrayList<ModelComparator>();
+	private List<ModelComparator> comparatorList = new ArrayList<>();
 	@ElementList(entry = "Interface", inline = true, required = false)
-	private List<ModelInterface> interfaceList = new ArrayList<ModelInterface>();
+	private List<ModelInterface> interfaceList = new ArrayList<>();
 	@ElementList(entry = "ObjectFactory", inline = true, required = false)
-	private List<ModelObjectFactory> objectFactoryList = new ArrayList<ModelObjectFactory>();
+	private List<ModelObjectFactory> objectFactoryList = new ArrayList<>();
 	@ElementList(entry = "ExecutorSet", inline = true, required = false)
-	private List<ModelExecutorSet> executorSetList = new ArrayList<ModelExecutorSet>();
+	private List<ModelExecutorSet> executorSetList = new ArrayList<>();
 	@ElementList(entry = "DataStore", inline = true, required = false)
-	private List<ModelDataStore> dataStoreList = new ArrayList<ModelDataStore>();
+	private List<ModelDataStore> dataStoreList = new ArrayList<>();
 	@ElementList(entry = "DataSerializer", inline = true, required = false)
-	private List<ModelDataSerializer> dataSerializerList = new ArrayList<ModelDataSerializer>();
+	private List<ModelDataSerializer> dataSerializerList = new ArrayList<>();
 	@ElementList(entry = "XmlSerializer", inline = true, required = false)
-	private List<ModelXmlSerializer> xmlSerializerList = new ArrayList<ModelXmlSerializer>();
+	private List<ModelXmlSerializer> xmlSerializerList = new ArrayList<>();
 	@ElementList(entry = "JsonSerializer", inline = true, required = false)
-	private List<ModelJsonSerializer> jsonSerializerList = new ArrayList<ModelJsonSerializer>();
+	private List<ModelJsonSerializer> jsonSerializerList = new ArrayList<>();
 	@ElementList(entry = "Delegate", inline = true, required = false)
-	private List<ModelDelegate> delegateList = new ArrayList<ModelDelegate>();
+	private List<ModelDelegate> delegateList = new ArrayList<>();
 	@ElementList(entry = "ResultSetParser", inline = true, required = false)
-	private List<ModelResultSetParser> resultSetParserList = new ArrayList<ModelResultSetParser>();
+	private List<ModelResultSetParser> resultSetParserList = new ArrayList<>();
 	@ElementList(entry = "ServletRequestParser", inline = true, required = false)
-	private List<ModelServletRequestParser> servletRequestParserList = new ArrayList<ModelServletRequestParser>();
+	private List<ModelServletRequestParser> servletRequestParserList = new ArrayList<>();
 	@ElementList(entry = "Annotation", inline = true, required = false)
-	private List<ModelAnnotation> annotationList = new ArrayList<ModelAnnotation>();
+	private List<ModelAnnotation> annotationList = new ArrayList<>();
+	@ElementList(entry = "Builder", inline = true, required = false)
+	private List<ModelBuilder> builderList = new ArrayList<>();
 
 	@Override
 	public int getId() {
@@ -177,4 +180,8 @@ public class Model implements IModel {
 		return servletRequestParserList;
 	}
 
+	@Override
+	public List<ModelBuilder> getBuilderList() {
+		return builderList;
+	}
 }
