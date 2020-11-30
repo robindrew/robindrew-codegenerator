@@ -256,7 +256,7 @@ public abstract class AbstractJavaType implements IJavaType {
 
 	@Override
 	public Class<?> getType() {
-		throw new IllegalStateException("not a class type");
+		throw new IllegalStateException("not a class type: " + this);
 	}
 
 	@Override
