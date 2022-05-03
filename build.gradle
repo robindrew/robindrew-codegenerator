@@ -55,21 +55,21 @@ repositories {
 // DEPENDENCIES (Which JAR files to download and host locally)
 dependencies {
 
-	compile group: 'com.google.guava',     name: 'guava',             version: '20.0'
-	compile group: 'org.slf4j',            name: 'slf4j-api',         version: '1.7.25'
-	compile group: 'org.apache.commons',   name: 'commons-lang3',     version: '3.0'
-	compile group: 'javax.servlet', 	   name: 'javax.servlet-api', version: '3.1.0'
-	compile group: 'org.simpleframework',  name: 'simple-xml',        version: '2.6.6'
+	implementation group: 'com.google.guava',     name: 'guava',             version: '20.0'
+	implementation group: 'org.slf4j',            name: 'slf4j-api',         version: '1.7.25'
+	implementation group: 'org.apache.commons',   name: 'commons-lang3',     version: '3.0'
+	implementation group: 'javax.servlet', 	   name: 'javax.servlet-api', version: '3.1.0'
+	implementation group: 'org.simpleframework',  name: 'simple-xml',        version: '2.6.6'
 
-	compile project(":robindrew-common")
-	compile project(":robindrew-codegenerator-api")
+	implementation project(":robindrew-common")
+	implementation project(":robindrew-codegenerator-api")
 
-	testCompile group: 'junit',            name: 'junit',             version: '4.4'
-	testCompile group: 'ch.qos.logback',   name: 'logback-core',      version: '1.2.3'
-	testCompile group: 'ch.qos.logback',   name: 'logback-classic',   version: '1.2.3'
-	testCompile group: 'com.h2database', 	   name: 'h2',                version: '1.4.190'
-	testCompile group: 'org.hsqldb',           name: 'hsqldb',            version: '2.5.1'
-	testCompile group: 'org.apache.derby',     name: 'derby',             version: '10.8.3.0'
-	testCompile group: 'org.apache.commons',   name: 'commons-dbcp2',     version: '2.8.0'
+	testImplementation group: 'junit',            name: 'junit',             version: '4.4'
+	testImplementation group: 'ch.qos.logback',   name: 'logback-core',      version: '1.2.3'
+	testImplementation group: 'ch.qos.logback',   name: 'logback-classic',   version: '1.2.3'
+	testImplementation group: 'com.h2database', 	   name: 'h2',                version: '1.4.190'
+	testImplementation group: 'org.hsqldb',           name: 'hsqldb',            version: '2.5.1'
+	testImplementation group: 'org.apache.derby',     name: 'derby',             version: '10.8.3.0'
+	testImplementation group: 'org.apache.commons',   name: 'commons-dbcp2',     version: '2.8.0'
 	
 }
