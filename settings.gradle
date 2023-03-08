@@ -1,7 +1,4 @@
 rootProject.name = 'robindrew-codegenerator'
 
 include 'robindrew-common'
-project(":robindrew-common").projectDir = file('/../robindrew-common')
-
 include 'robindrew-codegenerator-api'
-project(":robindrew-codegenerator-api").projectDir = file('/../robindrew-codegenerator-api')
